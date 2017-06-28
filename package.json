@@ -1,13 +1,13 @@
 {
-  "name": "survivejs-react",
+  "name": "survivejs-react-br",
   "private": true,
   "version": "2.5.8",
   "description": "SurviveJS - React",
   "author": "Juho Vepsalainen <info@survivejs.com>",
   "scripts": {
-    "publish:silent": "leanpub-cli publish-silent survivejs-react",
-    "preview": "leanpub-cli preview survivejs-react",
-    "job-status": "leanpub-cli job-status survivejs-react",
+    "publish:silent": "leanpub-cli publish-silent survivejs-react-br",
+    "preview": "leanpub-cli preview survivejs-react-br",
+    "job-status": "leanpub-cli job-status survivejs-react-br",
     "test": "check-markdown-links manuscript"
   },
   "dependencies": {},
