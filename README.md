@@ -4,46 +4,46 @@
 
 <img align="right" width="255" height="329" src="manuscript/images/title_page_small.png" />
 
-> **IMPORTANT!** If you want to support the development of this book, you can [purchase a copy at Leanpub](https://leanpub.com/survivejs-react). There's also [a paperback available through Amazon](http://www.amazon.com/SurviveJS-Webpack-React-apprentice-master/dp/152391050X/) (older book covering both Webpack and React).
+> **IMPORTANTE!** Se você quer apoiar o desenvolvimento desse livro, você pode [comprar uma cópia no Leanpub](https://leanpub.com/survivejs-react). Existe também uma [versão impressa disponível na Amazon](http://www.amazon.com/SurviveJS-Webpack-React-apprentice-master/dp/152391050X/) (é uma versão anterior que fala sobre Webpack e React).
 
-This book shows you how to build a little Kanban application using React. During the process you will learn the basics and will be able to take the skills to your own projects. You can [read the book online](http://survivejs.com/react/introduction/).
+Esse livro mostra como construir uma pequena aplicação Kanban utilizando React. Durante o processo, você irá aprender os conceitos básicos e será capaz de aprender novas habilidades com o decorrer dos seus projetos. Você também [pode ler a versão online](http://survivejs.com/react/introduction/).
 
-## How to Use This Repository?
+## Como Usar esse Repositório?
 
-The repository has been split in two main parts: `manuscript` and `project_source`. You can find the freely available chapters under `manuscript` organized per chapter. `project_source` contains source associated to each chapter.
+Esse repositório está dividido em duas partes principais: `manuscript` (manuscrito) e `project_source` (código fonte). Você poderá encontrar os capítulos grauitos em `manuscript`, eles estão organizados por capítulo. Enquanto `project_source` está o código fonte associado a cada capítulo.
 
 <img align="left" width="306" height="149" src="manuscript/images/github.png" />
 
-There is no single right way to approach the book. It depends on your experience level and interest. You can build the project from scratch by following the book or you can start from a specific stage. Just pick the source from previous chapter as your starting point.
+Não existe maneira correta para ler esse livro. Tudo depende da sua experiência e interesse. Você pode construir esse projeto do zero, seguindo o livro, ou você pode começar em um ponto específico. Basta utilizar o código fonte do capítulo anterior como seu ponto de início.
 
-Please note that the repository defaults to the `dev` branch of the book. `master` contains the source of the most recent version. Each version has been tagged so that it's easy for you to find the source matching to the version of the book you are reading.
+Vale a pena notar que, esse repositório tem como padrão o branch `dev` do livro. `master` contém o código fonte da versão mais recente. Cada versão é marcada, ficando mais fácil para voc6e achar o código fonte da versão do livro que você está lendo.
 
-## Getting Support
+## Dúvidas e Suporte
 
-As no book is perfect, you will likely come by issues and might have some questions related to the content. There are a couple of options to deal with this:
+Como nenhum livro é perfeito, talvez você encontre algum problem ou tenha alguma dúvida relacionada ao conteúdo. Existem várias formas para resolver isso:
 
-* Contact me through [GitHub Issue Tracker](https://github.com/survivejs/react/issues)
-* Join me at [Gitter Chat](https://gitter.im/survivejs/react)
-* Follow [@survivejs](https://twitter.com/survivejs) at Twitter for official news or poke me through [@bebraw](https://twitter.com/bebraw) directly
-* Send me email at [info@survivejs.com](mailto:info@survivejs.com)
-* Ask me anything about Webpack or React at [SurviveJS AmA](https://github.com/survivejs/ama/issues)
+* Entre em contato comigo através do [GitHub Issue Tracker](https://github.com/survivejs/react/issues)
+* Participe do grupo no [Gitter Chat](https://gitter.im/survivejs/react)
+* Siga [@survivejs](https://twitter.com/survivejs) no Twitter para ficar por dentro das novidades oficiais ou me envie um tweet diretamente em [@bebraw](https://twitter.com/bebraw)
+* Me envie um email em [info@survivejs.com](mailto:info@survivejs.com)
+* Me pergunte qualquer coisa sobre Webpack ou React em [SurviveJS AmA](https://github.com/survivejs/ama/issues)
 
-If you post questions to [Stack Overflow](http://stackoverflow.com/search?q=survivejs), tag them using [**survivejs**](https://stackoverflow.com/questions/tagged/survivejs) so I will get notified of them. You can also use the hashtag **#survivejs** at Twitter.
+Se você postar uma pergunta no [Stack Overflow](http://stackoverflow.com/search?q=survivejs), use a tag [**survivejs**](https://stackoverflow.com/questions/tagged/survivejs), assim, eu serei notificado. Você também pode usar a hashtag **#survivejs** no Twitter.
 
-## Announcements
+## Novidades
 
-I announce SurviveJS related news through a couple of channels:
+Eu divulgo novidades do SurviveJS através de alguns canais:
 
-* [Mailing list](http://eepurl.com/bth1v5)
+* [Newsletter](http://eepurl.com/bth1v5)
 * [Twitter](https://twitter.com/survivejs)
 * [Blog RSS](http://survivejs.com/atom.xml)
 
-Feel free to subscribe.
+Fique à vontade para participar!
 
-## Contributing
+## Contribuindo
 
-Feedback and PRs are welcome! See *CONTRIBUTING.md* for more information.
+Feedback e PRs são muito bem-vindos! Veja *CONTRIBUTING.md* para mais informações.
 
-## License
+## Licença
 
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/3.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/3.0/88x31.png" /></a>
