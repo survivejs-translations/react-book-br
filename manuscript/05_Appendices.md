@@ -1,3 +1,3 @@
--# Appendices
+-# Apêndices
 
-As not everything that's worth discussing fits a book like this, I've compiled related material into brief appendices. These support the main material and explain certain topics, such as language features, in greater detail. There are also troubleshooting tips in the end.
+Como nem tudo o que vale a pena discutir é adequado a um livro como este, adicionei material relacionado em breves apêndices. Eles apoiam o material principal e explicam determinados tópicos, como os recursos de linguagem, em maior detalhe. Há também dicas de solução de problemas no final.
