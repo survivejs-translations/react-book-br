@@ -1,26 +1,30 @@
-One of the unique aspects of this book is that its development happens mostly in the open. You can actually see as develops. As a result you'll be able to contribute just like for any open source project.
+Um dos aspectos únicos deste livro é que o seu desenvolvimento acontece públicamente. Você pode acompanhar o seu desenvolver. Como resultado, você poderá contribuir, como em qualquer outro projeto de código aberto.
 
 ## PRs
 
 I welcome PRs (typo fixes and such). If you have some bigger changes in mind, I recommend you open an issue first. That way we'll avoid wasting time.
 
-Create your PRs against `dev` (default branch).
+Eu agradeço pelos PRs (correções de digitação e tal). Se você tiver alguma mudança maior em mente, eu recomendo que você [abra uma *issue*](https://github.com/survivejs-translations/react-book-br/issues) primeiro. Dessa forma, evitaremos perder o tempo.
 
-## Issues
+Crie seus PRs para a branch `dev` (que é a branch padrão).
 
-There are two basic ways you can provide feedback through issues:
+## Usando Github Issue
 
-1. Set a single issue that contains possible problems in [a task list](https://help.github.com/articles/writing-on-github/#task-lists)
-2. Set up an individual issue per problem you find
+Existem duas maneiras básicas de fornecer feedback através de uma *issue*:
 
-Both work for me. Use what you feel most comfortable with. I can adapt to that. The most important thing is that I get feedback to allow me to push the content further.
+1. Defina um único problema que descrevendo os possíveis problemas em [uma lista de tarefas](https://help.github.com/articles/writing-on-github/#task-lists).
+2. Crie uma *issue* individual para cada problema que você encontrar.
 
-## Issue Format
+Ambos funcionam para mim. Use o que você se sentir mais confortável. Eu não ligo. O mais importante é que receber feedback para me permitir criar um conteúdo de boa qualidade.
+
+## Formato da Issue
 
 It will help a lot if you can prefix your feedback with the chapter name in question. I.e. `getting started - <script> tag had incorrect path` is clear and easy for me to resolve.
 
-## Freeform Feedback
+Isso ajudará muito, se você puder prefixar seus comentários com o nome do capítulo em questão. Isto é, `getting started - <script> tag tem um erro de gramática`, é claro e fácil para mim resolver.
 
-You can also send me freeform feedback through [email](mailto:bebraw@gmail.com) or [Twitter](https://twitter.com/bebraw).
+## Feedback de forma livre
 
-Even if the things you have in mind might feel trivial, they can help me to improve the book further. I want to provide the best experience within my capability. It is very easy to lose perspective on the book as I spend time with the topic. Therefore any insight you may provide will come in handy!
+Você também pode me enviar feedback de forma livre através de [email](mailto:bebraw@gmail.com) ou [Twitter](https://twitter.com/bebraw).
+
+Mesmo que as coisas que você tenha em mente possam parecer triviais, elas podem me ajudar a melhorar ainda mais o livro. Quero fornecer a melhor experiência, dentro da na minha capacidade. É muito fácil perder a perspectiva do livro enquanto eu foco em um único tópico. Portanto, qualquer ponto de vista que você possa fornecer, será útil!
