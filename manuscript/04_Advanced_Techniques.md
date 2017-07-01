@@ -1,7 +1,7 @@
--# Advanced Techniques
+-# Técnicas Avançadas
 
-There are a variety of advanced React techniques that are good to be aware of. By testing and typing your code well, you can make it more robust against change. It will be easier to develop if you have the right scaffolding in place supporting your application.
+Há uma variedade de técnicas avançadas em React que são boas para estar ciente. Testar e organizar bem seu código, pode torná-lo mais robusto para mudanças. Será mais fácil de desenvolver se você tiver a fundação correta, apoiando toda a sua aplicação.
 
-Styling React is a complicated topic itself. There are multiple ways to achieve that and there's no clear consensus on what is the correct way in the context of React. I will provide you a good idea of the current situation.
+Estilizar componentes React é um tópico complicado. Existem várias maneiras de conseguir isso e não há um consenso claro sobre qual é o caminho correto no contexto do React. Vou lhe fornecer uma boa idéia da situação atual.
 
-As there's no one right way to structure React projects, I'll also provide some idea on how to do that. It's better to be pragmatic and figure out a structure that's the right one for you.
+a de estruturar projetos em React, também vou fornecer uma idéia sobre como fazer isso. É melhor ser pragmático e descobrir uma estrutura que é a certa para você.
