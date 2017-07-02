@@ -1,21 +1,21 @@
-# Writing Conventions
+# Estilos de escrita
 
-* *filename*
-* `code`
+* *nome de arquivo*
+* `código`
 
 ## npm
 
-* *npm* should be in lowercase even if it's in the beginning of a sentence.
+* *npm* deve ser escrito em letra minúscula, mesmo que seja no início de uma frase..
 
-Use
+Uso recomendado:
 
 ```bash
 npm i alt --save
 ```
 
-always when installing something through *npm*. Remember to include `--save` or `--save-dev`!
+Sempre que instalar algo com *npm*, lembre-se de incuir `--save` ou `--save-dev`!
 
-## Code Examples
+## Exemplos de código
 
-* Delete first, insert then.
+* Apague primeiro, e insirir depois.
 
