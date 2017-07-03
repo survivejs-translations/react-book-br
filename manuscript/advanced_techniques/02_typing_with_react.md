@@ -1,15 +1,15 @@
-# Typing with React
+# Tipagem em React
 
-In order to encourage people to support my work, I've decided to publish a TL;DR version of this chapter for the community. This will allow me to develop more content, so it's a win-win really.
+Para incentivar as pessoas a apoiarem meu trabalho, decidi publicar uma versão TL;DR deste capítulo para a comunidade. Isso permitirá que eu desenvolva mais o conteúdo, uma estratégia onde todo mundo ganha.
 
-You can access the full chapter by buying a copy through [Leanpub](https://leanpub.com/survivejs_react). It goes into detail, whereas the following should give you a rough idea of the chapter contents.
+Você pode acessar o capítulo completo comprando uma cópia no [Leanpub](https://leanpub.com/survivejs_react). Nele, nós entraremos em detalhes, enquanto aqui, será uma idéia aproximada do conteúdo do capítulo.
 
 ## TL;DR
 
-* [propTypes](https://facebook.github.io/react/docs/reusable-components.html) are great. Use them to improve the maintainability of your application.
-* `propTypes` give you nice little errors during development, but will be stripped from the production build to improve performance.
-* [Flow](http://flowtype.org) goes one step further. It provides syntax that allows you to gradually type your JavaScript code.
-* While `flow` itself is a static checker you have to run separately, [babel-plugin-typecheck](https://github.com/codemix/babel-plugin-typecheck) provides runtime checks during development.
-* Microsoft's [TypeScript](http://www.typescriptlang.org/) is yet another alternative. Starting from the version 1.6 it will gain JSX support.
+* [propTypes](https://facebook.github.io/react/docs/reusable-components.html) são ótimos. Use-os para melhorar a manutenção da sua aplicação.
+* `propTypes` retorna bons erros durante o desenvolvimento, mas será eliminado na compilação para produção, melhorarando o desempenho da aplicação final.
+* [Flow](http://flowtype.org) vai um passo adiante. Ele fornece sintaxe que permite que você digite, gradualmente, tipagem em seu código JavaScript.
+* Enquanto `flow` é um analisador estático que você precisa executar separadamente, [babel-plugin-typecheck](https://github.com/codemix/babel-plugin-typecheck) fornece análise estática em tempo de execução durante o desenvolvimento.
+* O [TypeScript](http://www.typescriptlang.org/), da Microsoft, é mais uma alternativa. A partir da versão 1.6 ganhará suporte ao JSX.
 
-> [Buy the book](https://leanpub.com/survivejs-react) for the rest.
+> [Compre o livro](https://leanpub.com/survivejs-react) para acessar o conteúdo restante.
