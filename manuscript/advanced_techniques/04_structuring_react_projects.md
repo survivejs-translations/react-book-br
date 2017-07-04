@@ -1,10 +1,10 @@
-# Structuring React Projects
+# Estruturando seu Projeto React
 
-React doesn't enforce any particular project structure. The good thing about this is that it allows you to make up a structure to suit your needs. The bad thing is that it is not possible to provide you an ideal structure that would work for every project. Instead, I'm going to give you some inspiration you can use to think about structure.
+React não impõe nenhuma estrutura de projeto específica. A coisa boa sobre isso é que ele permite que você faça uma estrutura para atender às suas necessidades. O ruim é que não é possível fornecer uma estrutura ideal para todos os projetos. Em vez disso, vou mostrar algumas inspirações que você pode usar para pensar sobre a sua estrutura.
 
-## Directory per Concept
+## Diretório por Conceito
 
-Our Kanban application has a somewhat flat structure:
+Nosso aplicativo Kanban tem uma estrutura um tanto plana:
 
 ```bash
 ├── actions
@@ -30,17 +30,17 @@ Our Kanban application has a somewhat flat structure:
     └── NoteStore.js
 ```
 
-It's enough for this purpose, but there are some interesting alternatives around:
+É o suficiente para este projeto, mas existem algumas alternativas interessantes em torno:
 
-* File per concept - Perfect for small prototypes. You can split this up as you get more serious with your application.
-* Directory per component - It is possible to push components to directories of their own. Even though this is a heavier approach, there are some interesting advantages as we'll see soon.
-* Directory per view - This approach becomes relevant once you want to introduce routing to your application.
+* Arquivo por conceito - perfeito para pequenos protótipos. Você pode dividir isso quando seu aplicativo ficar mais sério.
+* Diretório por Componente - É possível organizar componentes em diretórios próprios. Embora esta seja uma abordagem mais complexa, existem algumas vantagens interessantes, como veremos em breve.
+* Diretório por Página - Essa abordagem torna-se relevante quando você deseja introduzir o roteamento na sua aplicação.
 
-There are more alternatives but these cover some of the common cases. There is always room for adjustment based on the needs of your application.
+Existem mais alternativas, mas estas cobrem alguns dos casos comuns. Há sempre espaço para ajustes com base nas necessidades da sua aplicação.
 
-## Directory per Component
+## Diretório por Componente
 
-If we split our components to directories of their own, we could end up with something like this:
+Se dividirmos nossos componentes em diretórios próprios, seria algo assim:
 
 ```bash
 ├── actions
@@ -72,25 +72,25 @@ If we split our components to directories of their own, we could end up with som
     └── NoteStore.js
 ```
 
-Compared to our current solution, this would be heavier. The *index.js* files are there to provide easy entry points for components. Even though they add noise, they simplify imports.
+Comparado com a nossa solução atual, isso seria mais complexo. Os arquivos *index.js* estão disponíveis para fornecer pontos de entrada para os componentes. Mesmo que eles sejam opcionais, eles simplificam as importações.
 
-There are some interesting benefits in this approach, though:
+Há, ainda, alguns benefícios interessantes nesta abordagem:
 
-* We can leverage technology, such as CSS Modules, for styling each component separately.
-* Given each component is a little "package" of its own now, it would be easier to extract them from the project. You could push generic components elsewhere and consume them across multiple applications.
-* We can define unit tests at component level. The approach encourages you to test. We can still have higher level tests around at the root level of the application just like earlier.
+* Podemos aproveitar outras tecnologias, como os Módulos CSS, para estilizar cada componente separadamente.
+* Dado que cada componente é um pequeno "pacote" próprio, agora seria mais fácil extraí-los do projeto. Você pode mover componentes genéricos para outros lugares e consumi-los em várias aplicações.
+* Podemos definir testes unitários ao lado do componente. Essa abordagem encoraja você a criar testes específicos para seu componente e, ainda podemos ter testes de nível superior, na raiz do projeto, como anteriormente.
 
-It could be interesting to try to push actions and stores to `components` as well. Or they could follow a similar directory scheme. The benefit of this is that it would allow you to define unit tests in a similar manner.
+Pode ser interessante tentar mover suas *actions* e *stores* para "componentes" também. Ou eles poderiam seguir um esquema de diretório semelhante. O benefício disso é que ele permitiria que você definisse testes unitários de forma semelhante.
 
-This setup isn't enough when you want to add multiple views to the application. Something else is needed to support that.
+Esta configuração não é suficiente quando você quer adicionar várias páginas ao aplicativo. É necessário outra abordagem para suportar isso.
 
-T> [gajus/create-index](https://github.com/gajus/create-index) is able to generate the *index.js* files automatically as you develop.
+T> [gajus/create-index](https://github.com/gajus/create-index) pode gerar arquivos *index.js* automaticamente à medida que você desenvolve.
 
-## Directory per View
+## Diretório por Página
 
-Multiple views bring challenges of their own. First of all, you'll need to define a routing scheme. [react-router](https://github.com/rackt/react-router) is a popular alternative for this purpose. In addition to a routing scheme, you'll need to define what to display on each view. You could have separate views for the home page of the application, registration, Kanban board, and so on, matching each route.
+Várias páginas trazem desafios próprios. Em primeiro lugar, você precisará definir um esquema de roteamento. [react-router](https://github.com/rackt/react-router) é uma alternativa popular para este propósito. Além de um esquema de roteamento, você precisará definir o que exibir em cada página. Você poderia ter páginas separadas para a página inicial do aplicativo, registro, quadro do Kanban, e assim por diante, combinando cada rota.
 
-These requirements mean new concepts need to be introduced to the structure. One way to deal with routing is to push it to a `Routes` component that coordinates which view is displayed at any given time based on the current route. Instead of `App` we would have just multiple views instead. Here's what a possible structure could look like:
+Esses requisitos significam que novos conceitos precisam ser introduzidos na estrutura. Uma maneira de lidar com o roteamento é move-lo para um componente `Routes` que coordena a exibição que é exibida a qualquer momento com base na rota atual. Ao invés de `App`, nós teríamos várias páginas. Aqui está uma possível estrutura:
 
 ```bash
 ├── components
@@ -121,14 +121,14 @@ These requirements mean new concepts need to be introduced to the structure. One
     └── index.js
 ```
 
-The idea is the same as earlier. This time around we have more parts to coordinate. The application starts from `index.jsx` which will trigger `Routes` that in turn chooses some view to display. After that it's the flow we've gotten used to.
+A idéia é a mesma que antes. Desta vez, nós temos mais partes para coordenar. O aplicativo começa a partir de `index.jsx` que irá desencadear rotas que, por sua vez, escolhem uma página para exibir. Depois disso, é o fluxo que nos estamos acostumados.
 
-This structure can scale further, but even it has its limits. Once your project begins to grow, you might want to introduce new concepts to it. It could be natural to introduce a concept, such as "feature", between the views and the components.
+Esta estrutura pode ser escalada ainda mais, mas mesmo ela, tem seus limites. Uma vez que seu projeto começa a crescer, você pode querer introduzir outros conceitos junto dela. Poe exemplo, é comum introduzir diretórios por conceitos dentro de cada página e também os componentes.
 
-For example, you might have a fancy `LoginModal` that is displayed on certain views if the session of the user has timed out. It would be composed of lower level components. Again, common features could be pushed out of the project itself into packages of their own as you see potential for reuse.
+Por exemplo, você pode ter um `LoginModal` que é exibido em determinadas páginas se a sessão do usuário tiver expirado. Ele seria composto de componentes primitivos. Esses recursos comuns podem até, ser excluídos do próprio projeto, em pacotes próprios, aumentando o potencial de reutilização.
 
-## Conclusion
+## Conclusão
 
-There is no single right way to structure your project with React. That said, it is one of those aspects that is worth thinking about. Figuring out a structure that serves you well is worth it. A clear structure helps in the maintenance effort and makes your project more understandable to others.
+Não existe uma maneira única de estruturar seu projeto React. É um desses aspectos que vale a pena investir tempo para pensar. Escrever uma estrutura que lhe sirva bem, vale a pena. Uma estrutura clara ajuda no esforço de manutenção e torna o seu projeto mais compreensível para os outros.
 
-You can evolve the structure as you go. Too heavy structure early on might just slow you down. As the project evolves, so should its structure. It's one of those things that's worth thinking about given it affects development so much.
+Você pode mudar essa estrutura no decorrer do seu projeto. Uma estrutura complexa no início pode diminuir sua velocidade. À medida que o projeto evolui, também deve evoluir sua estrutura. É uma dessas coisas que vale a pena pensar, dado que afeta nossa produtividade e desenvolvimento.
