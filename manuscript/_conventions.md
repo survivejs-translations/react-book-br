@@ -17,5 +17,5 @@ Sempre que instalar algo com *npm*, lembre-se de incuir `--save` ou `--save-dev`
 
 ## Exemplos de código
 
-* Apague primeiro, e insirir depois.
+* Apague primeiro, insira depois.
 
