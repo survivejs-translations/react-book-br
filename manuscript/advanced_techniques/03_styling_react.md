@@ -1,72 +1,72 @@
-# Styling React
+# Estilos em React
 
-Traditionally, web pages have been split up into markup (HTML), styling (CSS), and logic (JavaScript). Thanks to React and similar approaches, we've begun to question this split. We still may want to separate our concerns somehow. But the split can be on different axes.
+Tradicionalmente, as páginas web foram divididas em marcação (HTML), estilos (CSS) e lógica (JavaScript). Graças ao React, e abordagens semelhantes, começamos a questionar essa divisão. Ainda podemos separar nossos interesses de alguma forma. Mas essa separação pode ser em eixos diferentes.
 
-This change in the mindset has lead to new ways to think about styling. With React, we're still figuring out the best practices. Some early patterns have begun to emerge, however. As a result it is difficult to provide any definite recommendations at the moment. Instead, I will go through various approaches so you can make up your mind based on your exact needs.
+Essa mudança de mentalidade levou a novas maneiras de pensar sobre o CSS. Com o React, ainda estamos descobrindo as melhores práticas. Contudo, alguns padrões iniciais começaram a surgir. Como resultado, é difícil fornecer recomendações definitivas no momento. Em vez disso, vamos ver várias abordagens para que você possa tomar uma decisão com base em suas necessidades.
 
-## Old School Styling
+## Modo antigo de estilos
 
-The old school approach to styling is to sprinkle some *ids* and *classes* around, set up CSS rules, and hope for the best. In CSS everything is global by default. Nesting definitions(e.g., `.main .sidebar .button`) creates implicit logic to your styling. Both features lead to a lot of complexity as your project grows. This approach can be acceptable when starting out, but as you develop, you most likely want to migrate away from it.
+A abordagem da "velha guarda" para o estilo é para polvilhar alguns *ids* e *classes*, configurar regras CSS e esperar o melhor. No CSS, tudo é global por padrão. Definições de aninhamento (por ex., `.main .sidebar .button`.), cria uma lógica implícita para o seu estilo. Ambos os recursos levam a muita complexidade à medida que seu projeto cresce. Essa abordagem pode ser aceitável no início, mas, à medida que você desenvolve, você provavelmente quer melhorar ela.
 
-## CSS Methodologies
+## Metodologias CSS
 
-What happens when your application starts to expand and new concepts get added? Broad CSS selectors are like globals. The problem gets even worse if you have to deal with loading order. If selectors end up in a tie, the last declaration wins, unless there's `!important` somewhere. It gets complex very fast.
+O que acontece quando o aplicativo começa a se expandir e novos conceitos são adicionados? Os seletores CSS são amplos e globais. O problema fica ainda pior se você tiver que lidar com a ordem de carregamento. Se os seletores acabarem em conflitos, a última declaração ganha, a menos que haja `!important` em algum lugar. Tudo se torna complexo muito rápido.
 
-We could battle this problem by making the selectors more specific, using some naming rules, and so on. That just delays the inevitable. As people have battled with this problem for a while, various methodologies have emerged.
+Podemos combater este problema, tornando os seletores mais específicos, usando algumas regras de nomeação, e assim por diante. Isso acaba atrasando o inevitável. À medida que a comunidade CSS foi lutando com esses problemas por muito tempo, várias metodologias surgiram.
 
-Particularly, [OOCSS](http://oocss.org/) (Object-Oriented CSS), [SMACSS](https://smacss.com/) (Scalable and Modular Approach for CSS), and [BEM](https://en.bem.info/method/) (Block Element Modifier) are well known. Each of them solves problems of vanilla CSS in their own way.
+Em particular, [OOCSS](http://oocss.org/) (CSS Orientado a Objetos), [SMACSS](https://smacss.com/) (Abordagem Escalável e Modular para CSS) e [BEM](https://en.bem.info/method/) (Bloco, Elemento e Modificador) são bem conhecidos. Cada um deles resolvem problemas de CSS "puro", à sua maneira.
 
 ### BEM
 
-BEM originates from Yandex. The goal of BEM is to allow reusable components and code sharing. Sites, such as [Get BEM](http://getbem.com/) help you to understand the methodology in more detail.
+BEM foi criado no Yandex. O objetivo do BEM é permitir componentes reutilizáveis e compartilhamento de código. Sites, como [Get BEM](http://getbem.com/) ajudam você a entender a metodologia com mais detalhes.
 
-Maintaining long class names which BEM requires can be arduous. Thus various libraries have appeared to make this easier. For React, examples of these are [react-bem-helper](https://www.npmjs.com/package/react-bem-helper), [react-bem-render](https://www.npmjs.com/package/react-bem-render), and [bem-react](https://www.npmjs.com/package/bem-react).
+Manter nomes de classes longos, que o BEM requer, pode ser tedioso. Sendo assim, várias bibliotecas apareceram para tornar isso mais fácil. Para React, alguns exemplos disso são [react-bem-helper](https://www.npmjs.com/package/react-bem-helper), [react-bem-render](https: //www.npmjs.com/package/reagir-bem-render) e [bem-react](https://www.npmjs.com/package/bem-react).
 
-Note that [postcss-bem-linter](https://www.npmjs.com/package/postcss-bem-linter) allows you to lint your CSS for BEM conformance.
+Vale notar que o [postcss-bem-linter](https://www.npmjs.com/package/postcss-bem-linter) adiciona regras de lint para o seu CSS, validando suas declarações BEM.
 
-### OOCSS and SMACSS
+### OOCSS e SMACSS
 
-Just like BEM, both OOCSS and SMACSS come with their own conventions and methodologies. As of this writing, no React specific helper libraries exist for OOCSS and SMACSS.
+Assim como o BEM, o OOCSS e o SMACSS trazem suas próprias convenções e metodologias. Até o momento que escrevo isso, não existem bibliotecas auxiliares específicas em React para OOCSS e SMACSS.
 
-### Pros and Cons
+### Prós e contras
 
-The primary benefit of adopting a methodology is that it brings structure to your project. Rather than writing ad hoc rules and hoping everything works, you will have something stronger to fall back onto. The methodologies overcome some of the basic issues and help you develop good software over the long term. The conventions they bring to a project help with maintenance and are less prone to lead to a mess.
+O principal benefício de adotar uma metodologia é trazer estrutura ao seu projeto. Ao invés de escrever regras a mão e esperar que tudo funcione, você terá algo mais estável para te ajudar. As metodologias superam alguns dos problemas básicos e o ajudam a desenvolver bons softwares a longo prazo. As convenções que eles trazem para um projeto ajudam com a manutenção e são menos propensas a criar uma bagunça.
 
-On the downside, once you adopt one, you are pretty much stuck with that and it's going to be difficult to migrate. But if you are willing to commit, there are benefits to gain.
+A desvantagem, uma vez que você adote um, você estará preso com ele e será difícil migrar. Mas se você está disposto a se cometer, há bons benefícios dessa relação.
 
-The methodologies also bring their own quirks (e.g., complex naming schemes). This may make certain things more complicated than they have to be. They don't necessarily solve any of the bigger underlying issues. They rather provide patches around them.
+As metodologias também trazem suas peculiaridades (por exemplo, esquemas de nomeação complexos). Isso pode tornar certas coisas mais complicadas do que devem ser. Eles não resolvem necessariamente nenhum dos maiores problemas do CSS. Apenas oferecem uma alternativa, evitando-os a curto prazo.
 
-There are various approaches that go deeper and solve some of these fundamental problems. That said, it's not an either-or proposition. You may adopt a methodology even if you use some CSS processor.
+Existem várias abordagens que vão além e conseguem resolver algum desses problemas fundamentais, dito isso, não é uma situação de escolha entre um ou outro, você pode adotar uma metodologia mesmo se você estiver usando um processador CSS.
 
-## CSS Processors
+## Processadores CSS
 
-![CSS Processors](images/css.png)
+![Processadores CSS](images/css.png)
 
-Vanilla CSS is missing some functionality that would make maintenance work easier. Consider something basic like variables, nesting, mixins, math or color functions. It would also be nice to be able to forget about browser specific prefixes. These are small things that add up quite fast and make it annoying to write vanilla CSS.
+CSS Puro sempre falta alguma funcionalidade que facilita a manutenção. Considere algo básico como variáveis, aninhamento, mixins, matemática ou funções de cores. Também seria bom poder esquecer os prefixos específicos do navegador. Estas são pequenas coisas que se somam bastante rápido e tornam irritante escrever CSS Puro.
 
-Sometimes, you may see terms *preprocessor* or *postprocessor*. [Stefan Baumgartner](https://medium.com/@ddprrt/deconfusing-pre-and-post-processing-d68e3bd078a3) calls these tools simply *CSS processors*. The image above adapted based on Stefan's work gets to the point. The tooling operates both on authoring and optimization level. By authoring we mean features that make it easier to write CSS. Optimization features operate based on vanilla CSS and convert it into something more optimal for browsers to consume.
+Às vezes, você pode ver termos * pré-processador* ou * pós-processador*. [Stefan Baumgartner](https://medium.com/@ddprrt/deconfusing-pre-and-post-processing-d68e3bd078a3) chama essas ferramentas de *Processadores CSS*. A imagem acima, adaptada com base no trabalho de Stefan, chega ao ponto que queremos. A ferramenta funciona tanto no nível de autoria quanto na otimização. Por autoria, queremos dizer recursos que facilitam a escrita do CSS. Os recursos de otimização operam com base no CSS escrito convertendo-o em algo mais ideal para os navegadores.
 
-The interesting thing is that you may actually want to use multiple CSS processors. Stefan's image illustrates how you can author your code using Sass and still benefit from processing done through PostCSS. For example, it can *autoprefix* your CSS code so that you don't have to worry about prefixing per browser anymore.
+O interessante é que você realmente pode usar vários processadores CSS. A imagem de Stefan ilustra como você pode escrever seu código usando SASS e ainda se beneficiar do processamento feito através do PostCSS. Por exemplo, ele pode *autoprefixar* seu código CSS para que você não precise se preocupar mais com o prefixo por navegador.
 
-You can use common processors, such as [Less](http://lesscss.org/), [Sass](http://sass-lang.com/), [Stylus](https://learnboost.github.io/stylus/), or [PostCSS](http://postcss.org/) with React.
+Você pode usar processadores comuns, como [Less](http://lesscss.org/), [Sass](http://sass-lang.com/), [Stylus](https://learnboost.github.io/stylus/), ou [PostCSS](http://postcss.org/) com React.
 
-[cssnext](https://cssnext.github.io/) is a PostCSS plugin that allows us to experience the future now. There are some restrictions, but it may be worth a go. The advantage of PostCSS and cssnext is that you will literally be coding in the future. As browsers get better and adopt the standards, you don't have to worry about porting.
+[cssnext](https://cssnext.github.io/) é um plugin PostCSS que nos permite experimentar o futuro agora. Existem algumas restrições, mas pode valer a pena. A vantagem do PostCSS e do cssnext é que você, literalmente, estará codificando CSS do futuro. À medida que os navegadores melhorem e adotem os padrões, você não precisa se preocupar com a portabilidade.
 
-### Pros and Cons
+### Prós e contras
 
-Compared to vanilla CSS, processors bring a lot to the table. They deal with certain annoyances (e.g., autoprefixing) while improving your productivity. PostCSS is more granular by definition and allows you to use just the features you want. Processors, such as Less or Sass, are more involved. These approaches can be used together, though, so you could, for instance, author your styling in Sass and then apply some PostCSS plugins to it as you see necessary.
+Comparado ao CSS puro, os processadores trazem muitas facilidades. Eles lidam com certos aborrecimentos (por exemplo, *autoprefixing*) enquanto melhoram sua produtividade. O PostCSS é mais flexível, por definição, e permite que você use apenas os recursos desejados. Os processadores, como Less ou Sass, tem sua própria gama de ferramentas. Essas abordagens podem ser usadas em conjunto, no entanto, para que você possa, por exemplo, escrever seus estilos em Sass e, em seguida, aplicar alguns plugins PostCSS, como você desejar.
 
-In our project, we could benefit from cssnext even if we didn't make any changes to our CSS. Thanks to autoprefixing, rounded corners of our lanes would look good even in legacy browsers. In addition, we could parameterize styling thanks to variables.
+Em nosso projeto, nós poderíamos nos beneficiar do cssnext, mesmo não fazendo nenhuma alteração em nosso CSS. Graças ao *autoprefixing*, os cantos arredondados de nossas pistas ficariam bem mesmo em navegadores legados. Além disso, podemos parametrizar o estilo graças às variáveis.
 
-## React Based Approaches
+## Abordagens baseadas em React
 
-With React we have some additional alternatives. What if the way we've been thinking about styling has been misguided? CSS is powerful, but it can become an unmaintainable mess without some discipline. Where do we draw the line between CSS and JavaScript?
+Com o React, temos algumas alternativas. E se a maneira como pensamos sobre o estilo estiver defasada? O CSS é poderoso, mas pode se tornar uma bagunça incessante sem alguma disciplina. Onde desenhamos a linha entre CSS e JavaScript?
 
-There are various approaches for React that allow us to push styling to the component level. It may sound heretical. React, being an iconoclast, may lead the way here.
+Existem várias abordagens para React que nos permitem empurrar estilo para o nível de componente. Pode parecer maluco, mas React, e a mentalidade de componentização, pode liderar o caminho aqui.
 
-### Inline Styles to Rescue
+### Estilos inline ao salvamento!
 
-Ironically, the way solutions based on React solve this is through inline styles. Getting rid of inline styles was one of the main reasons for using separate CSS files in the first place. Now we are back there. This means that instead of something like this:
+Ironicamente, a forma como as soluções com base em React resolvem isso é através de estilos *inline*. Em primeiro lugar, o não uso de estilos inline foi um dos principais motivos para o uso de arquivos CSS separados. Agora estamos fazendo o caminho de volta. Isso significa que em vez de algo assim:
 
 ```javascript
 render(props, context) {
@@ -76,7 +76,7 @@ render(props, context) {
 }
 ```
 
-and accompanying CSS, we'll do something like this:
+seria acompanhado de CSS, ficando algo assim:
 
 ```javascript
 render(props, context) {
@@ -91,25 +91,26 @@ render(props, context) {
 }
 ```
 
-Like with HTML attribute names, we are using the same camelcase convention for CSS properties.
+Assim como os atributos HTML, estamos usando a mesma convenção camelCase para propriedades CSS.
 
-Now that we have styling at the component level, we can implement logic that also alters the styles easily. One classic way to do this has been to alter class names based on the outlook we want. Now we can adjust the properties we want directly.
+Com estilos no nível do componente, podemos implementar a lógica que irá alterar os estilos com mais facilidade. Uma maneira clássica de fazer isso é alterar os nomes das classes com base nas mudanças que queremos. Agora, podemos ajustar as propriedades que queremos diretamente.
 
-We have lost something in process, though. Now all of our styling is tied to our JavaScript code. It is going to be difficult to perform large, sweeping changes to our codebase as we need to tweak a lot of components to achieve that.
+No entanto, perdemos algo no processo. Agora, todo o nosso estilo está vinculado ao nosso código JavaScript. Vai ser difícil realizar grandes mudanças na nossa base de códigos, pois precisamos ajustar muitos componentes para conseguir isso.
 
-We can try to work against this by injecting a part of styling through props. A component could patch its style based on a provided one. This can be improved further by coming up with conventions that allow parts of style configuration to be mapped to some specific part. We just reinvented selectors on a small scale.
+Nós podemos tentar contornar isso, injetando uma parte do estilo através de *props*. Um componente poderia alterar seu estilo com base em uma prop fornecida. Isso pode ser aprimorado ainda mais, com convenções que permitem que pedaços de configuração de estilos sejam mapeadas para alguma parte específica da sua aplicação. Acabamos de reinventar os seletores CSS, em pequena escala.
 
-How about things like media queries? This naïve approach won't quite cut it. Fortunately, people have come up with libraries to solve these tough problems for us.
+E como fica *media queries*? Essa abordagem, ingênua, não disponibiliza suporte. Felizmente, algumas pessoas criaram bibliotecas específicas para resolver esses problemas difíceis para nós.
 
-According to Michele Bertoli basic features of these libraries are
+De acordo com Michele Bertoli, as características básicas dessas bibliotecas são:
 
-* Autoprefixing - e.g., for `border`, `animation`, `flex`.
-* Pseudo classes - e.g., `:hover`, `:active`.
-* Media queries - e.g., `@media (max-width: 200px)`.
-* Styles as Object Literals - See the example above.
-* CSS style extraction - It is useful to be able to extract separate CSS files as that helps with the initial loading of the page. This will avoid a flash of unstyled content (FOUC).
+* Autoprefixing - ex., para `border`, `animation`, `flex`.
+* Pseudo classes - ex., `:hover`, `:active`.
+* Media queries - ex., `@media (max-width: 200px)`.
+* Estilos como Objeto literal - Veja os exemplos acima.
+* Extração de CSS Inline - É útil extrair os estilos para arquivos CSS separados, pois ajuda com o carregamento inicial da página. Isso evitará um flash de conteúdo não estilizado (*FOUC - Flash of unstyled content*).
 
 I will cover some of the available libraries to give you a better idea how they work. See [Michele's list](https://github.com/MicheleBertoli/css-in-js) for a more a comprehensive outlook of the situation.
+Iremos cobrir algumas das bibliotecas disponíveis, para lhe dar uma melhor idéia de como elas funcionam. Veja a [lista completa do Michele](https://github.com/MicheleBertoli/css-in-js) para saber mais sobre isso.
 
 ### Radium
 
