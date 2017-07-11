@@ -40,11 +40,11 @@ Existem várias abordagens que vão além e conseguem resolver algum desses prob
 
 ## Processadores CSS
 
-![Processadores CSS](images/css.png)
+![Processadores CSS](../images/css.png)
 
 CSS Puro sempre falta alguma funcionalidade que facilita a manutenção. Considere algo básico como variáveis, aninhamento, mixins, matemática ou funções de cores. Também seria bom poder esquecer os prefixos específicos do navegador. Estas são pequenas coisas que se somam bastante rápido e tornam irritante escrever CSS Puro.
 
-Às vezes, você pode ver termos * pré-processador* ou * pós-processador*. [Stefan Baumgartner](https://medium.com/@ddprrt/deconfusing-pre-and-post-processing-d68e3bd078a3) chama essas ferramentas de *Processadores CSS*. A imagem acima, adaptada com base no trabalho de Stefan, chega ao ponto que queremos. A ferramenta funciona tanto no nível de autoria quanto na otimização. Por autoria, queremos dizer recursos que facilitam a escrita do CSS. Os recursos de otimização operam com base no CSS escrito convertendo-o em algo mais ideal para os navegadores.
+Às vezes, você pode ver termos *pré-processador* ou *pós-processador*. [Stefan Baumgartner](https://medium.com/@ddprrt/deconfusing-pre-and-post-processing-d68e3bd078a3) chama essas ferramentas de *Processadores CSS*. A imagem acima, adaptada com base no trabalho de Stefan, chega ao ponto que queremos. A ferramenta funciona tanto no nível de autoria quanto na otimização. Por autoria, queremos dizer recursos que facilitam a escrita do CSS. Os recursos de otimização operam com base no CSS escrito convertendo-o em algo mais ideal para os navegadores.
 
 O interessante é que você realmente pode usar vários processadores CSS. A imagem de Stefan ilustra como você pode escrever seu código usando SASS e ainda se beneficiar do processamento feito através do PostCSS. Por exemplo, ele pode *autoprefixar* seu código CSS para que você não precise se preocupar mais com o prefixo por navegador.
 
@@ -222,7 +222,6 @@ export default class ConfirmButton extends React.Component {
 }
 ```
 
-The approach supports pseudoselectors, i.e., you could define a selector within, such as
 A abordagem suporta *pseudo-selectors*, ou seja, você pode definir um seletor implícito, como `&:hover`, dentro de uma definição, e ela irá funcionar.
 
 T> Existe um Webpack loader para isso, o [jss-loader](https://www.npmjs.com/package/jss-loader).
