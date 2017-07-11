@@ -109,12 +109,11 @@ De acordo com Michele Bertoli, as características básicas dessas bibliotecas s
 * Estilos como Objeto literal - Veja os exemplos acima.
 * Extração de CSS Inline - É útil extrair os estilos para arquivos CSS separados, pois ajuda com o carregamento inicial da página. Isso evitará um flash de conteúdo não estilizado (*FOUC - Flash of unstyled content*).
 
-I will cover some of the available libraries to give you a better idea how they work. See [Michele's list](https://github.com/MicheleBertoli/css-in-js) for a more a comprehensive outlook of the situation.
 Iremos cobrir algumas das bibliotecas disponíveis, para lhe dar uma melhor idéia de como elas funcionam. Veja a [lista completa do Michele](https://github.com/MicheleBertoli/css-in-js) para saber mais sobre isso.
 
 ### Radium
 
-[Radium](http://projects.formidablelabs.com/radium/) has certain valuable ideas that are worth highlighting. Most importantly it provides abstractions required to deal with media queries and pseudo classes (e.g., `:hover`). It expands the basic syntax as follows:
+[Radium](http://projects.formidablelabs.com/radium/) traz certas idéias valiosas que merecem destaque. O mais importante, fornece abstrações necessárias para lidar com *media queries* e *pseudo-classes* (ex. `:hover`). Ele expande a sintaxe básica da seguinte maneira:
 
 ```javascript
 const styles = {
@@ -146,11 +145,11 @@ const styles = {
 <button style={[styles.button, styles.primary]}>Confirm</button>
 ```
 
-For `style` prop to work, you'll need to annotate your classes using `@Radium` decorator.
+Para a propriedade `style` funcionar, você precisar anotar sua classe usando o *decorator* `@Radium`.
 
 ### React Style
 
-[React Style](https://github.com/js-next/react-style) uses the same syntax as React Native [StyleSheet](https://facebook.github.io/react-native/docs/stylesheet.html#content). It expands the basic definition by introducing additional keys for fragments.
+[React Style](https://github.com/js-next/react-style) usa a mesma sintaxe do [Reative Native StyleSheet](https://facebook.github.io/react-native/docs/stylesheet.html#content). Ele expande a definição básica através de chaves adicionais para criar fragmentos.
 
 ```javascript
 import StyleSheet from 'react-style';
@@ -178,15 +177,15 @@ const styles = StyleSheet.create({
 <button styles={[styles.button, styles.primary]}>Confirm</button>
 ```
 
-As you can see, we can use individual fragments to get the same effect as Radium modifiers. Also media queries are supported. React Style expects that you manipulate browser states (e.g., `:hover`) through JavaScript. Also CSS animations won't work. Instead, it's preferred to use some other solution for that.
+Como você pode ver, podemos usar fragmentos individuais para obter o mesmo efeito que os modificadores do Radium. *Media queries* também são suportadas. React Style espera que você manipule os estados do navegador (ex. `:hover`) através do JavaScript. Animações CSS não funcionarão. Ao invés disso, é preferível usar outra solução para isso.
 
-T> [React Style plugin for Webpack](https://github.com/js-next/react-style-webpack-plugin) can extract CSS declarations into a separate bundle. Now we are closer to the world we're used to, but without cascades. We also have our style declarations on the component level.
+T> [Plugin React Style para Webpack](https://github.com/js-next/react-style-webpack-plugin) pode extrair declarações CSS em um arquivo separado. Agora estamos mais perto do mundo ao qual estamos acostumados, mas sem o efeito cascata. Também temos nossas declarações de estilo ao nível do componente.
 
 ### JSS
 
-[JSS](https://github.com/jsstyles/jss) is a JSON to StyleSheet compiler. It can be convenient to represent styling using JSON structures as this gives us easy namespacing. Furthermore it is possible to perform transformations over the JSON to gain features, such as autoprefixing. JSS provides a plugin interface just for this.
+[JSS](https://github.com/jsstyles/jss) é um compilador JSON para StyleSheets. Pode ser conveniente representar seus estilos usando estruturas JSON, pois isso nos facilita o uso de nomes. Além disso, é possível realizar transformações sobre o JSON para obter outros recursos, como autoprefixing. O JSS fornece uma interface de plugin apenas para isso.
 
-JSS can be used with React through [react-jss](https://www.npmjs.com/package/react-jss).  You can use JSS through *react-jss* like this:
+JSS pode ser usado com React através do [react-jss](https://www.npmjs.com/package/react-jss). Podemos usar JSS com *react-jss* dessa maneira:
 
 ```javascript
 ...
@@ -223,9 +222,10 @@ export default class ConfirmButton extends React.Component {
 }
 ```
 
-The approach supports pseudoselectors, i.e., you could define a selector within, such as `&:hover`, within a definition and it would just work.
+The approach supports pseudoselectors, i.e., you could define a selector within, such as
+A abordagem suporta *pseudo-selectors*, ou seja, você pode definir um seletor implícito, como `&:hover`, dentro de uma definição, e ela irá funcionar.
 
-T> There's a [jss-loader](https://www.npmjs.com/package/jss-loader) for Webpack.
+T> Existe um Webpack loader para isso, o [jss-loader](https://www.npmjs.com/package/jss-loader).
 
 ### React Inline
 
