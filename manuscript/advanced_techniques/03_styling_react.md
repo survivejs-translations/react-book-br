@@ -20,7 +20,7 @@ Em particular, [OOCSS](http://oocss.org/) (CSS Orientado a Objetos), [SMACSS](ht
 
 BEM foi criado no Yandex. O objetivo do BEM é permitir componentes reutilizáveis e compartilhamento de código. Sites, como [Get BEM](http://getbem.com/) ajudam você a entender a metodologia com mais detalhes.
 
-Manter nomes de classes longos, que o BEM requer, pode ser tedioso. Sendo assim, várias bibliotecas apareceram para tornar isso mais fácil. Para React, alguns exemplos disso são [react-bem-helper](https://www.npmjs.com/package/react-bem-helper), [react-bem-render](https: //www.npmjs.com/package/reagir-bem-render) e [bem-react](https://www.npmjs.com/package/bem-react).
+Manter nomes de classes longos, que o BEM requer, pode ser tedioso. Sendo assim, várias bibliotecas apareceram para tornar isso mais fácil. Para React, alguns exemplos disso são [react-bem-helper](https://www.npmjs.com/package/react-bem-helper), [react-bem-render](https://www.npmjs.com/package/reagir-bem-render) e [bem-react](https://www.npmjs.com/package/bem-react).
 
 Vale notar que o [postcss-bem-linter](https://www.npmjs.com/package/postcss-bem-linter) adiciona regras de lint para o seu CSS, validando suas declarações BEM.
 
