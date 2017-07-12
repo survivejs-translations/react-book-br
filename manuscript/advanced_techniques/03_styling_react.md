@@ -228,7 +228,7 @@ T> Existe um Webpack loader para isso, o [jss-loader](https://www.npmjs.com/pack
 
 ### React Inline
 
-[React Inline](https://github.com/martinandert/react-inline) is an interesting twist on StyleSheet. It generates CSS based on `className` prop of elements where it is used. The example above could be adapted to React Inline like this:
+[React Inline](https://github.com/martinandert/react-inline) é uma abordagem interessante para StyleSheet. Ele gera CSS com base em na propriedade `className` de elementos onde ele é usado. O exemplo acima pode ser adaptado para React Inline dessa maneira:
 
 ```javascript
 import cx from 'classnames';
@@ -244,7 +244,7 @@ class ConfirmButton extends React.Component {
 }
 ```
 
-Unlike React Style, the approach supports browser states (e.g., `:hover`). Unfortunately, it relies on its own custom tooling to generate React code and CSS which it needs to work.
+Diferente do React Style, essa abordagem oferece suporte a diferentes estados (por exemplo, `:hover`). Infelizmente, ele depende de suas próprias ferramentas de tooling para gerar código React e CSS.
 
 ### jsxstyle
 
