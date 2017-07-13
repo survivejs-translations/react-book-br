@@ -248,7 +248,7 @@ Diferente do React Style, essa abordagem oferece suporte a diferentes estados (p
 
 ### jsxstyle
 
-Pete Hunt's [jsxstyle](https://github.com/petehunt/jsxstyle) aims to mitigate some problems of React Style's approach. As you saw in previous examples, we still have style definitions separate from the component markup. jsxstyle merges these two concepts. Consider the following example:
+A biblioteca do Pete Hunt, [jsxstyle](https://github.com/petehunt/jsxstyle), visa mitigar alguns problemas da abordagem do React Style. Como você viu em exemplos anteriores, ainda temos definições de estilo separadas da marcação de componente. **jsxstyle** combina esses dois conceitos. Considere o seguinte exemplo:
 
 ```javascript
 // PrimaryButton component
@@ -258,9 +258,9 @@ Pete Hunt's [jsxstyle](https://github.com/petehunt/jsxstyle) aims to mitigate so
 >Confirm</button>
 ```
 
-The approach is still in its early days. For instance, support for media queries is missing. Instead of defining modifiers as above, you'll end up defining more components to support your use cases.
+Essa abordagem ainda está em seus primeiros dias. Por exemplo, o suporte para **media queries** está faltando. Em vez de definir modificadores como no exemplo acima, você acabará definindo mais componentes para seus casos de uso.
 
-T> Just like React Style, jsxstyle comes with a Webpack loader that can extract CSS into a separate file.
+T> Assim como React Style, jsxstyle tem um Webpack loader que pode extrair o CSS em um arquivo separado.
 
 ## CSS Modules
 
