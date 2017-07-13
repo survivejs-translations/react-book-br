@@ -228,7 +228,7 @@ T> Existe um Webpack loader para isso, o [jss-loader](https://www.npmjs.com/pack
 
 ### React Inline
 
-[React Inline](https://github.com/martinandert/react-inline) é uma abordagem interessante para StyleSheet. Ele gera CSS com base em na propriedade `className` de elementos onde ele é usado. O exemplo acima pode ser adaptado para React Inline dessa maneira:
+[React Inline](https://github.com/martinandert/react-inline) é uma abordagem interessante para StyleSheet. Ele gera CSS com base na propriedade `className` de elementos onde ele é usado. O exemplo acima pode ser adaptado para React Inline dessa maneira:
 
 ```javascript
 import cx from 'classnames';
