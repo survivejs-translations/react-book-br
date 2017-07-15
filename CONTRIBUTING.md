@@ -2,8 +2,6 @@ Um dos aspectos únicos deste livro é que o seu desenvolvimento acontece públi
 
 ## PRs
 
-I welcome PRs (typo fixes and such). If you have some bigger changes in mind, I recommend you open an issue first. That way we'll avoid wasting time.
-
 Eu agradeço pelos PRs (correções de digitação e tal). Se você tiver alguma mudança maior em mente, eu recomendo que você [abra uma *issue*](https://github.com/survivejs-translations/react-book-br/issues) primeiro. Dessa forma, evitaremos perder o tempo.
 
 Crie seus PRs para a branch `dev` (que é a branch padrão).
@@ -18,8 +16,6 @@ Existem duas maneiras básicas de fornecer feedback através de uma *issue*:
 Ambos funcionam para mim. Use o que você se sentir mais confortável. Eu não ligo. O mais importante é que receber feedback para me permitir criar um conteúdo de boa qualidade.
 
 ## Formato da Issue
-
-It will help a lot if you can prefix your feedback with the chapter name in question. I.e. `getting started - <script> tag had incorrect path` is clear and easy for me to resolve.
 
 Isso ajudará muito, se você puder prefixar seus comentários com o nome do capítulo em questão. Isto é, `getting started - <script> tag tem um erro de gramática`, é claro e fácil para mim resolver.
 
