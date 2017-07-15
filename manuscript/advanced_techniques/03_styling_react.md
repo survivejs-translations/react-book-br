@@ -264,13 +264,13 @@ T> Assim como React Style, jsxstyle tem um Webpack loader que pode extrair o CSS
 
 ## CSS Modules
 
-As if there weren't enough styling options for React, there's one more that's worth mentioning. [CSS Modules](https://github.com/css-modules/css-modules) starts from the premise that CSS rules should be local by default. Globals should be treated as a special case. Mark Dalgleish's post [The End of Global CSS](https://medium.com/seek-ui-engineering/the-end-of-global-css-90d2a4a06284) goes into more detail about this.
+Como se não houvesse opções de estilo suficientes para React, há mais um que vale a pena mencionar. [CSS Modules](https://github.com/css-modules/css-modules) parte da premissa de que as regras CSS devem ser locais por padrão. Declarações globais devem ser tratadas como um caso especial. O post do Mark Dalgleish, que você pode conferir em Português, [O fim do CSS global](https://medium.com/tableless/o-fim-do-css-global-ddcd80bd6334), fala mais detalhadamente sobre isso.
 
-In short, if you make it difficult to use globals, you manage to solve the biggest problem of CSS. The approach still allows us to develop CSS as we've been used to. This time we're operating in a safer, local context by default.
+Resumindo, se você dificultar o uso de declarações globais, você consegue resolver o maior problema do CSS. A abordagem ainda nos permite desenvolver CSS do modo que estamos acostumados. Dessa vez, estamos usando um contexto local, mais seguro por padrão.
 
-This itself solves a large amount of problems libraries above try to solve in their own ways. If we need global styles, we can still get them. We still might want to have some around for some higher level styling after all. This time we're being explicit about it.
+Isso já resolve uma grande quantidade de problemas que as bibliotecas acima tentam resolver em seus próprios modos. Se precisarmos de estilos globais, ainda podemos usá-los. Afinal, para alguns estilos mais genéricos, nós ainda queremos declarações globais. Mas nessa abordagem, estamos sendo explícitos sobre isso.
 
-To give you a better idea, consider the example below:
+Para dar uma ideia melhor, considere o exemplo abaixo:
 
 **style.css**
 
@@ -310,20 +310,20 @@ import styles from './style.css';
 <button className=`${styles.primaryButton}`>Confirm</button>
 ```
 
-As you can see, this approach provides a balance between what people are familiar with and what React specific libraries do. It would not surprise me a lot if this approach gained popularity even though it's still in its early days. See [CSS Modules Webpack Demo](https://css-modules.github.io/webpack-demo/) for more examples.
+Como você pode ver, essa abordagem fornece um equilíbrio entre o que as pessoas estão familiarizadas e o que as bibliotecas específicas em React, fazem. Não me surpreenderia muito se essa abordagem ganhasse popularidade apesar de ainda estar em seus primeiros dias. Veja o [demo de CSS Modules com Webpack](https://css-modules.github.io/webpack-demo/) para mais detalhes.
 
-T> You can use other processors, such as Sass, in front of CSS Modules, in case you want more functionality.
+T> Você pode usar outros processadores, como SASS, antes do CSS Modules, caso você queira mais funcionalidades.
 
-T> [gajus/react-css-modules](https://github.com/gajus/react-css-modules) makes it even more convenient to use CSS Modules with React. Using it, you don't need to refer to the `styles` object anymore, and you are not forced to use camelCase for naming.
+T> [gajus/react-css-modules](https://github.com/gajus/react-css-modules) deixa ainda mais conveniente usar CSS Modules com React. Usando essa biblioteca, você não precisa mais se referir ao objeto `styles`, e você não é obrigado a usar camelCase para nome de classes.
 
-T> Glen Maddern discusses the topic in greater detail in his article named [CSS Modules - Welcome to the Future](http://glenmaddern.com/articles/css-modules).
+T> Glen Maddern discute o tema em maior detalhe em seu artigo chamado [CSS Modules - Welcome to the Future](http://glenmaddern.com/articles/css-modules).
 
-## Conclusion
+## Conclusão
 
-It is simple to try out various styling approaches with React. You can do it all, ranging from vanilla CSS to more complex setups. React specific tooling even comes with loaders of their own. This makes it easy to try out different alternatives.
+É simples experimentar várias abordagens de estilos em React. Você pode fazer tudo, variando de CSS puro para configurações mais complexas. Várias ferramentas de tooling específicas para React trazem *loaders* específicos para isso. Facilitando a experimentação de diferentes alternativas.
 
-React based styling approaches allow us to push styles to the component level. This provides an interesting contrast to conventional approaches where CSS is kept separate. Dealing with component specific logic becomes easier. You will lose some power provided by CSS. In return you gain something that is simpler to understand. It is also harder to break.
+A abordagen base de estilos em React nos permitem mover nossos estilos para o nível do componente. Isso proporciona um contraste interessante com as abordagens convencionais onde o CSS é mantido separado. Lidar com a lógica específica do componente torna-se mais fácil. Você perderá algum poder fornecido pelo CSS. Mas em troca, você ganha algo que é mais simples de entender e também, mais difícil de quebrar.
 
-CSS Modules strike a balance between a conventional approach and React specific approaches. Even though it's a newcomer, it shows a lot of promise. The biggest benefit seems to be that it doesn't lose too much in the process. It's a nice step forward from what has been commonly used.
+CSS Modules encontra um equilíbrio entre uma abordagem convencional e abordagens específicas do React. Embora seja um recém-chegado, trás muita promessa. O maior benefício, parece que não se perde muito do processo já comumente usado. É um bom passo adiante.
 
-There are no best practices yet, and we are still figuring out the best ways to do this in React. You will likely have to do some experimentation of your own to figure out what ways fit your use case the best.
+Ainda não existem boas práticas, e ainda estamos descobrindo as melhores maneiras de fazer isso em React. Você provavelmente terá que fazer algumas experiências próprias para descobrir quais maneiras se encaixam melhor em seu caso de uso.
