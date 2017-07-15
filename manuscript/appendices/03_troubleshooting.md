@@ -1,10 +1,10 @@
-# Troubleshooting
+# Solucionando Problemas
 
-I've tried to cover some common issues here. This chapter will be expanded as common issues are found.
+Eu tentei abordar alguns problemas comuns aqui. Este capítulo será expandido à medida que forem encontrados outros problemas comuns.
 
 ## `EPEERINVALID`
 
-It is possible you may see a message like this:
+É possível que você veja uma mensagem como esta:
 
 ```bash
 npm WARN package.json kanban-app@0.0.0 No repository field.
@@ -29,44 +29,45 @@ npm ERR! Please include the following file with any support request:
 ...
 ```
 
-In human terms, it means that some package, `eslint-loader` in this case, has a too strict `peerDependency` requirement. Our project has a newer version installed already. Given the required peer dependency is older than our version, we get this particular error.
+Em linguagem humana, isso significa que algum pacote, `eslint-loader` nesse caso, tema uma dependência rígida, `peerDependency`, declarada. Nosso projeto já possui uma versão mais recente. Dado que a dependência necessária declarada é mais antiga do que a nossa versão, obtemos esse erro específico.
 
-There are a couple of ways to work around this:
+Há algumas maneiras de contornar isso:
 
-1. Report the glitch to the package author and hope the version range will be expanded.
-2. Resolve the conflict by settling to a version that satisfies the peer dependency. In this case, we could pin `eslint` to version `0.23` (`"eslint": "0.23"`), and everyone should be happy.
-3. Fork the package, fix the version range, and point at your custom version. In this case, you would have a `"<package>": "<github user>/<project>#<reference>"` kind of declaration for your dependencies.
+1. Informe a falha para o autor da biblioteca e espere que a extensão de versões seja ampliada.
+2. Resolva o conflito localmente, configurando-o para uma versão que satisfaça a dependência. Nesse caso, poderíamos colocar `eslint` para versão `0.23` (`"eslint": "0.23"`), e todo mundo ficaria feliz.
+3. Faça um *fork* da biblioteca, corrija a extensão de versões e aponte para a sua versão personalizada. Neste caso, você teria algo como `"<package>": "<github user>/<project>#<reference>"` declarado nas suas depêndencias.
 
-T> Note that peer dependencies are dealt with differently starting from npm 3. After that version, it's up to the package consumer (i.e., you) to deal with it. This particular error will go away.
+T> Observe que as `peerDependency` são tratadas de forma diferente a partir de npm 3. Depois dessa versão, cabe ao consumidor do pacote (ou seja, você) lidar com isso. Este erro, em particular, desaparecerá.
 
 ## Warning: setState(...): Cannot update during an existing state transition
 
-You might get this warning while using React. An easy way to end up getting it is to trigger `setState()` within a method, such as `render()`. Sometimes this can happen indirectly. One way to cause the warning is call a method instead of binding it. Example: `<input onKeyPress={this.checkEnter()} />`. Assuming `this.checkEnter` uses `setState()`, this code will fail. Instead, you should use `<input onKeyPress={this.checkEnter} />` as that will bind the method correctly without calling it.
+You might get this warning while using React. An easy way to end up getting it is to trigger
+Você pode obter esse aviso usando React. Uma maneira fácil de encontra-lo é usar `setState()` dentro de um método, como `render()`. Às vezes, isso pode acontecer indiretamente. Uma maneira de causar o aviso é executar um método ao invés de vincular sua referência. Exemplo: `<input onKeyPress={this.checkEnter()} />`. Assumindo `this.checkEnter` faça uso de `setState()`, esse código irá falhar. Ao invés disso, você deveria usar `<input onKeyPress={this.checkEnter} />`, dessa maneira, você está vinculando a referência do método ao invés de executá-lo.
 
 ## Warning: React attempted to reuse markup in a container but the checksum was invalid
 
-You can get this warning through multiple means. Common causes below:
+Você pode obter esse aviso por vários meios. Causas comuns abaixo:
 
-* You tried to mount React multiple times to the same container. Check your script loading and make sure your application is loaded only once.
-* The existing markup on your template doesn't match the one rendered by React. This can happen especially if you are rendering the initial markup through a server.
+* Você tentou montar sua aplicação React, várias vezes, usando o mesmo objeto alvo. Verifique o carregamento do seu script e verifique se o seu aplicativo é carregado apenas uma vez.
+* A marcação existente não corresponde ao renderizado pelo React. Isso pode acontecer especialmente se você estiver renderizando a marcação inicial no servidor.
 
 ## `Module parse failed`
 
-When using Webpack, an error like this might come up:
+Ao usar o Webpack, um erro como esse pode surgir:
 
 ```bash
 ERROR in ./app/components/Demo.jsx
 Module parse failed: .../app/components/Demo.jsx Line 16: Unexpected token <
 ```
 
-This means there is something preventing Webpack to interpret the file correctly. You should check out your `loader` configuration carefully. Make sure the right loaders are applied to the right files. If you are using `include`, you should verify that the file is included within `include` paths.
+Isso significa que há alguma coisa impedindo o Webpack de interpretar o arquivo corretamente. Você deve verificar sua configuração e seus `loaders`. Verifique se os carregadores corretos são aplicados aos arquivos corretos. Se você estiver usando `include`, você deve verificar se o arquivo está incluído dentro do caminho definido no `include`.
 
-## Project Fails to Compile
+## O projeto não compila
 
-Even though everything should work in theory, sometimes version ranges can bite you, despite SemVer. If some core package breaks, let's say `babel`, and you happen to execute `npm i` in an unfortunate time, you may end up with a project that doesn't compile.
+Mesmo que tudo funcione, em teoria, às vezes os intervalos de versões podem ser um problema, apesar do `SemVer`. Se algum pacote principal tem uma versão com grandes mudanças, digamos `babel`, e você executa `npm i`, em um momento infeliz, você pode acabar com um projeto que não compila.
 
-A good first step is to execute `npm update`. This will check out your dependencies and pull the newest matching versions into your SemVer declarations. If this doesn't fix the issue, you can try to nuke `node_modules` (`rm -rf node_modules`) from the project directory and reinstall the dependencies (`npm i`). Alternatively you can try to explicitly pin some of your dependencies to specific versions.
+Um bom primeiro passo é executar `npm update`. Isso verificará suas dependências e puxará as versões mais recentes baseado nas declarações`SemVer`. Se isso não resolver o problema, você pode tentar remover `node_modules` (`rm -rf node_modules`) do projeto e instalar as dependências (`npm i`) novamente. Alternativamente, você pode tentar incluir, explicitamente, algumas de suas dependências em versões específicas.
 
-Often you are not alone with your problem. Therefore, it may be worth your while to check out the project issue trackers to see what's going on. You can likely find a good workaround or a proposed fix there. These issues tend to get fixed fast for popular projects.
+Muitas vezes você não está sozinho com seu problema. Portanto, vale a pena verificar os problemas do projeto, no Github, para ver o que está acontecendo. Você provavelmente pode encontrar uma boa solução alternativa ou uma proposta de correção por lá. Essas questões tendem a ser corrigidas rapidamente para projetos populares.
 
-In a production environment, it may be preferable to lock production dependencies using `npm shrinkwrap`. [The official documentation](https://docs.npmjs.com/cli/shrinkwrap) goes into more detail on the topic.
+Em um ambiente de produção, é possível bloquear dependências de produção usando `npm shrinkwrap`. [A documentação oficial](https://docs.npmjs.com/cli/shrinkwrap) entra em mais detalhes desse tópico.
