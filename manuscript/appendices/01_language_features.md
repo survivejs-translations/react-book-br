@@ -1,14 +1,14 @@
-# Language Features
+# Caracteristicas da Linguagem
 
-ES6 (or ES2015) was arguably the biggest change to JavaScript in a long time. As a result, we received a wide variety of new functionality. The purpose of this appendix is to illustrate the features used in the book in isolation to make it clearer to understand how they work. Rather than going through [the entire specification](http://www.ecma-international.org/ecma-262/6.0/index.html), I will just focus on the subset of features used in the book.
+ES6 (ou ES2015) foi, sem dúvida, a maior mudança no JavaScript em muito tempo. Como resultado, recebemos uma grande variedade de novas funcionalidades. O objetivo deste apêndice é ilustrar os recursos utilizados no livro de forma isolada para que eles sejam mais claros, e também, para entender melhor como eles funcionam. Ao invés de falarmos de [toda a especificação](http://www.ecma-international.org/ecma-262/6.0/index.html), Vou focar apenas no subconjunto de recursos usados no livro.
 
-## Modules
+## Módulos
 
-ES6 introduced proper module declarations. Earlier, this was somewhat ad hoc and we used formats, such as AMD or CommonJS. ES6 module declarations are statically analyzable. This is highly useful for tool authors. Effectively, this means we can gain features like *tree shaking*. This allows the tooling to skip unused code easily simply by analyzing the import structure.
+ES6 introduziu declarações de módulos adequadas. Antes disso, nós faziamos alguns *hacks* em determinados formatos, como AMD ou CommonJS. As declarações do módulo ES6 são analisáveis estaticamente. Isso é altamente útil para autores de ferramentas. Isso significa que podemos obter recursos como *tree shaking*. Isso permite que a ferramenta ignore o código não utilizado, simplesmente analisando a estrutura de importação.
 
-### `import` and `export` for Single
+### Único `import` e `export`
 
-To give you an example of exporting directly through a module, consider below:
+Vamos ver um exemplo de como exportar um módulo diretamente, considere abaixo:
 
 **persist.js**
 
@@ -28,9 +28,9 @@ import persist from './persist';
 ...
 ```
 
-### `import` and `export` for Multiple
+### Múltiplos `import` e `export`
 
-Sometimes it can be useful to use modules as a namespace for multiple functions:
+Às vezes, queremos usar módulos como escopo para várias funções:
 
 **math.js**
 
@@ -48,7 +48,7 @@ export function square(a) {
 }
 ```
 
-Alternatively we could write the module in a form like this:
+Poderíamos escrever o módulo dessa forma:
 
 **math.js**
 
@@ -56,34 +56,34 @@ Alternatively we could write the module in a form like this:
 const add = (a, b) => a + b;
 const multiple = (a, b) => a * b;
 
-// You can omit ()'s with a single parameter if you want.
+// Se você quiser, você pode omitir os () quando utilizar apenas um parâmetro.
 const square = a => a * a;
 
 export {
   add,
   multiple,
-  // Aliasing works too
+  // Criar "alias" também funciona
   multiple as mul
 };
 ```
 
-The example leverages the *fat arrow syntax*. This definition can be consumed through an import like this:
+O exemplo usa as *fat arrows*. Esta definição pode ser consumida através de uma importação como esta:
 
 **index.js**
 
 ```javascript
 import {add} from './math';
 
-// Alternatively we could bind the math methods to a key
+// Também podemos vincular os métodos a uma chave
 // import * as math from './math';
 // math.add, math.multiply, ...
 
 ...
 ```
 
-Especially `export default` is useful if you prefer to keep your modules focused. The `persist` function is an example of such. Regular `export` is useful for collecting multiple functions below the same umbrella.
+ `export default` é especialmente útil se você preferir manter seus módulos focados. A função `persist` é um exemplo. Já o comum `export`, é útil para agrupar múltiplas funções debaixo do mesmo módulo.
 
-T> Given the ES6 module syntax is statically analyzable, it enables tooling such as [analyze-es6-modules](https://www.npmjs.com/package/analyze-es6-modules).
+T> Dado que a sintaxe de módulos ES6 são analisáveis estaticamente, ele permite ferramentas como [analyze-es6-modules](https://www.npmjs.com/package/analyze-es6-modules).
 
 ### Aliasing Imports
 
