@@ -85,9 +85,9 @@ import {add} from './math';
 
 T> Dado que a sintaxe de módulos ES6 são analisáveis estaticamente, ele permite ferramentas como [analyze-es6-modules](https://www.npmjs.com/package/analyze-es6-modules).
 
-### Aliasing Imports
+### Criando alias para imports
 
-Sometimes it can be handy to alias imports. Example:
+Muitas vezes, vale a pena criar um alias para os módulos que você está importando. Exemplo:
 
 ```javascript
 import {actions as TodoActions} from '../actions/todo'
@@ -95,11 +95,12 @@ import {actions as TodoActions} from '../actions/todo'
 ...
 ```
 
-`as` allows you to avoid naming conflicts.
+`as` permite que você evite conflitos entre nomes de variáveis.
 
 ### Webpack `resolve.alias`
 
 Bundlers, such as Webpack, can provide some features beyond this. You could define a `resolve.alias` for some of your module directories for example. This would allow you to use an import, such as `import persist from 'libs/persist';`, regardless of where you import. A simple `resolve.alias` could look like this:
+Bundlers, como o Webpack, podem fornecer alguns recursos além disso. Você pode definir um `resolve.alias` para alguns de seus diretórios de módulos, por exemplo. Isso permitiria que você use-o diretamente na importação, como `import from 'libs/';`, independentemente de onde você escreva essa declaração. Um simples `resolve.alias` poderia ser assim:
 
 ```javascript
 ...
@@ -110,7 +111,7 @@ resolve: {
 }
 ```
 
-The official documentation describes [possible variants](https://webpack.github.io/docs/configuration.html#resolve-alias) in fuller detail.
+A documentação oficial descreve [Possíveis variações](https://webpack.github.io/docs/configuration.html#resolve-alias) em mais detalhes.
 
 ## Classes
 
