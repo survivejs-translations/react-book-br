@@ -115,9 +115,9 @@ A documentação oficial descreve [Possíveis variações](https://webpack.githu
 
 ## Classes
 
-Unlike many other languages out there, JavaScript uses prototype based inheritance instead of class based one. Both approaches have their merits. In fact, you can mimic a class based model through a prototype based one. ES6 classes are about providing syntactical sugar above the basic mechanisms of JavaScript. Internally it still uses the same old system. It just looks a little different to the programmer.
+Ao contrário de muitas outras linguages de programação, o JavaScript usa herança baseada em protótipo ao invés de baseada em classe. Ambas as abordagens têm seus méritos. Na verdade, você pode imitar um modelo baseado em classe através de um protótipo. As classes ES6 oferecem um açúcar sintático em cima desse mecanismo básico do JavaScript. Internamente, ele ainda usa o mesmo sistema. Mas para o programador, a sintaxe é diferente.
 
-These days React supports class based component definitions. Not all agree that it's a good thing. That said, the definition can be quite neat as long as you don't abuse it. To give you a simple example, consider the code below:
+Atualmente, React suporta definições de componentes baseadas em classes. Nem todos concordam que é uma coisa boa. Dito isto, a definição pode ser bastante limpa, desde que você não abuse. Um exemplo simples, considere o código abaixo:
 
 ```javascript
 import React from 'react';
@@ -126,19 +126,20 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
 
-    // This is a regular property outside of React's machinery.
-    // If you don't need to trigger render() when it's changed,
-    // this can work.
+    // Esta é uma propriedade regular da sintaxe JavaScript, não é React.
+    // Se você não precisar atualizar em cada render(),
+    // ela pode não funcionar.
     this.privateProperty = 'private';
 
     // React specific state. Alter this through `this.setState`. That
-    // will call `render()` eventually.
+    // Estado específico do React. Altere ele através de `this.setState`.
+    // E que, eventualmente irá chamar `render()`.
     this.state = {
       name: 'Class demo'
     };
   }
   render() {
-    // Use the properties somehow.
+    // Usando as propriedades de alguma forma.
     const privateProperty = this.privateProperty;
     const name = this.state.name
     const notes = this.props.notes;
@@ -148,7 +149,7 @@ export default class App extends React.Component {
 }
 ```
 
-Perhaps the biggest advantage of the class based approach is the fact that it cuts down some complexity, especially when it comes to React lifecycle methods. It is important to note that class methods won't get by default, though! This is why the book relies on an experimental feature known as property initializers.
+Talvez a maior vantagem da abordagem baseada em classe seja o fato de que reduz a complexidade, especialmente quando se trata de métodos de ciclo de vida do React. No entando, é importante notar que os métodos de classe não serão obtidos por padrão! É por isso que o livro baseia-se em um recurso experimental conhecido como ***property initializers***.
 
 ### Classes and Modules
 
