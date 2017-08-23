@@ -151,11 +151,13 @@ export default class App extends React.Component {
 
 Talvez a maior vantagem da abordagem baseada em classe seja o fato de que reduz a complexidade, especialmente quando se trata de métodos de ciclo de vida do React. No entando, é importante notar que os métodos de classe não serão obtidos por padrão! É por isso que o livro baseia-se em um recurso experimental conhecido como ***property initializers***.
 
-### Classes and Modules
+### Classes e Módulos
 
 As stated above, the ES6 modules allow `export` and `import` single and multiple objects, functions, or even classes. In the latter, you can use `export default class` to export an anonymous class or export multiple classes from the same module using `export class className`.
+Conforme mencionado acima, os módulos ES6 permitem usar `export` e `import` de objetos únicos/múltiplos, funções ou mesmo classes. No último, você pode usar `export default class` para exportar uma classe anônima ou exportar várias classes do mesmo módulo usando `export class className`.
 
 To export and import a single class you can use `export default class` to export an anonymous class and call it whatever you want at import time:
+Para exportar e importar uma única classe, você pode usar `export default class` para exportar uma classe anônima e chama-lá de qualquer coisa na hora da importação:
 
 **Note.jsx**
 
@@ -170,7 +172,7 @@ import Note from './Note.jsx';
 ...
 ```
 
-Or use `export class className` to export several named classes from a single module:
+Ou use `export class className` para exportar várias classes nomeadas de um único módulo:
 
 **Components.jsx**
 
@@ -187,11 +189,11 @@ import {Note, Notes} from './Components.jsx';
 ...
 ```
 
-It is recommended to keep your classes separated in different modules.
+Recomenda-se manter suas classes separadas em diferentes módulos.
 
-## Class Properties and Property Initializers
+## Propriedades de Classe e Inicializadores de Propriedades
 
-ES6 classes won't bind their methods by default. This can be problematic sometimes, as you still may want to be able to access the instance properties. Experimental features known as [class properties and property initializers](https://github.com/jeffmo/es-class-static-properties-and-fields) solve this problem. Without them, we might write something like this:
+As classes ES6 não vinculam seus métodos por padrão. Isso, muitas vezes, pode ser problemático, pois você ainda pode tentar acessar as propriedades da instância. Existe uma novidade, que ainda é experimental, chamados de [propriedades de classe e inicializadores de propriedades](https://github.com/jeffmo/es-class-static-properties-and-fields)(do inglês _class properties and property initializers_) que irão resolver esse problema. Sem eles, podemos escrever algo parecido com:
 
 ```javascript
 import React from 'react';
@@ -203,13 +205,13 @@ class App extends React.Component {
     this.renderNote = this.renderNote.bind(this);
   }
   render() {
-    // Use `renderNote` here somehow.
+    // Irá usar `renderNote` de alguma maneira.
     ...
 
     return this.renderNote();
   }
   renderNote() {
-    // Given renderNote was bound, we can access `this` as expected
+    // renderNote foi vinculado à instância, podemos usar `this`
     return <div>{this.props.value}</div>;
   }
 }
@@ -223,13 +225,13 @@ App.defaultProps = {
 export default App;
 ```
 
-Using class properties and property initializers we could write something tidier instead:
+Usando propriedades de classe e inicializações de propriedades, poderíamos escrever algo mais simples:
 
 ```javascript
 import React from 'react';
 
 export default class App extends React.Component {
-  // propType definition through static class properties
+  // definições de propType como métodos estáticos da classe
   static propTypes = {
     value: React.PropTypes.string
   }
@@ -237,20 +239,20 @@ export default class App extends React.Component {
     value: ''
   }
   render() {
-    // Use `renderNote` here somehow.
+    // Irá usar `renderNote` de alguma maneira.
     ...
 
     return this.renderNote();
   }
-  // Property initializer gets rid of the `bind`
+  // Inicializadores de propriedades removem a necessidade do `.bind`
   renderNote = () => {
-    // Given renderNote was bound, we can access `this` as expected
+    // renderNote foi vinculado à instância, podemos usar `this`
     return <div>{this.props.note}</div>;
   }
 }
 ```
 
-Now that we've pushed the declaration to method level, the code reads better. I decided to use the feature in this book primarily for this reason. There is simply less to worry about.
+Agora que nós empurramos a declaração para o nível do método, o código fica mais simples. Eu decidi usar o recurso neste livro principalmente por esse motivo. Temos algo a menos para se preocupar.
 
 ## Functions
 
