@@ -359,11 +359,11 @@ export default ({name}) => {
 };
 ```
 
-## String Interpolation
+## Interpolação de String
 
-Earlier, dealing with strings was somewhat painful in JavaScript. Usually you just ended up using a syntax like `'Hello' + name + '!'`. Overloading `+` for this purpose wasn't perhaps the smartest move as it can lead to strange behavior due to type coercion. For example, `0 + ' world` would yield `0 world` string as a result.
+Sabemos que lidar com strings era um tanto doloroso em JavaScript. Normalmente, usamos uma sintaxe como `'Hello' + name + '!'`. Abusando o uso do `+` para este propósito, talvez não seja o modo mais inteligente, pois pode levar a um comportamento estranho, devido à coerção de tipo. Por exemplo, `0 + ' world` irá retornar o resultado `0 world` como string.
 
-Besides being clearer, ES6 style string interpolation provides us multi-line strings. This is something the old syntax didn't support. Consider the examples below:
+Além de ser mais claro, a interpolação de strings em ES6 nos fornece strings de múltiplas linhas. Isso é algo que a sintaxe antiga não suportava. Considere os exemplos abaixo:
 
 ```javascript
 const hello = `Hello ${name}!`;
@@ -374,7 +374,7 @@ awesomeness
 `;
 ```
 
-The back-tick syntax may take a while to get used to, but it's powerful and less prone to mistakes.
+A sintaxe back-tick pode demorar um pouco para ser algo familiar, mas é poderosa e menos propensa a erros.
 
 ## Destructuring
 
