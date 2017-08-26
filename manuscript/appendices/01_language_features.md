@@ -99,7 +99,6 @@ import {actions as TodoActions} from '../actions/todo'
 
 ### Webpack `resolve.alias`
 
-Bundlers, such as Webpack, can provide some features beyond this. You could define a `resolve.alias` for some of your module directories for example. This would allow you to use an import, such as `import persist from 'libs/persist';`, regardless of where you import. A simple `resolve.alias` could look like this:
 Bundlers, como o Webpack, podem fornecer alguns recursos além disso. Você pode definir um `resolve.alias` para alguns de seus diretórios de módulos, por exemplo. Isso permitiria que você use-o diretamente na importação, como `import from 'libs/';`, independentemente de onde você escreva essa declaração. Um simples `resolve.alias` poderia ser assim:
 
 ```javascript
@@ -153,10 +152,8 @@ Talvez a maior vantagem da abordagem baseada em classe seja o fato de que reduz 
 
 ### Classes e Módulos
 
-As stated above, the ES6 modules allow `export` and `import` single and multiple objects, functions, or even classes. In the latter, you can use `export default class` to export an anonymous class or export multiple classes from the same module using `export class className`.
 Conforme mencionado acima, os módulos ES6 permitem usar `export` e `import` de objetos únicos/múltiplos, funções ou mesmo classes. No último, você pode usar `export default class` para exportar uma classe anônima ou exportar várias classes do mesmo módulo usando `export class className`.
 
-To export and import a single class you can use `export default class` to export an anonymous class and call it whatever you want at import time:
 Para exportar e importar uma única classe, você pode usar `export default class` para exportar uma classe anônima e chama-lá de qualquer coisa na hora da importação:
 
 **Note.jsx**
@@ -254,9 +251,9 @@ export default class App extends React.Component {
 
 Agora que nós empurramos a declaração para o nível do método, o código fica mais simples. Eu decidi usar o recurso neste livro principalmente por esse motivo. Temos algo a menos para se preocupar.
 
-## Functions
+## Funções
 
-Traditionally, JavaScript has been very flexible with its functions. To give you a better idea, see the implementation of `map` below:
+Tradicionalmente, o JavaScript é flexível com suas funções. Para lhe dar uma ideia melhor, veja a implementação do `map` abaixo:
 
 ```javascript
 function map(cb, values) {
@@ -292,31 +289,31 @@ function map(cb, values) {
 map((v) => v * 2, [34, 2, 5]); // yields [68, 4, 10]
 ```
 
-The implementation of `map` is more or less the same still. The interesting bit is at the way we call it. Especially that `(v) => v * 2` part is intriguing. Rather than having to write `function` everywhere, the fat arrow syntax provides us a handy little shorthand. To give you further examples of usage, consider below:
+A implementação do `map` é mais ou menos a mesmo coisa. O interessante está na forma como o chamamos essa função. Especialmente na parte, `(v) => v * 2`, é intrigante. Ao invés de ter que escrever `function` em todos os lugares, a sintaxe ES6 _arrow functions_, nos fornece uma pequena abreviação, bem útil! Para dar mais exemplos de uso, considere abaixo:
 
 ```javascript
-// These are the same
+// Estes são os mesmos
 v => v * 2;
-(v) => v * 2; // I prefer this variant for short functions
-(v) => { // Use this if you need multiple statements
+(v) => v * 2; // Prefiro esta variante para funções curtas
+(v) => { // Use isso se precisar de várias declarações
   return v * 2;
 }
 
-// We can bind these to a variable
+// Podemos vinculá-los a uma variável
 const double = (v) => v * 2;
 
 console.log(double(2));
 
-// If you want to use a shorthand and return an object,
-// you need to wrap the object.
+// Se você quiser usar um método curto retornando um objeto,
+// Você precisa envolver o objeto em ().
 v => ({
   foo: 'bar'
 });
 ```
 
-### Arrow Function Context
+### Contexto das Arrow Functions
 
-Arrow functions are special in that they don't have `this` at all. Rather, `this` will point at the caller object scope. Consider the example below:
+As _arrow functions_ são especiais, elas não têm o contexto do `this`. Ao invés disso, `this` indicará o escopo superior. Considere o exemplo abaixo:
 
 ```javascript
 var obj = {
@@ -332,32 +329,32 @@ var obj2 = {
 };
 
 console.log(obj.context()); // { context: [Function], name: 'demo object 1' }
-console.log(obj2.context()); // {} in Node.js, Window in browser
+console.log(obj2.context()); // {} em Node.js, e `window` no navegador
 ```
 
-As you can notice in the snippet above, the anonymous function has a `this` pointing to the `context` function in the `obj` object. In other words, it is binding the scope of the caller object `obj` to the `context` function.
+Como você pode notar no fragmento acima, a função anônima possui um `this` apontando para a função `context` no objeto` obj`. Em outras palavras, o escopo superior, do objeto `obj`, é vinculado ao `this`, para a função` context`.
 
-This happens because `this` doesn't point to the object scopes that contains it, but the caller object scopes, as you can see it in the next snippet of code:
+Isso acontece porque `this` não aponta para o escopo do objeto que o contém, mas o escopo do objeto que está executando-o, como você pode ver no próximo fragmento de código:
 
 ```javascript
 console.log(obj.context.call(obj2)); // { context: [Function], name: 'demo object 2' }
 ```
 
-The arrow function in the object `obj2` doesn't bind any object to its context, following the normal lexical scoping rules resolving the reference to the nearest outer scope. In this case it happens to be Node.js `global` object.
+A _arrow function_ no `obj2` não vincula nenhum escopo ao seu contexto, seguindo as regras do **escopo lexical** (do inglês, _lexical scoping_), eles resolvem a referência ao escopo externo mais próximo. Neste caso, é o objeto `global` do Node.js.
 
-Even though the behavior might seem a little weird, it is actually useful. In the past, if you wanted to access parent context, you either needed to `bind` it or attach the parent context to a variable `var that = this;`. The introduction of the arrow function syntax has mitigated this problem.
+Embora o comportamento possa parecer um pouco estranho, é realmente útil. No passado, se você quisesse acessar o contexto superior, você precisava armazena-lo em uma variável `var that = this;`. A introdução da sintaxe _arrow functions_, resolveu esse problema.
 
-### Function Parameters
+### Parâmetros de Função
 
-Historically, dealing with function parameters has been somewhat limited. There are various hacks, such as `values = values || [];`, but they aren't particularly nice and they are prone to errors. For example, using `||` can cause problems with zeros. ES6 solves this problem by introducing default parameters. We can simply write `function map(cb, values=[])` now.
+Historicamente, lidar com parâmetros de uma função tem sido um pouco limitado. Existem vários hacks, como `values = values || [];`, mas eles não são agradáveis e são propensos a erros. Por exemplo, usar `||` pode causar problemas com zeros. O ES6 resolve este problema introduzindo parâmetros predefinidos. Agora, podemos simplesmente escrever `function map(cb, values=[])`.
 
-There is more to that and the default values can even depend on each other. You can also pass an arbitrary amount of parameters through `function map(cb, ...values)`. In this case, you would call the function through `map(a => a * 2, 1, 2, 3, 4)`. The API might not be perfect for `map`, but it might make more sense in some other scenario.
+Falando mais sobre isso, valores predefinidos podem até mesmo depender uns dos outros. Você também pode passar uma quantidade arbitrária de parâmetros através de `function map(cb, ...values)`. Nesse caso, você chamaria a função através do `map(a => a * 2, 1, 2, 3, 4)`. A API pode não ser perfeita para `map`, mas pode ter mais sentido em algum outro cenário.
 
-There are also convenient means to extract values out of passed objects. This is highly useful with React component defined using the function syntax:
+Existe outros meios mais convenientes para extrair valores de objetos passados. Isso é altamente útil com componentes React, usando a sintaxe de função:
 
 ```javascript
 export default ({name}) => {
-  // ES6 string interpolation. Note the back-ticks!
+  // Interpolação ES6. Usando back-ticks!
   return <div>{`Hello ${name}!`}</div>;
 };
 ```
