@@ -442,7 +442,6 @@ Eu uso como padrão, `const`, sempre que possível. Se eu precisar de algo mutá
 
 ## Decoradores
 
-Given decorators are still an experimental feature and there's a lot to cover about them, there's an entire appendix dedicated to the topic. Read *Understanding Decorators* for more information.
 Decoradores ainda são um recurso experimental e há muito a se discutir sobre, há um apêndice inteiro dedicado ao tópico. Leia *Entendendo Decorators * para mais informações.
 
 ## Conclusão
