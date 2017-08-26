@@ -368,17 +368,17 @@ Além de ser mais claro, a interpolação de strings em ES6 nos fornece strings 
 ```javascript
 const hello = `Hello ${name}!`;
 const multiline = `
-multiple
-lines of
-awesomeness
+mútiplas
+linhas de
+coisas boas
 `;
 ```
 
 A sintaxe back-tick pode demorar um pouco para ser algo familiar, mas é poderosa e menos propensa a erros.
 
-## Destructuring
+## Desestruturação
 
-That `...` is related to the idea of destructuring. For example, `const {lane, ...props} = this.props;` would extract `lane` out of `this.props` while the rest of the object would go to `props`. This object based syntax is still experimental. ES6 specifies an official way to perform the same for arrays like this:
+O `...` está relacionado à idéia de desestruturação. Por exemplo, `const {lane, ...props} = this.props;` irá extrair `lane` de `this.props` enquanto as chaves restantes do objeto irão para `props`. Essa sintaxe ainda é experimental. ES6 especifica uma maneira oficial de executar o mesmo para arrays:
 
 ```javascript
 const [lane, ...rest] = ['foo', 'bar', 'baz'];
@@ -386,16 +386,16 @@ const [lane, ...rest] = ['foo', 'bar', 'baz'];
 console.log(lane, rest); // 'foo', ['bar', 'baz']
 ```
 
-The spread operator (`...`) is useful for concatenating. You see syntax like this in Redux examples often. They rely on experimental [Object rest/spread syntax](https://github.com/sebmarkbage/ecmascript-rest-spread):
+O operador **spread** (`...`) é útil, também, para concatenar. Você verá uma sintaxe assim com freqüência nos exemplos de Redux. Eles dependem da proposta experimental [Object rest/spread syntax](https://github.com/sebmarkbage/ecmascript-rest-spread):
 
 ```javascript
 [...state, action.lane];
 
-// This is equal to
+// Isso é igual ao:
 state.concat([action.lane])
 ```
 
-The same idea applies to React components:
+A mesma ideia aplica-se aos componentes React:
 
 ```javascript
 ...
@@ -409,7 +409,7 @@ render() {
 ...
 ```
 
-W> There are several gotchas related to the spread operator. Given it is *shallow* by default, it can lead to interesting behavior that might be unexpected. This is particularly true if you are trying to use it to clone an object using it. Josh Black discusses this problem in detail at his Medium post titled [Gotchas in ES2015+ Spread](https://medium.com/@joshblack/gotchas-in-es2015-spread-5db06dfb1e10).
+W> Existem alguns problemas relacionadas ao operador de propagação. Dado que é *raso* por padrão, pode levar a um comportamento interessante que pode ser inesperado. Isto é mais problemático quando você estiver tentando usá-lo para clonar um objeto. Josh Black discute este problema detalhadamente em seu post no Medium, intitulado [Gotchas in ES2015+ Spread](https://medium.com/@joshblack/gotchas-in-es2015-spread-5db06dfb1e10).
 
 ## Object Initializers
 
