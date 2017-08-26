@@ -411,22 +411,22 @@ render() {
 
 W> Existem alguns problemas relacionadas ao operador de propagação. Dado que é *raso* por padrão, pode levar a um comportamento interessante que pode ser inesperado. Isto é mais problemático quando você estiver tentando usá-lo para clonar um objeto. Josh Black discute este problema detalhadamente em seu post no Medium, intitulado [Gotchas in ES2015+ Spread](https://medium.com/@joshblack/gotchas-in-es2015-spread-5db06dfb1e10).
 
-## Object Initializers
+## Inicializadores de Objetos
 
-In order to make it easier to work with objects, ES6 provides a variety of features just for this. To quote [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Object_initializer), consider the examples below:
+Para facilitar o trabalho com objetos, o ES6 oferece uma variedade de recursos apenas para isso. Como é mostrado no [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Object_initializer), considere os exemplos abaixo:
 
 ```javascript
 const a = 'demo';
 const shorthand = {a}; // Same as {a: a}
 
-// Shorthand methods
+// Métodos de atalho
 const o = {
   get property() {},
   set property(value) {},
   demo() {}
 };
 
-// Computed property names
+// Propriedades computadas
 const computed = {
   [a]: 'testing' // demo -> testing
 };
@@ -434,16 +434,17 @@ const computed = {
 
 ## `const`, `let`, `var`
 
-In JavaScript, variables are global by default. `var` binds them on *function level*. This is in contrast to many other languages that implement *block level* binding. ES6 introduces block level binding through `let`.
+Em JavaScript, as variáveis são globais por padrão. `var` tem o escopo relacionado ao *nível da função*. Isso vai de encontro com outras linguagens que implementam o escopo de *nível de bloco*. ES6 introduz escopos de nível de bloco através do `let`.
 
-There's also support for `const`, which guarantees the reference to the variable itself cannot change. This doesn't mean, however, that you cannot modify the contents of the variable. So if you are pointing at an object, you are still allowed to tweak it!
+Há também suporte para `const`, que garante que a referência para a variável não seja alterada. Isso não significa, no entanto, que você não pode modificar o conteúdo da variável. Se você está apontando para um objeto, você ainda pode alterar seu conteúdo!
 
-I tend to favor to default to `const` whenever possible. If I need something mutable, `let` will do fine. It is hard to find any good use for `var` anymore as `const` and `let` cover the need in a more understandable manner. In fact, all of the book's code, apart from this appendix, relies on `const`. That just shows you how far you can get with it.
+Eu uso como padrão, `const`, sempre que possível. Se eu precisar de algo mutável, `let` resolve o problema. É difícil encontrar um bom uso para `var`, já que` const` e `let` resolvem necessidade de uma forma mais compreensível. Na verdade, todo o código desse livro, além deste apêndice, depende de `const`. Isso mostra como é fácil de utiliza-las.
 
-## Decorators
+## Decoradores
 
 Given decorators are still an experimental feature and there's a lot to cover about them, there's an entire appendix dedicated to the topic. Read *Understanding Decorators* for more information.
+Decoradores ainda são um recurso experimental e há muito a se discutir sobre, há um apêndice inteiro dedicado ao tópico. Leia *Entendendo Decorators * para mais informações.
 
-## Conclusion
+## Conclusão
 
-There's a lot more to ES6 and the upcoming specifications than this. If you want to understand the specification better, [ES6 Katas](http://es6katas.org/) is a good starting point for learning more. Just having a good idea of the basics will take you far.
+Há muito mais sobre ES6 e suas próximas especificações do que esse apêndice. Se você deseja entender melhor a especificação, [ES6 Katas](http://es6katas.org/) é um bom ponto de partida para aprender mais. Ter uma boa idéia do básico, já é o suficiente para te levar adiante.
