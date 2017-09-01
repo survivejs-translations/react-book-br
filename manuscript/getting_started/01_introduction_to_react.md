@@ -1,18 +1,19 @@
-# Introduction to React
+# Introdução ao React
 
-Facebook's [React](https://facebook.github.io/react/) has changed the way we think about web applications and user interface development. Due to its design, you can use it beyond web. A feature known as the **Virtual DOM** enables this.
+[React](https://facebook.github.io/react/), biblioteca do Facebook, mudou a forma como pensamos sobre aplicações web e desenvolvimento de interfaces de usuários. Devido ao seu design, você pode usá-lo muito além da web. Um recurso conhecido como **Virtual DOM** permite isso.
 
-In this chapter we'll go through some of the basic ideas behind the library so you understand React a little better before moving on.
+Neste capítulo, veremos algumas das idéias básicas por trás da biblioteca para que você entenda React um pouco melhor antes de seguir em frente.
 
-## What is React?
+## O qué é o React?
 
 ![React](images/react_header.png)
 
-React is a JavaScript library that forces you to think in terms of components. This model of thinking fits user interfaces well. Depending on your background it might feel alien at first. You will have to think very carefully about the concept of `state` and where it belongs.
+React é uma biblioteca JavaScript que obriga você a pensar em componentes. Esse modelo de pensamento se adapta bem às interfaces do usuário. Dependendo da sua experiência anterior, pode parecer estranho no início. Você terá que pensar com muito cuidado sobre o conceito de "estado" e aonde ele pertence.
 
 Because **state management** is a difficult problem, a variety of solutions have appeared. In this book, we'll start by managing state ourselves and then push it to a Flux implementation known as Alt. There are also implementations available for several other alternatives, such as Redux, MobX, and Cerebral.
+**Administrar estado** de uma aplicação, é um problema difícil, uma variedade de soluções apareceram. Neste livro, começaremos a gerenciar o estado nós mesmo e, ao avançarmos, usaremos uma implementação do Flux, conhecida como Alt. Existem várias outras alternativas, implementações como Redux, MobX e Cerebral.
 
-React is pragmatic in the sense that it contains a set of escape hatches. If the React model doesn't work for you, it is still possible to revert back to something lower level. For instance, there are hooks that can be used to wrap older logic that relies on the DOM. This breaks the abstraction and ties your code to a specific environment, but sometimes that's the pragmatic thing to do.
+React é pragmático no sentido de que contém um conjunto de possibilidades. Se o modelo padrão do React não funcionar para você, é possível usar algo de mais baixo nível. Por exemplo, existem ganchos que podem ser usados para envolver uma lógica mais antiga que depende do DOM. Isso quebra a abstração e vincula seu código a um ambiente específico, mas às vezes isso é o ponto pragmático de fazer.
 
 ## Virtual DOM
 
