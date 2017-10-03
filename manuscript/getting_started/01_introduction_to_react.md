@@ -57,9 +57,9 @@ Mesmo que o react-dom seja o renderizador mais utilizado, há alguns outros que 
 * [gl-react](https://projectseptemberinc.gitbooks.io/gl-react/content/) - gl-react disponibiliza métodos WebGL para React. Você pode criar *shaders*, por exemplo.
 * [react-canvas](https://github.com/Flipboard/react-canvas) - react-canvas disponibiliza métodos para o elemento Canvas.
 
-## `React.createElement` and JSX
+## `React.createElement` e JSX
 
-Given we are operating with virtual DOM, there's a [high level API](https://facebook.github.io/react/docs/top-level-api.html) for handling it. A naïve React component written using the JavaScript API could look like this:
+Dado que estamos operando com Virtual DOM, existe uma [API](https://facebook.github.io/react/docs/top-level-api.html) para trabalhar com ele. Um componente React ingênuo, pode ser escrito usando a API JavaScript:
 
 ```javascript
 const Names = () => {
@@ -84,7 +84,7 @@ const Names = () => {
 };
 ```
 
-As it is verbose to write components this way and the code is quite hard to read, often people prefer to use a language known as [JSX](https://facebook.github.io/jsx/) instead. Consider the same component written using JSX below:
+Como é verboso escrever componentes dessa maneira e o código é bastante difícil de ler, muitas vezes as pessoas preferem usar um idioma conhecido como [JSX](https://facebook.github.io/jsx/). Considere o mesmo componente escrito usando JSX:
 
 ```javascript
 const Names = () => {
@@ -94,7 +94,7 @@ const Names = () => {
     <div>
       <h2>Names</h2>
 
-      {/* This is a list of names */}
+      {/* Uma lista de nomes */}
       <ul className="names">{
         names.map(name =>
           <li className="name">{name}</li>
@@ -105,14 +105,14 @@ const Names = () => {
 };
 ```
 
-Now we can see the component renders a set of names within a HTML list. It might not be the most useful component, but it's enough to illustrate the basic idea of JSX. It provides us a syntax that resembles HTML. It also provides a way to write JavaScript within it by using braces (`{}`).
+Agora, podemos ver o componente renderizar um conjunto de nomes dentro de uma lista HTML. Pode não ser o componente mais útil, mas é suficiente para ilustrar a idéia básica do JSX Ele nos fornece uma sintaxe que se lembra o HTML. Ele também fornece uma maneira de escrever JavaScript dentro dele usando chaves (`{}`).
 
-Compared to vanilla HTML, we are using `className` instead of `class`. This is because the API has been modeled after the DOM naming. It takes some getting used to and you might experience a [JSX shock](https://medium.com/@housecor/react-s-jsx-the-other-side-of-the-coin-2ace7ab62b98) until you begin to appreciate the approach. It gives us an additional level of validation.
+Comparado com o HTML, estamos usando `className` ao invés de `class`. Isso ocorre porque a API foi modelada seguindo a nomeação DOM. Demora um pouco de acostumar e você pode experimentar algumas [surpresas ao usar JSX](https://medium.com/@housecor/react-s-jsx-the-other-side-of-the-coin-2ace7ab62b98), até começar a apreciar essa abordagem. Isso nos dá um nível adicional de validação.
 
-T> [HyperScript](https://github.com/dominictarr/hyperscript) is an interesting alternative to JSX. It provides a JavaScript based API and as such is closer to the metal. You can use the syntax with React through [hyperscript-helpers](https://www.npmjs.com/package/hyperscript-helpers).
+T> [HyperScript](https://github.com/dominictarr/hyperscript) é uma interessante alternativa ao JSX. Ele fornece uma API baseada em JavaScript e, como tal, está mais perto da API do React. Você pode ver a sintaxe com React em [hyperscript-helpers](https://www.npmjs.com/package/hyperscript-helpers).
 
-T> There is a semantic difference between React components and React elements. In the example each of those JSX nodes would be converted into an element. In short, components can have state whereas elements are simpler by nature. They are just pure objects. Dan Abramov goes into further detail in a [blog post](https://facebook.github.io/react/blog/2015/12/18/react-components-elements-and-instances.html) of his.
+T> Existe uma diferença semântica entre os componentes React e Elementos React. No exemplo, cada um desses nós JSX seria convertido em um elemento. Em suma, os componentes podem ter estado, enquanto os elementos são mais simples por natureza. Eles são apenas objetos puros. Dan Abramov entra em detalhes nesse [artigo](https://facebook.github.io/react/blog/2015/12/18/react-components-elements-and-instances.html).
 
-## Conclusion
+## Conclusão
 
-Now that we have a rough understanding of what React is, we can move onto something more technical. It's time to get a small project up and running.
+Agora que temos uma compreensão melhor do que é o React, podemos avançar para algo mais técnico. É hora de colocar um pequeno projeto em funcionamento.
