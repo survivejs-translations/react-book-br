@@ -10,7 +10,6 @@ Neste capítulo, veremos algumas das idéias básicas por trás da biblioteca pa
 
 React é uma biblioteca JavaScript que obriga você a pensar em componentes. Esse modelo de pensamento se adapta bem às interfaces do usuário. Dependendo da sua experiência anterior, pode parecer estranho no início. Você terá que pensar com muito cuidado sobre o conceito de "estado" e aonde ele pertence.
 
-Because **state management** is a difficult problem, a variety of solutions have appeared. In this book, we'll start by managing state ourselves and then push it to a Flux implementation known as Alt. There are also implementations available for several other alternatives, such as Redux, MobX, and Cerebral.
 **Administrar estado** de uma aplicação, é um problema difícil, uma variedade de soluções apareceram. Neste livro, começaremos a gerenciar o estado nós mesmo e, ao avançarmos, usaremos uma implementação do Flux, conhecida como Alt. Existem várias outras alternativas, implementações como Redux, MobX e Cerebral.
 
 React é pragmático no sentido de que contém um conjunto de possibilidades. Se o modelo padrão do React não funcionar para você, é possível usar algo de mais baixo nível. Por exemplo, existem ganchos que podem ser usados para envolver uma lógica mais antiga que depende do DOM. Isso quebra a abstração e vincula seu código a um ambiente específico, mas às vezes isso é o ponto pragmático de fazer.
@@ -19,11 +18,11 @@ React é pragmático no sentido de que contém um conjunto de possibilidades. Se
 
 ![Virtual DOM](images/vdom.png)
 
-One of the fundamental problems of programming is how to deal with state. Suppose you are developing a user interface and want to show the same data in multiple places. How do you make sure the data is consistent?
+Um dos problemas fundamentais da programação é como lidar com o estado da aplicação. Vamos supor que você esteja desenvolvendo uma interface de usuário e quer mostrar os mesmos dados em vários lugares. Como você se certifica de que os dados estão consistentes?
 
-Historically we have mixed the concerns of the DOM and state and tried to manage it there. React solves this problem in a different way. It introduced the concept of the **Virtual DOM** to the masses.
+Historicamente, misturamos as declarações DOM e de estado e tentamos gerenciar tudo isso. React resolve esse problema de uma maneira diferente. Ele introduz o conceito do **Virtual DOM** na comunidade.
 
-Virtual DOM exists on top of the actual DOM, or some other render target. It solves the state manipulation problem in its own way. Whenever changes are made to it, it figures out the best way to batch the changes to the underlying DOM structure. It is able to propagate changes across its virtual tree as in the image above.
+Virtual DOM existe em cima do DOM real, ou algum outro alvo de renderização. Ele resolve o problema de manipulação do estado de uma maneira diferente. Sempre que alguma mudança é feitas nele, ele descobre a melhor maneira de processar essas mudanças para refleti-las no DOM real. Ele é capaz de propagar mudanças em sua árvore virtual, como na imagem acima.
 
 ### Virtual DOM Performance
 
