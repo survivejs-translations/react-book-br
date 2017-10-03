@@ -24,17 +24,17 @@ Historicamente, misturamos as declarações DOM e de estado e tentamos gerenciar
 
 Virtual DOM existe em cima do DOM real, ou algum outro alvo de renderização. Ele resolve o problema de manipulação do estado de uma maneira diferente. Sempre que alguma mudança é feitas nele, ele descobre a melhor maneira de processar essas mudanças para refleti-las no DOM real. Ele é capaz de propagar mudanças em sua árvore virtual, como na imagem acima.
 
-### Virtual DOM Performance
+### Performance do Virtual DOM
 
-Handling the DOM manipulation this way can lead to increased performance. Manipulating the DOM by hand tends to be inefficient and is hard to optimize. By leaving the problem of DOM manipulation to a good implementation, you can save a lot of time and effort.
+Atualizar as manipulações do DOM dessa maneira pode levar a um aumento de desempenho. Manipular o DOM na mão tende a ser ineficiente e é difícil de otimizar. Ao deixar o problema da manipulação do DOM para uma boa abstração, você pode economizar muito tempo e esforço.
 
-React allows you to tune performance further by implementing hooks to adjust the way the virtual tree is updated. Though this is often an optional step.
+React permite que você ajuste o desempenho em ainda mais detalhes, implementando métodos de ciclos de vida para ajustar a maneira como a árvore virtual é atualizada. Embora este seja muitas vezes um passo opcional.
 
-The biggest cost of Virtual DOM is that the implementation makes React quite big. You can expect the bundle sizes of small applications to be around 150-200 kB minified, React included. gzipping will help, but it's still big.
+O maior custo do Virtual DOM é que sua implementação faz com que o React fique bastante grande. Você pode esperar que os tamanhos do pacote de pequenas aplicações sejam de cerca de 150-200 kB minificados, com React incluído. Gzip ajudará, mas ainda é grande.
 
-T> Solutions such as [preact](https://developit.github.io/preact/) and [react-lite](https://github.com/Lucifier129/react-lite) allow you to reach far smaller bundle sizes while sacrificing some functionality. If you are size conscious, consider checking out these solutions.
+T> Solução como [preact](https://developit.github.io/preact/) e [react-lite](https://github.com/Lucifier129/react-lite) permitem que você alcance tamanhos menores enquanto sacrifica alguma funcionalidade. Se você está preocupado com o tamanho do arquivo final, vale a pena considerar essas soluções.
 
-T> Libraries, such as [Matt-Esch/virtual-dom](https://github.com/Matt-Esch/virtual-dom) or [paldepind/snabbdom](https://github.com/paldepind/snabbdom), focus entirely on Virtual DOM. If you are interested in the theory and want to understand it further, check these out.
+T> Bibliotecas como [Matt-Esch/virtual-dom](https://github.com/Matt-Esch/virtual-dom) ou [paldepind/snabbdom](https://github.com/paldepind/snabbdom), são focadas inteiramente em Virtual DOM. Se você está interessado na teoria e quer entender isso, vale a pena dar uma olhada.
 
 ## React Renderers
 
