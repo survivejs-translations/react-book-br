@@ -36,26 +36,26 @@ T> Solução como [preact](https://developit.github.io/preact/) e [react-lite](h
 
 T> Bibliotecas como [Matt-Esch/virtual-dom](https://github.com/Matt-Esch/virtual-dom) ou [paldepind/snabbdom](https://github.com/paldepind/snabbdom), são focadas inteiramente em Virtual DOM. Se você está interessado na teoria e quer entender isso, vale a pena dar uma olhada.
 
-## React Renderers
+## Renderizadores do React
 
-As mentioned, React's approach decouples it from the web. You can use it to implement interfaces across multiple platforms. In this case we'll be using a renderer known as [react-dom](https://www.npmjs.com/package/react-dom). It supports both client and server side rendering.
+Como já foi mencionado, o React tem uma abordagem desacoplada da web. Você pode renderizar sua interface em diversas plataformas. No nosso caso, nós iremos utilizar o renderizador [react-dom](https://www.npmjs.com/package/react-dom). Ele suporta a renderização do lado do cliente e do servidor.
 
-### Universal Rendering
+### Renderização Universal
 
-We could use react-dom to implement so called *universal* rendering. The idea is that the server renders the initial markup and passes the initial data to the client. This improves performance by avoiding unnecessary round trips as each request comes with an overhead. It is also useful for search engine optimization (SEO) purposes.
+Poderíamos usar o react-dom para implementar o chamado *renderização universal*. A idéia é que o servidor irá processar a marcação inicial e repassar os dados iniciais para o cliente. Isso melhora o desempenho, evitando chamadas de ida e volta desnecessárias, conforme cada pedido, vem uma sobrecarga. Também é útil para otimização de mecanismos de pesquisa (SEO).
 
-Even though the technique sounds simple, it can be difficult to implement for larger scale applications. But it's still something worth knowing about.
+Embora a técnica pareça simples, pode ser difícil de implementar para aplicações de grande escala. Mas ainda é algo que vale a pena conhecer.
 
-Sometimes using the server side part of react-dom is enough. You can use it to [generate invoices](https://github.com/bebraw/generate-invoice) for example. That's one way to use React in a flexible manner. Generating reports is a common need after all.
+Às vezes, utilizar a interface de renderização no servidor do react-dom, é suficiente. Você pode usar como exemplo o [gerardor de faturas](https://github.com/bebraw/generate-invoice). Essa é uma maneira de usar React de uma forma flexível. Gerar faturas é uma necessidade comum, afinal.
 
-### Available React Renderers
+### Renderizadores disponíveis para React
 
-Even though react-dom is the most used renderer, there are a few others you might want to be aware of. I've listed some of the well known alternatives below:
+Mesmo que o react-dom seja o renderizador mais utilizado, há alguns outros que você pode querer conhecer. Vou listar algumas das alternativas bem conhecidas abaixo:
 
-* [React Native](https://facebook.github.io/react-native/) - React Native is a framework and renderer for mobile platforms including iOS and Android. You can also run [React Native applications on the web](https://github.com/necolas/react-native-web).
-* [react-blessed](https://github.com/Yomguithereal/react-blessed) - react-blessed allows you to write terminal applications using React. It's even possible to animate them.
-* [gl-react](https://projectseptemberinc.gitbooks.io/gl-react/content/) - gl-react provides WebGL bindings for React. You can write shaders this way for example.
-* [react-canvas](https://github.com/Flipboard/react-canvas) - react-canvas provides React bindings for the Canvas element.
+* [React Native](https://facebook.github.io/react-native/) - React Native é um framework e renderizador para plataformas móveis, incluindo iOS e Android. Você também pode [rodar aplicações React Native na web](https://github.com/necolas/react-native-web).
+* [react-blessed](https://github.com/Yomguithereal/react-blessed) - react-blessed permite que você crie aplicações para terminais utilizando React. É possível até, criar animações.
+* [gl-react](https://projectseptemberinc.gitbooks.io/gl-react/content/) - gl-react disponibiliza métodos WebGL para React. Você pode criar *shaders*, por exemplo.
+* [react-canvas](https://github.com/Flipboard/react-canvas) - react-canvas disponibiliza métodos para o elemento Canvas.
 
 ## `React.createElement` and JSX
 
