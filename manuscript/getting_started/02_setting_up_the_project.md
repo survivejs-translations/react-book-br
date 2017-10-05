@@ -10,11 +10,11 @@ T> Editores comuns (Sublime Text, Visual Studio Code, vim, emacs, Atom and such)
 
 W> Se você usar uma IDE, desative um recurso conhecido como **safe write**. Ele é conhecido por causar problemas com a configuração que usaremos neste livro.
 
-## Setting Up Node.js and Git
+## Configurando Node.js e Git
 
-To get started, make sure you have fresh versions of [Node.js](https://nodejs.org) and [Git](https://git-scm.com/) installed. I recommend using at least the LTS version of Node.js. You might run into hard to debug issues with older versions. Same can apply to versions newer than LTS because of their bleeding edge status.
+Para começar, certifique-se de ter as novas versões do [Node.js](https://nodejs.org) e [Git](https://git-scm.com/) estão instalado. Eu recomendo usar pelo menos a versão LTS do Node.js. Você pode encontrar problemas difíceis de debugar com versões antigas. O mesmo pode acontecer para versões mais recentes do LTS devido ao seu estado de constante desenvolvimento.
 
-T> One interesting option is to manage your environment through [Vagrant](https://www.vagrantup.com/) or a tool like [nvm](https://www.npmjs.com/package/nvm).
+T> Uma opção interessante é gerenciar seu ambiente através do [Vagrant](https://www.vagrantup.com/) ou ferramentas como [nvm](https://www.npmjs.com/package/nvm).
 
 ### Downloading the Boilerplate
 
