@@ -1,14 +1,14 @@
-# Setting Up the Project
+# Configurando o Projeto
 
-To make it easier to get started, I've set up a simple Webpack based boilerplate that allows us to dig into React straight away. The boilerplate includes a development mode with a feature known as *hot loading* enabled.
+Para ser mais fácil começar, eu criei um projeto simples baseado no webpack, nos permitindo começar com React imediatamente. O esqueleto inclui um modo de desenvolvimento com um recurso conhecido como *hot loading* ativado.
 
-Hot loading allows Webpack to patch the code running in the browser without a full refresh. It works the best especially with styling although React supports it fairly well too.
+*Hot loading* permite que o webpack atualize parte do código em execução no navegador sem uma atualização completa. Funciona especialmente muito bem com estilos/css, embora, o suporte para componentes React também funciona muito bem.
 
-Unfortunately it's not a fool proof technology and it won't be able to detect all changes made to the code. This means there will be times when you need to force a hard refresh to make the browser to catch the recent changes.
+Infelizmente, não é uma tecnologia à prova de balas e não será capaz de detectar todas as alterações feitas no código. Isso significa que haverá momentos em que você precisa forçar uma atualização completa para que o navegador capture as mudanças recentes.
 
-T> Common editors (Sublime Text, Visual Studio Code, vim, emacs, Atom and such) have good support for React. Even IDEs, such as [WebStorm](https://www.jetbrains.com/webstorm/), support it up to an extent. [Nuclide](http://nuclide.io/), an Atom based IDE, has been developed with React in mind. Make sure you have React related plugins installed and enabled.
+T> Editores comuns (Sublime Text, Visual Studio Code, vim, emacs, Atom and such) oferecem um bom suporte para React. Mesmo IDEs, como [WebStorm](https://www.jetbrains.com/webstorm/), suportam até certo ponto. [Nuclide](http://nuclide.io/), uma IDE baseada no Atom, foi desenvolvido com o React em mente. Certifique-se de que os plugins relacionados ao React estão instalados e habilitados.
 
-W> If you use an IDE, disable a feature known as **safe write**. It is known to cause issues with the setup we'll be using in this book.
+W> Se você usar uma IDE, desative um recurso conhecido como **safe write**. Ele é conhecido por causar problemas com a configuração que usaremos neste livro.
 
 ## Setting Up Node.js and Git
 
