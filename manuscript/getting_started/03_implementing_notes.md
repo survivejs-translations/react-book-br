@@ -183,9 +183,9 @@ leanpub-end-insert
 
 Agora, ao executar o aplicativo, ele deve ser exatamente o mesmo que antes. Mas agora temos mais espaço para crescer.
 
-### Adding a Stub for *Add* Button
+### Adicionando um Stub para o botão *Adicionar*
 
-A good step towards something more functional is to add a stub for an *add* button. To achieve this, `App` needs to evolve:
+Um bom passo para algo mais funcional é adicionar um *stub* para um botão *Adicionar*. Para conseguir isso, o `App` precisa evoluir:
 
 **app/components/App.jsx**
 
@@ -199,16 +199,16 @@ leanpub-end-delete
 leanpub-start-insert
 export default () => (
   <div>
-    <button onClick={() => console.log('add note')}>+</button>
+    <button onClick={() => console.log('adicionar nota')}>+</button>
     <Notes />
   </div>
 );
 leanpub-end-insert
 ```
 
-If you press the button we added, you should see an "add note" message at the browser console. We still have to connect the button with our data somehow. Currently the data is trapped within the `Notes` component so before we can do that, we need to extract it to the `App` level.
+Se você clicar no botão que adicionamos, você deve ver uma mensagem "adicionar nota" no console do navegador. Ainda temos que conectar o botão com nossos dados de alguma forma. Atualmente, os dados estão no componente `Notes`, então, antes que possamos fazer isso, precisamos extraí-lo para o nível` App`.
 
-T> Given React components have to return a single element, we had to wrap our application within a `div`.
+T> Apesar de componentes React devolverem um único elemento, devemos envolver o nosso aplicativo dentro de um `div`.
 
 ### Pushing Data to `App`
 
@@ -240,7 +240,7 @@ leanpub-end-insert
 
 export default () => (
   <div>
-    <button onClick={() => console.log('add note')}>+</button>
+    <button onClick={() => console.log('adicionar nota')}>+</button>
 leanpub-start-delete
     <Notes />
 leanpub-end-delete
@@ -319,7 +319,7 @@ const notes = [
 
 export default () => (
   <div>
-    <button onClick={() => console.log('add note')}>+</button>
+    <button onClick={() => console.log('adicionar nota')}>+</button>
     <Notes notes={notes} />
   </div>
 );
@@ -348,7 +348,7 @@ export default class App extends React.Component {
 
     return (
       <div>
-        <button onClick={() => console.log('add note')}>+</button>
+        <button onClick={() => console.log('adicionar nota')}>+</button>
         <Notes notes={notes} />
       </div>
     );
@@ -390,7 +390,7 @@ export default class App extends React.Component {
     return (
       <div>
 leanpub-start-delete
-        <button onClick={() => console.log('add note')}>+</button>
+        <button onClick={() => console.log('adicionar nota')}>+</button>
 leanpub-end-delete
 leanpub-start-insert
         <button onClick={this.addNote}>+</button>
