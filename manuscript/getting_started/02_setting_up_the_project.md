@@ -95,13 +95,13 @@ Nosso boilerplate é capaz de gerar uma compilação para produção com *hashin
 
 Verifique a parte dos `"scripts"` no seu *package.json* para melhor entender como cada um deles funciona. Há um quantidade considerável de configuração. Veja [SurviveJS - Webpack](http://survivejs.com/webpack/introduction/) para saber mais sobre o tópico.
 
-## Boilerplate Language Features
+## Características da linguagem no nosso Boilerplate
 
 ![Babel](images/babel.png)
 
-The boilerplate relies on a transpiler known as [Babel](https://babeljs.io/). It allows us to use features from the future of JavaScript. It transforms your code to a format understandable by the browsers. You can even use it to develop your own language features. It supports JSX through a plugin.
+Nosso boilerplate depende de um *transpiler* conhecido como [Babel](https://babeljs.io/). Ele nos permite usar recursos futuros do JavaScript. Ele transforma seu código em um formato compreensível pelos navegadores atuais. Você pode até usá-lo para desenvolver seus próprios recursos de linguagem. Ele suporta JSX através de um plugin.
 
-Babel provides support for certain [experimental features](https://babeljs.io/docs/plugins/#stage-x-experimental-presets-) from ES7 beyond standard ES6. Some of these might make it to the core language while some might be dropped altogether. The language proposals have been categorized within stages:
+Babel fornece suporte para certas [características experimentais](https://babeljs.io/docs/plugins/#stage-x-experimental-presets-) do ES7 além do padrão ES6. Alguns dessas características podem chegar a serem incluídas na linguagem, enquanto algumas podem ser descartadas. As propostas de idiomas foram classificadas em etapas:
 
 * **Stage 0** - Strawman
 * **Stage 1** - Proposal
@@ -109,22 +109,22 @@ Babel provides support for certain [experimental features](https://babeljs.io/do
 * **Stage 3** - Candidate
 * **Stage 4** - Finished
 
-I would be very careful with **stage 0** features. The problem is that if the feature changes or gets removed you will end up with broken code and will need to rewrite it. In smaller experimental projects it may be worth the risk, though.
+Tenha muito cuidado com os recursos **stage 0**. O problema é que se o recurso muda ou for removido, você acabará com o código quebrado e precisará reescrevê-lo. Em projetos experimentais menores, vale a pena o risco.
 
-In addition to standard ES2015 and JSX, we'll be using a few custom features in this project. I've listed them below. See the *Language Features* appendix to learn more of each.
+Além do padrão ES2015 e JSX, usaremos alguns recursos personalizados neste projeto. Eu os listei abaixo. Consulte o apêndice *Características da Linguagem* para saber mais sobre cada uma delas.
 
-* [Property initializers](https://github.com/jeffmo/es-class-static-properties-and-fields) - Example: `addNote = (e) => {`. This binds the `addNote` method to an instance automatically. The feature makes more sense as we get to use it.
-* [Decorators](https://github.com/wycats/javascript-decorators) - Example: `@DragDropContext(HTML5Backend)`. These annotations allow us to attach functionality to classes and their methods.
-* [Object rest/spread](https://github.com/sebmarkbage/ecmascript-rest-spread) - Example: `const {a, b, ...props} = this.props`. This syntax allows us to easily extract specific properties from an object.
+* [Inicializadores de Propriedades](https://github.com/jeffmo/es-class-static-properties-and-fields) - Exemplo: `addNote = (e) => {`. Isso liga o método `addNote` para uma instância automaticamente. O recurso faz mais sentido quando chegamos a usá-lo.
+* [Decoradores](https://github.com/wycats/javascript-decorators) - Exemplo: `@DragDropContext(HTML5Backend)`. Essas anotações nos permitem anexar funcionalidades às classes e seus métodos.
+* [Operador rest/spread em Objetos](https://github.com/sebmarkbage/ecmascript-rest-spread) - Exemplo: `const {a, b, ...props} = this.props`. Essa sintaxe nos permite extrair facilmente propriedades específicas de um objeto.
 
-In order to make it easier to set up the features, I created [a specific preset](https://github.com/survivejs/babel-preset-survivejs-kanban). It also contains [babel-plugin-transform-object-assign](https://www.npmjs.com/package/babel-plugin-transform-object-assign) and [babel-plugin-array-includes](https://www.npmjs.com/package/babel-plugin-array-includes) plugins. The former allows us to use `Object.assign` while the latter provides `Array.includes` without having to worry about shimming these for older environments.
+Para facilitar a configuração dos nossos recursos, criei [um preset específico](https://github.com/survivejs/babel-preset-survivejs-kanban). Ele também contém os plugins [babel-plugin-transform-object-assign](https://www.npmjs.com/package/babel-plugin-transform-object-assign) e [babel-plugin-array-includes](https://www.npmjs.com/package/babel-plugin-array-includes). O primeiro nos permite usar `Object.assign` enquanto o último fornece `Array.includes` sem ter que se preocupar em modificar seu código para ambientes mais antigos.
 
-A preset is simply a npm module exporting Babel configuration. Maintaining presets like this can be useful especially if you want to share the same set of functionality across multiple projects.
+Um *preset* é simplesmente um módulo do npm que exporta uma configuração do Babel. A manutenção de *presets* como este pode ser útil, especialmente se você quiser compartilhar o mesmo conjunto de funcionalidades em vários projetos.
 
-T> You can [try out Babel online](https://babeljs.io/repl/) to see what kind of code it generates.
+T> Você [pode tentar o Babel online](https://babeljs.io/repl/) para ver que tipo de código ele gera.
 
-T> If you are interested in a lighter alternative, check out [Bublé](https://gitlab.com/Rich-Harris/buble).
+T> Se você está interessado em uma alternativa mais leve, verifique o [Bublé](https://gitlab.com/Rich-Harris/buble).
 
-## Conclusion
+## Conclusão
 
-Now that we have a simple "Hello World!" application running, we can focus on development. Developing and getting into trouble is a good way to learn after all.
+Agora que temos um aplicativo simples com "Hello World!" em execução, podemos nos concentrar no desenvolvimento. Começar a desenvolver e encontrar alguns problemas é uma boa maneira de aprender depois de tudo.
