@@ -2,9 +2,9 @@
 
 Agora que temos uma configuração agradável para desenvolvimento, podemos realmente fazer algum trabalho. Nosso objetivo aqui é construir uma breve aplicação de notas. Ela terá operações básicas de manipulação. Vamos expandir nossa aplicação a partir do zero e entrar em alguns problemas. Desta forma, você entenderá por que são necessárias arquiteturas, como o Flux.
 
-## Initial Data Model
+## Modelo de dados inicial
 
-Often a good way to begin designing an application is to start with the data. We can model a list of notes as follows:
+Muitas vezes, uma boa maneira de começar a projetar um aplicativo é começar com o formato dos dados. Podemos modelar uma lista de notas da seguinte forma:
 
 ```javascript
 [
@@ -19,11 +19,11 @@ Often a good way to begin designing an application is to start with the data. We
 ];
 ```
 
-Each note is an object which will contain the data we need, including an `id` and a `task` we want to perform. Later on it is possible to extend this data definition to include things like the note color or the owner.
+Cada nota é um objeto que conterá os dados que precisamos, incluindo um `id` e uma `task` que queremos realizar. Mais tarde, é possível ampliar essa definição de dados para incluir coisas como a cor da nota ou o proprietário.
 
-We could have skipped ids in our definition. This would become problematic as we grow the application and add the concept of references to it. Each Kanban lane needs to be able to refer to some notes after all. By adopting proper indexing early on, we save ourselves some effort later.
+Poderíamos ignorar ids em nossa definição. Isso se tornaria problemático à medida que aumentamos nossa aplicação e adicionamos o conceito de referências. Cada coluna do Kanban precisa referenciar algumas notas. Ao adotar uma indexação adequada no início, nos salvamos algum esforço mais tarde.
 
-T> Another interesting way to approach data would be to normalize it. In this case we would end up with a `[<id> -> { id: '...', task: '...' }]` kind of structure. Even though there's some redundancy, it is convenient to operate using the structure as it gives us easy access by index. The structure becomes even more useful once we start getting references between data entities.
+T> Outra maneira interessante de abordar os dados seria normalizá-los. Nesse caso, acabaríamos com uma estrutura similar a `[<id> -> { id: '...', task: '...' }]`. Mesmo que haja alguma redundância, é conveniente operar usando uma estrutura com acesso via índices. A estrutura torna-se ainda mais útil uma vez que começamos a obter referências entre entidades de dados.
 
 ## Rendering Initial Data
 
