@@ -40,9 +40,9 @@ npm install
 
 Após a conclusão, você deve ver um diretório `node_modules /` contendo as dependências do projeto.
 
-### Create a Fresh Git Repository for Your Project
+### Crie um repositório Git novo para o seu projeto
 
-Your freshly checked out project includes the history of the the  `react-boilerplate` project. That history is not really relevant to your new project, so now is a good time to clear the git history, and start a fresh repository. This new repository will reflect the evolution of your project. In your initial commit, you may want to mention the baseline version of the boilerplate.
+O seu novo projeto inclui o histórico do projeto `react-boilerplate`. Esse histórico não é realmente relevante para o seu novo projeto, agora é um bom momento para limpar o histórico do Git e iniciar um novo repositório. Este novo repositório irá refletir a evolução do seu projeto. No seu *commit* inicial, você pode querer mencionar a versão inicial do boilerplate.
 
 ```
 rm -rf .git
@@ -50,7 +50,8 @@ git init
 git add .
 git commit -am "New project based on react-boilerplate (v2.5.6)"
 ```
-After this process you have a fresh project to work against.
+
+Após este processo, você tem um novo projeto para trabalhar.
 
 ## Running the Project
 
