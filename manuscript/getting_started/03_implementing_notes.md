@@ -210,11 +210,11 @@ Se você clicar no botão que adicionamos, você deve ver uma mensagem "adiciona
 
 T> Apesar de componentes React devolverem um único elemento, devemos envolver o nosso aplicativo dentro de um `div`.
 
-### Pushing Data to `App`
+### Movendo dados para o `App`
 
-To push the data to `App` we need to make two modifications. First we need to literally move it there and pass the data through a prop to `Notes`. After that we need to tweak `Notes` to operate based on the new logic. Once we have achieved this, we can start thinking about adding new notes.
+Para mover nossos dados para o `App` precisamos fazer duas modificações. Primeiro, precisamos literalmente mover e passar os dados através de uma *prop* para `Notes`. Depois disso, precisamos ajustar as `Notes` para operar com base na nova lógica. Uma vez que conseguimos isso, podemos começar a pensar em adicionar novas notas.
 
-The `App` side is simple:
+O `App` se parecerá com:
 
 **app/components/App.jsx**
 
@@ -251,7 +251,7 @@ leanpub-end-insert
 );
 ```
 
-This won't do much until we tweak `Notes` as well:
+Isso não fará muito, precisamos ajustar `Notes` também:
 
 **app/components/Notes.jsx**
 
@@ -282,9 +282,9 @@ leanpub-end-insert
 );
 ```
 
-Our application should look exactly the same as it did before these changes. Now we are ready to add some logic to it.
+Nosso aplicativo deve ser exatamente o mesmo que antes após essas mudanças. Agora estamos prontos para adicionar alguma lógica nele.
 
-T> The way we extract `notes` from `props` (the first parameter) is a standard trick you see with React. If you want to access the remaining `props`, you can use `{notes, ...props}` kind of syntax. We'll use this later so you can get a better feel for how this works and why you might use it.
+T> A maneira como extraímos `notes` de`props` (o primeiro parâmetro) é um truque que você vê com o React. Se quiser acessar as `props` restantes, você pode usar a sintaxe `{notes, ... props}`. Usaremos isso mais tarde para que você possa ter uma melhor sensação de como isso funciona e por que você pode usá-lo.
 
 ### Pushing State to `App`
 
