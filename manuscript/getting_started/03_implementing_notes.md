@@ -139,9 +139,9 @@ T> Se você estiver interessado na matemática por trás da geração de IDs, co
 
 Agora, conseguimos mostrar notas individuais, mas ainda está faltando muita lógica para tornar nossa aplicação útil. Uma maneira lógica de começar isso seria implementar a adição de novas notas à lista. Para fazer isso, precisamos expandir o aplicativo um pouco.
 
-### Defining a Stub for `App`
+### Definindo um Stub para nosso `App`
 
-To enable adding new notes, we should have a button for that somewhere. Currently our `Notes` component does only one thing, display notes. That's perfectly fine. To make room for more functionality, we could add a concept known as `App` on top of that. This component will orchestrate the execution of our application. We can add the button we want there and manage state as well as we add notes. At a basic level `App` could look like this:
+Para criar a adição de novas notas, devemos ter um botão para isso em algum lugar. Atualmente, nosso componente `Notes` faz apenas uma coisa, exibe notas. E isso é perfeitamente aceitável. Para ter mais espaço para mais funcionalidades, poderíamos adicionar um conceito conhecido como `App` em cima disso. Esse componente orquestará a execução de nossa aplicação. Podemos adicionar o botão que queremos por lá, e também, gerenciar o estado de como adicionar notas. Em um nível básico, o `App` poderia ficar assim:
 
 **app/components/App.jsx**
 
@@ -152,7 +152,7 @@ import Notes from './Notes';
 export default () => <Notes />;
 ```
 
-All it does now is render `Notes`, so it's going to take more work to make it useful. To glue `App` to our application, we still need to tweak the entry point as follows:
+Tudo o que ele faz até o momento, é renderizar `Notes`, vai levar um tempo para torná-lo útil. Vamos adicionar o `App` na nossa aplicação, também precisamos ajustar o ponto de entrada da seguinte maneira:
 
 **app/index.jsx**
 
@@ -181,7 +181,7 @@ leanpub-end-insert
 );
 ```
 
-If you run the application now, it should look exactly the same as before. But now we have room to grow.
+Agora, ao executar o aplicativo, ele deve ser exatamente o mesmo que antes. Mas agora temos mais espaço para crescer.
 
 ### Adding a Stub for *Add* Button
 
