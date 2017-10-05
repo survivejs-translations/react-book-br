@@ -81,19 +81,19 @@ Eu vou discutir o boilerplate em maior detalhe a seguir, então você saberá co
 
 T> As técnicas utilizadas pelo *boilerplate* são cobertas em maior detalhe em [SurviveJS - Webpack](http://survivejs.com/webpack/introduction/).
 
-## Boilerplate npm `scripts`
+## npm `scripts` no Boilerplate
 
-Our boilerplate is able to generate a production grade build with hashing. There's also a deployment related target so that you can show your project to other people through [GitHub Pages](https://pages.github.com/). I've listed all of the `scripts` below:
+Nosso boilerplate é capaz de gerar uma compilação para produção com *hashing*. Há também um processo de compilação para [páginas do GitHub] (https://pages.github.com/). Eu listei todos os `script` abaixo:
 
-* `npm run start` (or `npm start`) - Starts the project in the development mode. Surf to `localhost:8080` in your browser to see it running.
-* `npm run build` - Generates a production build below `build/`. You can open the generated *index.html* through the browser to examine the result.
-* `npm run deploy` - Deploys the contents of `build/` to the *gh-pages* branch of your project and pushes it to GitHub. You can access the project below `<user>.github.io/<project>` after that. Before this can work correctly, you should set `publicPath` at *webpack.config.js* to match your project name on GitHub.
-* `npm run stats` - Generates statistics (*stats.json*) about the project. You can [analyze the build output](http://survivejs.com/webpack/building-with-webpack/analyzing-build-statistics/) further.
-* `npm run test` (or `npm test`) - Executes project tests. The *Testing React* chapter digs deeper into the topic. In fact, writing tests against your components can be a good way to learn to understand React better.
-* `npm run test:tdd` - Executes project tests in TDD mode. This means it will watch for changes and run the tests when changes are detected allowing you to develop fast without having to run the tests manually.
-* `npm run test:lint` - Executes [ESLint](http://eslint.org/) against the code. ESLint is able to catch smaller issues. You can even configure your development environment to work with it. This allows you to catch potential mistakes as you make them. Our setup lints even during development so you rarely need to execute this command yourself.
+* `npm run start` (ou `npm start`) - Inicia o projeto em modo de desenvolvimento. Navegue até `localhost:8080` para vê-lo funcionando.
+* `npm run build` - Irá iniciar a compilação para produção gerando a pasta `build/`. Você pode abrir o *index.html* no seu navegador para examinar o resultado.
+* `npm run deploy` - Faz o deploy da pasta `build/` para a *branch* *gh-pages* do seu projeto e a envia para o GitHub. Você pode acessar o projeto através da URL `<user>.github.io/<project>`. Mas antes, para fazer isso funcionar, você deve configurar o `publicPath` no *webpack.config.js* para combinar com o nome do seu projeto no GitHub.
+* `npm run stats` - Gera estatísticas (*stats.json*) sobre o projeto. Após isso, você pode [analisar o resultado do seu projeto](http://survivejs.com/webpack/building-with-webpack/analyzing-build-statistics/).
+* `npm run test` (ou `npm test`) - Executa os testes do projeto. No capítulo *Testando React*, iremos falar mais sobre esse tópico. De fato, escrever testes para seus componentes pode ser uma boa maneira de aprender e entender melhor sobre o React.
+* `npm run test:tdd` - Executa os testes do projeto em TDD. Isso significa que iremos aguardar mudanças nos seus arquivos e executar os testes quando essas mudanças forem detectadas, permitindo que você desenvolva de uma maneira mais rápida, sem a necessidade de rodar os testes manualmente.
+* `npm run test:lint` - Executa [ESLint](http://eslint.org/) no seu código. ESLint é capaz de capturar problemas menores. Você pode até mesmo configurar seu ambiente de desenvolvimento para trabalhar com ele. Isso permite que você capture possíveis erros o mais cedo possível. Nosso projeto já vem configurado, mesmo durante o desenvolvimento, você raramente precisa executar esse comando.
 
-Study the `"scripts"` section of *package.json* to understand better how each of these works. There is quite a bit configuration. See [SurviveJS - Webpack](http://survivejs.com/webpack/introduction/) to dig deeper into the topic.
+Verifique a parte dos `"scripts"` no seu *package.json* para melhor entender como cada um deles funciona. Há um quantidade considerável de configuração. Veja [SurviveJS - Webpack](http://survivejs.com/webpack/introduction/) para saber mais sobre o tópico.
 
 ## Boilerplate Language Features
 
