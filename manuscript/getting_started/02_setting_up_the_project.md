@@ -53,9 +53,9 @@ git commit -am "New project based on react-boilerplate (v2.5.6)"
 
 Após este processo, você tem um novo projeto para trabalhar.
 
-## Running the Project
+## Executando o projeto
 
-To get the project running, execute `npm start`. You should see something like this at the terminal if everything went right:
+Para executar o projeto, execute `npm start`. Você deve ver algo assim no terminal:
 
 ```bash
 > webpack-dev-server
@@ -69,17 +69,17 @@ Child html-webpack-plugin for "index.html":
 webpack: bundle is now VALID.
 ```
 
-In case you received an error, make sure there isn't something else running in the same port. You can run the application through some other port easily using an invocation such as `PORT=3000 npm start` (Unix only). The configuration will pick up the new port from the environment. If you want to fix the port to something specific, adjust its value at *webpack.config.js*.
+Caso tenha recebido um erro, certifique-se de que não haja outro processo em execução na mesma porta. Você pode executar o aplicativo através de alguma outra porta facilmente, usando o comando com `PORT=3000 npm start` (somente para Unix). A configuração irá usar essa nova porta para o ambiente. Se você deseja configurar a porta para algum número específico, ajuste seu valor no *webpack.config.js*.
 
-Assuming everything went fine, you should see something like this at the browser:
+Vamos supor que tudo correu bem, você deveria ver algo assim no navegador:
 
 ![Hello world](images/hello_01.png)
 
-You can try modifying the source to see how hot loading works.
+Você pode tentar modificar a fonte para ver o *hot loading* em funcionamento.
 
-I'll discuss the boilerplate in greater detail next so you know how it works. I'll also cover the language features we are going to use briefly.
+Eu vou discutir o boilerplate em maior detalhe a seguir, então você saberá como ele funciona. Também abordarei as funcionalidades da linguagem que usaremos brevemente.
 
-T> The techniques used by the boilerplate are covered in greater detail at [SurviveJS - Webpack](http://survivejs.com/webpack/introduction/).
+T> As técnicas utilizadas pelo *boilerplate* são cobertas em maior detalhe em [SurviveJS - Webpack](http://survivejs.com/webpack/introduction/).
 
 ## Boilerplate npm `scripts`
 
