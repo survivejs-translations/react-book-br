@@ -10,11 +10,11 @@ Muitas vezes, uma boa maneira de começar a projetar um aplicativo é começar c
 [
   {
     id: '4e81fc6e-bfb6-419b-93e5-0242fb6f3f6a',
-    task: 'Learn React'
+    task: 'Aprenda React'
   },
   {
     id: '11bbffc8-5891-4b45-b9ea-5c99aadf870f',
-    task: 'Do laundry'
+    task: 'Lavar roupa'
   }
 ];
 ```
@@ -25,9 +25,9 @@ Poderíamos ignorar ids em nossa definição. Isso se tornaria problemático à 
 
 T> Outra maneira interessante de abordar os dados seria normalizá-los. Nesse caso, acabaríamos com uma estrutura similar a `[<id> -> { id: '...', task: '...' }]`. Mesmo que haja alguma redundância, é conveniente operar usando uma estrutura com acesso via índices. A estrutura torna-se ainda mais útil uma vez que começamos a obter referências entre entidades de dados.
 
-## Rendering Initial Data
+## Renderização de dados iniciais
 
-Now that we have a rough data model together, we can try rendering it through React. We are going to need a component to hold the data. Let's call it `Notes` for now. We can grow from that as we want more functionality. Set up a file with a small dummy component as follows:
+Agora que temos um modelo de dados, podemos tentar renderizá-lo através do React. Nós vamos precisar de um componente para armazenar os dados. Vamos chamá-lo de `Notes`, por enquanto. Podemos melhorar a partir disso, pois queremos mais funcionalidades. Configure um arquivo com um pequeno componente da seguinte maneira:
 
 **app/components/Notes.jsx**
 
@@ -37,11 +37,11 @@ import React from 'react';
 const notes = [
   {
     id: '4e81fc6e-bfb6-419b-93e5-0242fb6f3f6a',
-    task: 'Learn React'
+    task: 'Aprenda React'
   },
   {
     id: '11bbffc8-5891-4b45-b9ea-5c99aadf870f',
-    task: 'Do laundry'
+    task: 'Lavar roupa'
   }
 ];
 
@@ -52,12 +52,12 @@ export default () => (
 )
 ```
 
-We are using various important features of JSX in the snippet above. I have annotated the difficult parts below:
+Estamos usando vários recursos importantes do JSX no trecho acima. As partes difíceis abaixo:
 
-* `<ul>{notes.map(note => ...)}</ul>` - `{}`'s allow us to mix JavaScript syntax within JSX. `map` returns a list of `li` elements for React to render.
-* `<li key={note.id}>{note.task}</li>` - In order to tell React which items have been changed, added, or removed, we use the `key` property. It is important that this is unique or else React won't be able to figure out the correct order in which to render. If not set, React will give a warning. See [Multiple Components](https://facebook.github.io/react/docs/lists-and-keys.html#rendering-multiple-components) for more information.
+* `<ul>{notes.map(note => ...)}</ul>` - `{}` nos permitem misturar a sintaxe do JavaScript dentro do JSX. `map` retorna uma lista de elementos `li` para o React renderizar.
+* `<li key={note.id}>{note.task}</li>` - Para dizer ao React quais itens foram alterados, adicionados ou removidos, usamos a propriedade `key`. É importante que isso seja único, ou o React não poderá descobrir a ordem correta para renderizar. Se não for definido, React dará um aviso. Veja [múltiplos componentes](https://facebook.github.io/react/docs/lists-and-keys.html#rendering-multiple-components) para mais informações.
 
-We also need to refer to the component from the entry point of our application:
+Também precisamos adicionar o componente no ponto de entrada do nosso aplicativo:
 
 **app/index.jsx**
 
@@ -83,11 +83,11 @@ leanpub-end-insert
 );
 ```
 
-If you run the application now, you should see a list of notes. It's not particularly pretty or useful yet, but it's a start:
+Se você executar o aplicativo agora, você deve ver uma lista de notas. Ainda não é bonito ou útil, mas é um começo:
 
 ![A list of notes](images/react_03.png)
 
-T> We need to `import` React to *Notes.jsx* given there's that JSX to JavaScript transformation going on. Without it the resulting code would fail.
+T> Nós precisamos fazer o `import` do React no *Notes.jsx* dado que existe JSX, para realizar a transformação do JavaScript. Sem ele, o código falharia.
 
 ## Generating the Ids
 
@@ -111,7 +111,7 @@ leanpub-end-delete
 leanpub-start-insert
     id: uuid.v4(),
 leanpub-end-insert
-    task: 'Learn React'
+    task: 'Aprenda React'
   },
   {
 leanpub-start-delete
@@ -120,7 +120,7 @@ leanpub-end-delete
 leanpub-start-insert
     id: uuid.v4(),
 leanpub-end-insert
-    task: 'Do laundry'
+    task: 'Lavar roupa'
   }
 ];
 
@@ -229,11 +229,11 @@ leanpub-start-insert
 const notes = [
   {
     id: uuid.v4(),
-    task: 'Learn React'
+    task: 'Aprenda React'
   },
   {
     id: uuid.v4(),
-    task: 'Do laundry'
+    task: 'Lavar roupa'
   }
 ];
 leanpub-end-insert
@@ -263,11 +263,11 @@ import uuid from 'uuid';
 const notes = [
   {
     id: uuid.v4(),
-    task: 'Learn React'
+    task: 'Aprenda React'
   },
   {
     id: uuid.v4(),
-    task: 'Do laundry'
+    task: 'Lavar roupa'
   }
 ];
 
@@ -309,11 +309,11 @@ leanpub-start-delete
 const notes = [
   {
     id: uuid.v4(),
-    task: 'Learn React'
+    task: 'Aprenda React'
   },
   {
     id: uuid.v4(),
-    task: 'Do laundry'
+    task: 'Lavar roupa'
   }
 ];
 
@@ -334,11 +334,11 @@ export default class App extends React.Component {
       notes: [
         {
           id: uuid.v4(),
-          task: 'Learn React'
+          task: 'Aprenda React'
         },
         {
           id: uuid.v4(),
-          task: 'Do laundry'
+          task: 'Lavar roupa'
         }
       ]
     };
