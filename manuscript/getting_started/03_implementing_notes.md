@@ -135,9 +135,9 @@ A declaração `debugger;` é particularmente útil porque diz ao navegador que 
 
 T> Se você estiver interessado na matemática por trás da geração de IDs, confira [os cálculos na Wikipedia](https://en.wikipedia.org/wiki/Universally_unique_identifier#Random_UUID_probability_of_duplicates) para mais detalhes. Você verá que a possibilidade de colisões é bem pequena e algo que não precisamos nos preocupar.
 
-## Adding New Notes to the List
+## Adicionando novas notas à lista
 
-Even though we can display individual notes now, we are still missing a lot of logic to make our application useful. A logical way to start would be to implement adding new notes to the list. To achieve this, we need to expand the application a little.
+Agora, conseguimos mostrar notas individuais, mas ainda está faltando muita lógica para tornar nossa aplicação útil. Uma maneira lógica de começar isso seria implementar a adição de novas notas à lista. Para fazer isso, precisamos expandir o aplicativo um pouco.
 
 ### Defining a Stub for `App`
 
