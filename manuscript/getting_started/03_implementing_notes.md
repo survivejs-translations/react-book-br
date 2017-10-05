@@ -1,6 +1,6 @@
-# Implementing a Note Application
+# Implementando um aplicativo de Notas
 
-Now that we have a nice development setup, we can actually get some work done. Our goal here is to end up with a crude note-taking application. It will have basic manipulation operations. We will grow our application from scratch and get into some trouble. This way you will understand why architectures, such as Flux, are needed.
+Agora que temos uma configuração agradável para desenvolvimento, podemos realmente fazer algum trabalho. Nosso objetivo aqui é construir uma breve aplicação de notas. Ela terá operações básicas de manipulação. Vamos expandir nossa aplicação a partir do zero e entrar em alguns problemas. Desta forma, você entenderá por que são necessárias arquiteturas, como o Flux.
 
 ## Initial Data Model
 
