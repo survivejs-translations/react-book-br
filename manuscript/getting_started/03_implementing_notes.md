@@ -286,17 +286,17 @@ Nosso aplicativo deve ser exatamente o mesmo que antes após essas mudanças. Ag
 
 T> A maneira como extraímos `notes` de`props` (o primeiro parâmetro) é um truque que você vê com o React. Se quiser acessar as `props` restantes, você pode usar a sintaxe `{notes, ... props}`. Usaremos isso mais tarde para que você possa ter uma melhor sensação de como isso funciona e por que você pode usá-lo.
 
-### Pushing State to `App`
+### Movendo estados para o `App`
 
-Now that we have everything in the right place, we can start to worry about modifying the data. If you have used JavaScript before, the intuitive way to handle it would be to set up an event handler like `() => notes.push({id: uuid.v4(), task: 'New task'})`. If you try this, you'll see that nothing happens.
+Agora que temos tudo no lugar certo, podemos começar a nos preocupar com a modificação dos nossos dados. Se você já usou JavaScript antes, a maneira intuitiva de lidar com isso seria configurar um manipulador de eventos como `() => notes.push({id: uuid.v4(), task: 'Nova tarefa'})`. Se você tentar isso, verá que nada acontece.
 
-The reason why is simple. React cannot notice the structure has changed and won't react accordingly (that is, trigger `render()`). To overcome this issue, we can implement our modification through React's own API. This makes it notice that the structure has changed. As a result it is able to `render()` as we might expect.
+A razão pela qual, é simples. React pode não perceber que a estrutura mudou e não irá atualizar seu estado (isto é, executar o `render()`). Para corrigir este problema, podemos implementar nossa modificação através da própria API do React. Isso faz com que ele perceba que a estrutura mudou. Como resultado, o `render()` será executado, como esperado.
 
-As of the time of writing, the function based component definition doesn't support the concept of state. The problem is that these components don't have a backing instance. It is something in which you would attach state. We might see a way to solve this through functions only in the future but for now we have to use a heavy duty alternative.
+No momento dessa escrita, a componentes baseados em função, não suportam o conceito de estado. O problema é que esses componentes não possuem uma instância. Isso é, algo em que você eles poderiam anexar um estado. Talvez no futuro, isso seja resolvido, mas por enquanto, temos que usar uma alternativa para isso.
 
-In addition to functions, you can create React components through `React.createClass` or a class based component definition. In this book we'll use function based components whenever possible. If there's a good reason why those can't work, then we'll use the class based definition instead.
+Além das funções, você pode criar componentes no React através de `React.createClass` ou componente baseado em classes. Neste livro, usaremos componentes baseados em funções sempre que possível. Se houver uma boa razão, então usaremos a definição baseada em classe.
 
-In order to convert our `App` to a class based component, adjust it as follows to push the state within:
+Para converter nosso `App` para um componente baseado em classe, vamos altera-lo da seguinte forma:
 
 **app/components/App.jsx**
 
@@ -357,11 +357,11 @@ export default class App extends React.Component {
 leanpub-end-insert
 ```
 
-After this change `App` owns the state even though the application still should look the same as before. We can begin to use React's API to modify the state.
+Após esta mudança, `App` possui um estado, mesmo que o aplicativo ainda seja o mesmo de antes. Podemos começar a usar a API do React para modificar o estado.
 
-T> Data management solutions, such as [MobX](https://mobxjs.github.io/mobx/), solve this problem in their own way. Using them you annotate your data structures and React components and leave the updating problem to them. We'll get back to the topic of data management later in this book in detail.
+T> Soluções de gerenciamento de dados, como [MobX](https://mobxjs.github.io/mobx/), resolvem esse problema à sua maneira. Usando-os, você anota suas estruturas de dados nos componentes React e deixa o problema de atualização para essas bibliotecas. Voltaremos ao tópico de gerenciamento de dados mais adiante neste livro.
 
-T> We're passing `props` to `super` by convention. If you don't pass it, `this.props` won't get set! Calling `super` invokes the same method of the parent class and you see this kind of usage in object oriented programming often.
+T> Estamos passando `props` para `super`, por convenção. Se você não passar, `this.props` não será configurado! Chamar `super` invoca o mesmo método da classe pai e você vê esse tipo de uso em programação orientada a objetos com freqüência.
 
 ### Implementing `Note` Adding Logic
 
