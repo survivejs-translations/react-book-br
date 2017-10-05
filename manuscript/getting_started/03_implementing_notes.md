@@ -89,11 +89,11 @@ Se você executar o aplicativo agora, você deve ver uma lista de notas. Ainda n
 
 T> Nós precisamos fazer o `import` do React no *Notes.jsx* dado que existe JSX, para realizar a transformação do JavaScript. Sem ele, o código falharia.
 
-## Generating the Ids
+## Gerando Ids
 
-Normally the problem of generating the ids is solved by a back-end. As we don't have one yet, we'll use a standard known as [RFC4122](https://www.ietf.org/rfc/rfc4122.txt) instead. It allows us to generate unique ids. We'll be using a Node.js implementation known as *uuid* and its `uuid.v4` variant. It will give us ids, such as `1c8e7a12-0b4c-4f23-938c-00d7161f94fc` and they are guaranteed to be unique with a very high probability.
+Normalmente, o problema de gerar os ids é resolvido por um back-end. Como ainda não temos um, usaremos um padrão conhecido como [RFC4122](https://www.ietf.org/rfc/rfc4122.txt). Isso nos permite gerar ids únicos. Usaremos uma implementação Node.js conhecida como *uuid* e sua função `uuid.v4`. Ele nos dará ids, como `1c8e7a12-0b4c-4f23-938c-00d7161f94fc` e eles tem uma garantia, bem alta por sinal, de serem únicos.
 
-To connect the generator with our application, modify it as follows:
+Para conectar o gerador ao nosso aplicativo, vamos usá-lo da seguinte maneira:
 
 **app/components/Notes.jsx**
 
@@ -127,13 +127,13 @@ leanpub-end-insert
 ...
 ```
 
-The development setup will install the `uuid` dependency automatically. Once that has happened and the application has refreshed, everything should still look the same. If you try debugging it, you can see the ids should change if you refresh. You can verify this easily either by inserting a `console.log(notes);` line or a [debugger;](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/debugger) statement within the component function.
+A configuração de desenvolvimento instalará a depêndencia `uuid` automaticamente. Uma vez instalado e o aplicativo atualizado, tudo deve permanecer o mesmo. Se você tentar debugar, você pode ver os IDs ao atualizar. Você pode verificar isso facilmente, inserindo uma declaração `console.log(notes);` ou [debugger;](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/debugger) dentro da função do componente.
 
-The `debugger;` statement is particularly useful as it tells the browser to break execution. This way you can examine the current call stack and examine the available variables. If you are unsure of something, this is a great way to debug and figure out what's going on.
+A declaração `debugger;` é particularmente útil porque diz ao navegador que interrompa a execução atual. Desta forma, você pode examinar a pilha de chamadas atual e as variáveis disponíveis. Se você não tiver certeza de algo, esta é uma ótima maneira de debugar e descobrir o que está acontecendo.
 
-`console.log` is a lighter alternative. You can even design a logging system around it and use the techniques together. See [MDN](https://developer.mozilla.org/en-US/docs/Web/API/Console) and [Chrome documentation](https://developers.google.com/web/tools/chrome-devtools/debug/console/console-reference) for the full API.
+`console.log` é uma alternativa mais leve. Você pode até projetar um sistema de registro em torno dele e usar essas técnicas juntas. Acesse [MDN](https://developer.mozilla.org/en-US/docs/Web/API/Console) e [Chrome documentation](https://developers.google.com/web/tools/chrome-devtools/debug/console/console-reference) para ver a API completa.
 
-T> If you are interested in the math behind id generation, check out [the calculations at Wikipedia](https://en.wikipedia.org/wiki/Universally_unique_identifier#Random_UUID_probability_of_duplicates) for details. You'll see that the possibility for collisions is somewhat miniscule and something we don't have to worry about.
+T> Se você estiver interessado na matemática por trás da geração de IDs, confira [os cálculos na Wikipedia](https://en.wikipedia.org/wiki/Universally_unique_identifier#Random_UUID_probability_of_duplicates) para mais detalhes. Você verá que a possibilidade de colisões é bem pequena e algo que não precisamos nos preocupar.
 
 ## Adding New Notes to the List
 
