@@ -16,28 +16,29 @@ Para começar, certifique-se de ter as novas versões do [Node.js](https://nodej
 
 T> Uma opção interessante é gerenciar seu ambiente através do [Vagrant](https://www.vagrantup.com/) ou ferramentas como [nvm](https://www.npmjs.com/package/nvm).
 
-### Downloading the Boilerplate
+### Fazendo o downloading do Boilerplate
 
 In order to fetch the boilerplate our project needs, clone it through Git as follows at your terminal:
+Para fazer o download do boilerplate, para as necessidades do nosso projeto, vamos clonar através do Git usando o seguinte comando em seu terminal:
 
 ```bash
 git clone https://github.com/survivejs/react-boilerplate.git kanban-app
 ```
 
-This will create a new directory, *kanban-app*. Inside it you can find everything we need to get ahead. As the boilerplate can change between book versions, I recommend you check out the version specific of it:
+Isso criará um novo diretório, *kanban-app*. Dentro dele você pode encontrar tudo o que precisamos para avançar. Como o boilerplate pode mudar entre as versões do livro, eu recomendo que você verifique a versão específica dele:
 
 ```bash
 cd kanban-app
 git checkout v2.5.6
 ```
 
-The repository contains a small seed application that shows `Hello World!` and basic Webpack configuration. To get the seed application dependencies installed, execute
+O repositório contém um pequeno aplicativo de exemplo que mostra o `Hello World!` e a configuração básica do webpack. Para instalar as dependências execute:
 
 ```bash
 npm install
 ```
 
-Upon completion you should see a `node_modules/` directory containing the project dependencies.
+Após a conclusão, você deve ver um diretório `node_modules /` contendo as dependências do projeto.
 
 ### Create a Fresh Git Repository for Your Project
 
