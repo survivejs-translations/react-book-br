@@ -85,7 +85,7 @@ leanpub-end-insert
 
 Se você executar o aplicativo agora, você deve ver uma lista de notas. Ainda não é bonito ou útil, mas é um começo:
 
-![A list of notes](images/react_03.png)
+![A list of notes](../images/react_03.png)
 
 T> Nós precisamos fazer o `import` do React no *Notes.jsx* dado que existe JSX, para realizar a transformação do JavaScript. Sem ele, o código falharia.
 
@@ -363,15 +363,15 @@ T> Soluções de gerenciamento de dados, como [MobX](https://mobxjs.github.io/mo
 
 T> Estamos passando `props` para `super`, por convenção. Se você não passar, `this.props` não será configurado! Chamar `super` invoca o mesmo método da classe pai e você vê esse tipo de uso em programação orientada a objetos com freqüência.
 
-### Implementing `Note` Adding Logic
+### Implementando lógica para adicionar `Note`
 
-All the effort will pay off soon. We have just one step left. We will need to use React's API to manipulate the state and to finish our feature. React provides a method known as `setState` for this purpose. In this case we will need to call it like this: `this.setState({... new state goes here ...}, () => ...)`.
+Todo o esforço irá se pagar em breve. Temos apenas um passo à faltando. Precisamos usar a API do React para manipular o estado e terminar nosso recurso. React fornece um método conhecido como `setState` para isso. Nesse caso, iremos chamá-lo dessa maneira: `this.setState({... new state goes here ...}, () => ...)`.
 
-The callback is optional. React will call it when the state has been set and often you don't need to care about it at all. Once `setState` has gone through, React will call `render()`. The asynchronous API might feel a little strange at first but it will allow React to optimize its performance by using techniques such as batching updates. This all ties back to the concept of Virtual DOM.
+A função de *callback* é opcional. React irá chamá-lo quando o estado for alterado e muitas vezes você não precisa se preocupar com isso. Uma vez que o `setState` terminado, o React executará `render()`. A API assíncrona pode ser um pouco estranha no início, mas permitirá que o React otimize seu desempenho usando técnicas como atualizações por lotes (*batch updates*). Isso tudo vincula o conceito do Virtual DOM.
 
-One way to trigger `setState` would be to push the associated logic to a method of its own and then call it when a new note is added. The class based component definition doesn't bind custom methods like this by default so we will need to handle the binding somehow. It would be possible to do that at the `constructor`, `render()`, or by using a specific syntax. I'm opting for the syntax option in this book. Read the *Language Features* appendix to learn more.
+Uma maneira de executar o `setState` seria mover a lógica de um próprio método e chamá-lo quando uma nova nota for adicionada. A definição de componente baseada em classe não vincula métodos personalizados como este por padrão, então, precisamos lidar com isso de alguma forma. Seria possível fazer isso no `constructor`, `render()`, ou usando uma sintaxe específica. Estou optando pela opção de sintaxe neste livro. Leia mais no apêndice *Caracteristicas da Linguagem* para aprender mais.
 
-To tie the logic with the button, adjust `App` as follows:
+Para chamar a lógica ao clicar no botão, iremos mudar o `App` da seguinte maneira:
 
 **app/components/App.jsx**
 
@@ -401,16 +401,16 @@ leanpub-end-insert
   }
 leanpub-start-insert
   addNote = () => {
-    // It would be possible to write this in an imperative style.
-    // I.e., through `this.state.notes.push` and then
-    // `this.setState({notes: this.state.notes})` to commit.
+    // Seria possível escrever isso em um estilo imperativo.
+    // por exemplo, através de `this.state.notes.push` e então
+    // `this.setState({notes: this.state.notes})` para persistir.
     //
-    // I tend to favor functional style whenever that makes sense.
-    // Even though it might take more code sometimes, I feel
-    // the benefits (easy to reason about, no side effects)
-    // more than make up for it.
+    // Eu prefiro favorecer o estilo funcional sempre que possível.
+    // Embora possa ser mais verboso as vezes, eu sinto
+    // que os benefícios (fácil de entender, sem efeitos colaterais)
+    // valem a pena.
     //
-    // Libraries, such as Immutable.js, go a notch further.
+    // Bibliotecas como Immutable.js, vão um passo além.
     this.setState({
       notes: this.state.notes.concat([{
         id: uuid.v4(),
@@ -422,16 +422,16 @@ leanpub-end-insert
 }
 ```
 
-Given we are binding to an instance here, the hot loading setup cannot pick up the change. To try out the new feature, refresh the browser and try clicking the `+` button. You should see something:
+Dado que estamos vinculando uma instância aqui, a configuração de *hot loading* não irá refletir a alteração. Para ver os novos recursos, atualize o navegador e tente clicar no botão `+`. Você deve ver algo:
 
-![Notes with a plus](images/react_05.png)
+![Notes with a plus](../images/react_05.png)
 
-T> If we were operating with a back-end, we would trigger a query here and capture the id from the response. For now it's enough to just generate an entry and a custom id.
+T> Se estivéssemos operando com um back-end, iríamos fazer uma consulta e capturar o id da resposta. Por enquanto, basta apenas gerar uma entrada e um ID personalizado.
 
-T> You could use `this.setState({notes: [...this.state.notes, {id: uuid.v4(), task: 'New task'}]})` to achieve the same result. This [spread operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_operator) can be used with function parameters as well. See the *Language Features* appendix for more information.
+T> Você poderia usar `this.setState({notes: [...this.state.notes, {id: uuid.v4(), task: 'New task'}]})` para coneguir o mesmo resultado. O [operador spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_operator) também pode ser usado com parâmetros de função. Veja o apêndice *Caracteristicas da Linguagem* para mais detalhes.
 
-T> Using [autobind-decorator](https://www.npmjs.com/package/autobind-decorator) would be a valid alternative for property initializers. In this case we would use `@autobind` annotation either on class or method level. To learn more about decorators, read the *Understanding Decorators* appendix.
+T> Usando [autobind-decorator](https://www.npmjs.com/package/autobind-decorator) seria uma alternativa válida para inicializadores de propriedade. Neste caso, usaríamos a anotação `@autobind` na classe ou método. Para aprender mais sobre *decorators*, leia o apêndice *Entendendo Decorators*.
 
-## Conclusion
+## Conclusão
 
-Even though we have a rough application together now, we are still missing two crucial features: editing and deleting notes. It's a good time to focus on those next. Let's do deletion first and handle editing after that.
+Com uma quase- aplicação, ainda está faltando duas características cruciais: edição e exclusão de notas. É um bom momento para se concentrar nos próximos passos. Vamos fazer a exclusão primeiro e lidar com a edição depois disso.
