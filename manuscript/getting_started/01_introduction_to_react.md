@@ -6,7 +6,7 @@ Neste capítulo, veremos algumas das idéias básicas por trás da biblioteca pa
 
 ## O qué é o React?
 
-![React](images/react_header.png)
+![React](../images/react_header.png)
 
 React é uma biblioteca JavaScript que obriga você a pensar em componentes. Esse modelo de pensamento se adapta bem às interfaces do usuário. Dependendo da sua experiência anterior, pode parecer estranho no início. Você terá que pensar com muito cuidado sobre o conceito de "estado" e aonde ele pertence.
 
@@ -16,7 +16,7 @@ React é pragmático no sentido de que contém um conjunto de possibilidades. Se
 
 ## Virtual DOM
 
-![Virtual DOM](images/vdom.png)
+![Virtual DOM](../images/vdom.png)
 
 Um dos problemas fundamentais da programação é como lidar com o estado da aplicação. Vamos supor que você esteja desenvolvendo uma interface de usuário e quer mostrar os mesmos dados em vários lugares. Como você se certifica de que os dados estão consistentes?
 
