@@ -28,9 +28,9 @@ Muitas vezes, `componentDidMount` e `componentWillUnmount` são usados em conjun
 
 ## Refs
 
-React's [refs](https://facebook.github.io/react/docs/more-about-refs.html) allow you to access the underlying DOM structure easily. Using them will bind your code to the web, but sometimes there's no way around this if you are measuring components for instance.
+React [refs](https://facebook.github.io/react/docs/more-about-refs.html) permitem que você acesse facilmente o elemento DOM. Seu código será exclusivo para web, mas às vezes, não há como contornar isso, por exemplo, se você estiver medindo seus componentes.
 
-Refs need a backing instance. This means they will work only with `React.createClass` or class based component definitions. The basic idea goes as follows:
+Refs precisa de uma instância. Isso significa que eles só funcionarão com `React.createClass` ou definições baseadas em classes. A idéia básica é a seguinte:
 
 ```javascript
 <input type="text" ref="input" />
@@ -41,7 +41,7 @@ Refs need a backing instance. This means they will work only with `React.createC
 this.refs.input
 ```
 
-In addition to strings, refs support a callback that gets called right after the component is mounted. You can do some initialization here or capture the reference:
+Além de *strings*, refs suportam uma função de *callback* que é chamada logo após o componente ser montado. Você pode fazer alguma inicialização aqui ou capturar a referência:
 
 ```javascript
 <input type="text" ref={element => element.focus()} />
