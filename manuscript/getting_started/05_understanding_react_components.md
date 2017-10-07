@@ -1,30 +1,30 @@
-# Understanding React Components
+# Entendo componentes em React
 
-As we have seen so far, React components are fairly simple. They can have internal `state`. They can also accept `props`. Beyond this React provides escape hatches that allow you to handle advanced use cases. These include lifecycle methods and `refs`. There are also a set of custom properties and methods you may want to be aware of.
+Como vimos até agora, os componentes em React são bastante simples. Eles podem ter guardar um `state` interno. Eles também podem aceitar `props`. Além disso, React fornece meios que permitem manipular casos avançados. Includingo métodos de ciclo de vida e `refs`. Há também um conjunto de propriedades personalizadas e métodos que você precisa saber.
 
-## Lifecycle Methods
+## Métodos de ciclo de vida
 
-![Lifecycle methods](images/lifecycle.png)
+![Lifecycle methods](../images/lifecycle.png)
 
-From the image above we can see that a React component has three phases during its lifecycle. It can be **mounting**, **mounted**, and **unmounting**. Each of these phases comes with related methods.
+A partir da imagem acima, podemos ver que um componente React possui três fases durante o ciclo de vida. Pode ser **mounting**, **mounted**, e **unmounting**. Cada uma dessas fases vem com métodos relacionados.
 
-During the mounting phase you have access to the following:
+Durante a fase de **mounting**, você tem acesso ao seguinte:
 
-* `componentWillMount()` gets triggered once before any rendering. One way to use it would be to load data asynchronously there and force rendering through `setState`. `render()` will see the updated state and will be executed only once despite the state change. This will get triggered when rendering on a server.
-* `componentDidMount()` gets triggered after initial rendering. You have access to the DOM here. You could use this hook to wrap a jQuery plugin within a component, for instance. This **won't** get triggered when rendering on a server.
+* `componentWillMount()` é desencadeado uma vez antes de qualquer renderização. Uma maneira de usá-lo seria carregar dados de forma assíncrona e forçar a renderização através de `setState`. `render()` verá o estado atualizado e será executado apenas uma vez, apesar da mudança de estado. Esse método também é ativado realizando renderização no servidor.
+* `componentDidMount()` é desencadeado após a renderização inicial. Você tem acesso ao DOM aqui. Você poderia usar esse método para usar um plugin jQuery dentro de um componente, por exemplo. Esse método **não** é ativado realizando renderização no servidor.
 
-After a component has been mounted and it's running, you can operate through the following methods:
+Depois que um componente foi montado e está funcionando, você pode operar através dos seguintes métodos na fase **mounted**:
 
-* `componentWillReceiveProps(object nextProps)` triggers when the component receives new props. You could, for instance, modify your component state based on the received props.
-* `shouldComponentUpdate(object nextProps, object nextState)` allows you to optimize the rendering. If you check the props and state and see that there's no need to update, return `false`. This is where [Immutable.js](https://facebook.github.io/immutable-js/) and similar libraries come in handy thanks to their easy equality checks. [The official documentation](https://facebook.github.io/react/docs/optimizing-performance.html#shouldcomponentupdate-in-action) goes to greater detail.
-* `componentWillUpdate(object nextProps, object nextState)` gets triggered after `shouldComponentUpdate` and before `render()`. It is not possible to use `setState` here, but you can set class properties, for instance.
-* `componentDidUpdate(object nextProps, object nextState)` is triggered after rendering. You can modify the DOM here. This can be useful for adapting other code to work with React.
+* `componentWillReceiveProps(object nextProps)` dispara quando o componente recebe novas `props`. Você poderia, por exemplo, modificar o estado do componente com base nas `props` recebidas.
+* `shouldComponentUpdate(object nextProps, object nextState)` permite otimizar a renderização. Se você verificar as `props` e ver que não há necessidade de atualização, você pode retornar `false`. Isso é onde [Immutable.js](https://facebook.github.io/immutable-js/) e bibliotecas similares são úteis graças às suas simples verificações de igualdade. [A documentação oficial](https://facebook.github.io/react/docs/optimizing-performance.html#shouldcomponentupdate-in-action) explica em mais detalhes.
+* `componentWillUpdate(object nextProps, object nextState)` é disparada logo após `shouldComponentUpdate` e antes do `render()`. Não é possível usar `setState` aqui, mas você pode definir propriedades da classe atual.
+* `componentDidUpdate(object nextProps, object nextState)` é disparada após a renderização. Você pode modificar o DOM aqui. Isso pode ser útil para adaptar outro código para trabalhar com o React.
 
-Finally, when a component is unmounting, there's one more hook you can use:
+Finalmente, quando um componente está desmontando, há mais um método que você pode usar na fase **unmounting**:
 
-* `componentWillUnmount()` is triggered just before a component is unmounted from the DOM. This is the ideal place to perform cleanup (e.g., remove running timers, custom DOM elements, and so on).
+* `componentWillUnmount()` é disparada logo antes um componente ser desmontado do DOM. Este é o local ideal para executar a limpeza (por exemplo, remover *timers/timeouts* em execução, elementos do DOM personalizados e assim por diante).
 
-Often `componentDidMount` and `componentWillUnmount` come as a pair. If you set up something DOM related or a listener at `componentDidMount`, you also have to remember to clean it up at `componentWillUnmount`.
+Muitas vezes, `componentDidMount` e `componentWillUnmount` são usados em conjunto. Se você configurar algum evento DOM (ex: *window.addEventListener(..)*) no `componentDidMount`, você também precisa se lembrar de limpá-lo em `componentWillUnmount` (ex: *window.removeEventListener(..)*).
 
 ## Refs
 
