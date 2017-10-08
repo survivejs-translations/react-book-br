@@ -95,16 +95,16 @@ Note.propTypes = {
 
 Para entender `propTypes` melhor, leia o capítulo *Tipagem em React*.
 
-## React Component Conventions
+## Convenções para componentes React
 
-I prefer to have the `constructor` first, followed by lifecycle methods, `render()`, and finally, methods used by `render()`. This top-down approach makes it straightforward to follow code. There is also an inverse convention that leaves `render()` as the last method. Naming conventions vary as well. You will have to find conventions which work the best for you.
+Eu prefiro declarar o `constructor` primeiro, seguido dos métodos de ciclo de vida, `render()`, e finalmente, métodos usados pelo `render()`. Esta abordagem de cima para baixo deixa simples de seguir e ler o código. Existe também uma convenção inversa, deixando o `render()` como último método. As convenções de nomenclatura também variam. Você terá que encontrar convenções que funcionem melhor para você.
 
-You can enforce a convention by using a linter such as [ESLint](http://eslint.org/). Using a linter decreases the amount of friction when working on code written by others. Even on personal projects, using tools to verify syntax and standards for you can be useful. It lessens the amount and severity of mistakes and allows you to spot them early.
+Você pode impor uma convenção usando um linter, como [ESLint](http://eslint.org/). Usar um linter diminui a quantidade de erros ao trabalhar no código escrito por outros. Mesmo em projetos pessoais, usar ferramentas para verificar sintaxe e padrões para você pode ser útil. Isso diminui a quantidade e a gravidade dos erros e permite que você os encontre mais cedo.
 
-By setting up a continuous integration system you can test against multiple platforms and catch possible regressions early. This is particularly important if you are using lenient version ranges. Sometimes dependencies might have problems and it's good to catch those.
+Ao configurar um sistema de integração contínua, você pode testar em múltiplas plataformas e capturar possíveis regressões antecipadamente. Isso é particularmente importante se você estiver usando múltiplas versões de pacotes. Às vezes, dependências podem ter problemas e é bom encontrar esses problemas cedo.
 
-## Conclusion
+## Conclusão
 
-Even though React's component definition is fairly simple, it's also powerful and pragmatic. Especially the advanced parts can take a while to master, but it's good to know they are there.
+Mesmo que componentes React sejam bastante simples, eles também são poderosos e pragmáticos. Especialmente as partes avançadas do seu ciclo de vida, pode demorar um pouco para acontecer o momento "a-ha!", mas é bom saber que eles estão por lá.
 
-We'll continue the implementation in the next chapter as we allow the user to edit individual notes.
+Continuaremos a implementação no próximo capítulo, agora, iremos permitir que o usuário edite notas individuais.
