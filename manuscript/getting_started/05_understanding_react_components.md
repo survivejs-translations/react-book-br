@@ -47,16 +47,16 @@ Além de *strings*, refs suportam uma função de *callback* que é chamada logo
 <input type="text" ref={element => element.focus()} />
 ```
 
-## Custom Properties and Methods
+## Propriedades e métodos personalizados
 
-Beyond the lifecycle methods and refs, there are a variety of [properties and methods](https://facebook.github.io/react/docs/component-specs.html) you should be aware of especially if you are going to use `React.createClass`:
+Além dos refs e métodos de ciclo de vida, há uma variedade de [propriedades e métodos](https://facebook.github.io/react/docs/component-specs.html) você deve conhecer, especialmente se você vai usar `React.createClass`:
 
-* `displayName` - It is preferable to set `displayName` as that will improve debug information. For ES6 classes this is derived automatically based on the class name. You can attach `displayName` to an anonymous function based component as well.
-* `getInitialState()` - In class based approach the same can be achieved through `constructor`.
-* `getDefaultProps()` - In classes you can set these in `constructor`.
-* `render()` - This is the workhorse of React. It [must return a single node](https://facebook.github.io/react/tips/maximum-number-of-jsx-root-nodes.html) as returning multiple won't work!
-* `mixins` - `mixins` contains an array of mixins to apply to components.
-* `statics` - `statics` contains static properties and method for a component. In ES6 you can assign them to the class as below:
+* `displayName` - Ao configurar `displayName`, irá melhorar o nome dos seus componentes para debug. Para as classes ES6, isso é criado automaticamente com base no nome da classe. Você pode adicionar `displayName` para um componente baseado em função anônima também.
+* `getInitialState()` - Em componentes baseados em classe, você pode alcançar o mesmo resultao dentro do `constructor`.
+* `getDefaultProps()` - Em componentes baseados em classe, você pode alcançar o mesmo resultao dentro do `constructor`.
+* `render()` - Esse é o método principal do React. Ele [deve retornar um único nó](https://facebook.github.io/react/tips/maximum-number-of-jsx-root-nodes.html), se você retornar múltiplos nós, ele não irá funcionar!
+* `mixins` - `mixins` contém uma série de mixins para se aplicar ao componente.
+* `statics` - `statics` contém propriedades estáticas e métodos para um componente. No ES6 você pode atribuí-los à classe conforme abaixo:
 
 ```javascript
 class Note {
@@ -69,7 +69,7 @@ Note.willTransitionTo = () => {...};
 export default Note;
 ```
 
-This could also be written as:
+Isso também pode ser escrito como:
 
 ```javascript
 class Note {
@@ -82,9 +82,9 @@ class Note {
 export default Note;
 ```
 
-Some libraries, such as React DnD, rely on static methods to provide transition hooks. They allow you to control what happens when a component is shown or hidden. By definition statics are available through the class itself.
+Algumas bibliotecas, como React DnD, dependem de métodos estáticos para fornecer ações de transição. Eles permitem que você controle o que acontece quando um componente é mostrado ou oculto. Por definição, o métoo estático está disponível através da própria classe.
 
-React components allow you to document the interface of your component using `propTypes` as below.
+Os componentes React permitem documentar a interface do seu componente usando `propTypes`.
 
 ```javascript
 const Note = ({task}) => <div>{task}</div>;
@@ -93,7 +93,7 @@ Note.propTypes = {
 }
 ```
 
-To understand `propTypes` better, read the *Typing with React* chapter.
+Para entender `propTypes` melhor, leia o capítulo *Tipagem em React*.
 
 ## React Component Conventions
 
