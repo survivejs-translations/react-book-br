@@ -6,9 +6,9 @@ O que dificulta nesse cenário é a necessidade da interface do usuário. Não b
 
 Uma maneira de conseguir isso é implementar o chamado **edição em linha**. A idéia é que, quando um usuário clicar em uma nota, mostraremos um campo de texto. Depois que o usuário terminar de editar e precionar *enter* ou cicar fora do campo (disparando o evento `blur`), vamos capturar o valor e realizar a atualização.
 
-## Implementing `Editable`
+## Implementando `Editable`
 
-To keep the application clean, I'll wrap this behavior into a component known as `Editable`. It will give us an API like this:
+Para manter a aplicação limpa, vamos isolar esse comportamento em um componente conhecido como `Editable`. Isso nos dará uma API como esta:
 
 ```javascript
 <Editable
@@ -17,9 +17,9 @@ To keep the application clean, I'll wrap this behavior into a component known as
   onEdit={onEdit.bind(null, id)} />
 ```
 
-This is an example of a **controlled** component. We'll control the editing state explicitly from outside of the component. This gives us more power, but it also makes `Editable` more involved to use.
+Isso é um exemplo de um componente **controlado**. Controlaremos o estado de edição explicitamente de fora do componente. Isso nos dá mais poder, mas também torna `Editable` mais verboso de se usar.
 
-T> It can be a good idea to name your callbacks using `on` prefix. This will allow you to distinguish them from other props and keep your code a little tidier.
+T> Pode ser uma boa ideia nomear seus callbacks usando o prefixo `on`. Isso permitirá que você os identifique dentre outras `props` e mantenha seu código um pouco mais limpo.
 
 ### Controlled vs. Uncontrolled Design
 
