@@ -1,10 +1,10 @@
-# Editing `Notes`
+# Editando `Notes`
 
-Editing notes is a similar problem as deleting them. The data flow is exactly the same. We'll need to define an `onEdit` callback and  `bind` an id of the note being edited at `Notes`.
+A edição de notas é um problema semelhante ao de eliminá-los. O fluxo de dados é exatamente o mesmo. Precisamos definir uma chamada para `onEdit` e fazer o `bind` com o id da nota que está sendo editada em` Notes`.
 
-What makes this scenario difficult is the user interface requirement. It's not enough just to have a button. We'll need some way to allow the user to input a new value which we can then commit to the data model.
+O que dificulta nesse cenário é a necessidade da interface do usuário. Não basta apenas ter um botão. Precisaremos de alguma maneira, permitir que o usuário insira um novo valor para podermos atualizar o modelo de dados.
 
-One way to achieve this is to implement so called **inline editing**. The idea is that when a user click a note, we'll show an input. After the user has finished editing and signals that by hitting *enter* or clicking outside of the field (blur event), we'll capture the value and update.
+Uma maneira de conseguir isso é implementar o chamado **edição em linha**. A idéia é que, quando um usuário clicar em uma nota, mostraremos um campo de texto. Depois que o usuário terminar de editar e precionar *enter* ou cicar fora do campo (disparando o evento `blur`), vamos capturar o valor e realizar a atualização.
 
 ## Implementing `Editable`
 
