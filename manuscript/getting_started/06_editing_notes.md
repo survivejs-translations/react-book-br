@@ -33,13 +33,13 @@ Antes de entrar nos detalhes, podemos implementar um pequeno `stub` e conectar i
 
 T> A documentação oficial do React fala sobre [componentes controlados](https://facebook.github.io/react/docs/forms.html) em mais detalhes.
 
-## Extracting Rendering from `Note`
+## Extraindo a renderização do `Note`
 
-Currently `Note` controls what is rendered inside it. It renders the passed task and connects a deletion button. We could push `Editable` inside it and handle the wiring through `Note` interface. Even though that might be one valid way to do it, we can push the rendering concern on a higher level.
+Atualmente `Note` controla o que é renderizado dentro dele. Ele processa a tarefa passada e conecta um botão de exclusão. Poderíamos colocar `Editable` dentro dele e fazer a ligação através das `props` do `Note`. Mesmo que essa possa ser uma maneira válida de se fazer, podemos empurrar a preocupação de renderização para um nível superior.
 
-Having the concept of `Note` is useful especially when we'll expand the application further so there's no need to remove it. Instead, we can give the control over its rendering behavior to `Notes` and wire it there.
+Tendo o conceito de `Note` é útil, especialmente, quando expandirmos o aplicativo, portanto, não há necessidade de removê-lo. Ao invés disso, podemos dar o controle sobre o comportamento de renderização para `Notes` e conectar tudo lá.
 
-React provides a prop known as `children` for this purpose. Adjust `Note` and `Notes` as follows to push the control over `Note` rendering to `Notes`:
+React fornece uma interface conhecida como `children` para isso. Ajustando `Note` e `Notes` da seguinte forma, iremos deixar o controle de renderização do `Note` para `Notes`:
 
 **app/components/Note.jsx**
 
@@ -88,11 +88,11 @@ leanpub-end-insert
 )
 ```
 
-Now that we have room to work, we can set up a stub for `Editable`.
+Agora, nós temos espaço para trabalhar, podemos configurar um `stub` para `Editable`.
 
-## Adding `Editable` Stub
+## Adicionando o stub de `Editable`
 
-We can model a rough starting point based on our specification as below. The idea is that we'll branch based on the `editing` prop and attach the props needed for implementing our logic:
+Podemos modelar um ponto de partida com base em nossa especificação abaixo. A ideia é que vamos fazer uma ramificação com base na `props` chamada `editing` e realizar a lógica necessária para implementar a funcionalidade:
 
 **app/components/Editable.jsx**
 
@@ -114,7 +114,7 @@ const Edit = ({onEdit = () => {}, value, ...props}) => (
 );
 ```
 
-To see our stub in action we still need to connect it with our application.
+Para ver o nosso `stub` em ação, ainda precisamos conectá-lo ao nosso aplicativo.
 
 ## Connecting `Editable` with `Notes`
 
