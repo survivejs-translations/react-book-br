@@ -21,17 +21,17 @@ Isso é um exemplo de um componente **controlado**. Controlaremos o estado de ed
 
 T> Pode ser uma boa ideia nomear seus callbacks usando o prefixo `on`. Isso permitirá que você os identifique dentre outras `props` e mantenha seu código um pouco mais limpo.
 
-### Controlled vs. Uncontrolled Design
+### Um pouco mais sobre controlado vs não controlado
 
-An alternative way to handle this would have been to leave the control over the `editing` state to `Editable`. This **uncontrolled** way of designing can be valid if you don't want to do anything with the state outside of the component.
+Uma maneira alternativa de lidar com a edição teria sido deixar o controle sobre o estado de `editing` para `Editable`. Isso é uma maneira de **não controlar** o componente, é uma maneira de projetar componentes que pode ser válida se você não quer fazer nada com o estado fora do componente.
 
-It is possible to use both of these designs together. You can even have a controlled component that has uncontrolled elements inside. In this case we'll end up using an uncontrolled design for the `input` that `Editable` will contain for example. Even that could be turned into something controlled should we want to.
+É possível usar esses dois meios juntos. Você pode até ter um componente controlado que tenha elementos não controlados dentro. No nosso caso, iremos usar um componente não controlado para o `input` e um controlado para o `Editable`. E podemos transformar isso em algo controlado, se quisermos.
 
-Logically `Editable` consists of two separate portions. We'll need to display the default value while we are not `editing`. In case we are `editing`, we'll want to show an `Edit` control instead. In this case we'll settle for a simple input as that will do the trick.
+O componente `Editable` consiste em duas porções separadas. Precisamos mostrar o valor padrão enquanto não estivermos no modo de `editing`. Quando estivermos no modo `editing`, queremos mostrar um controle `Edit`. Nesse caso, nos contentaremos com um campo de texto simples, isso fará o truque.
 
-Before digging into the details, we can implement a little stub and connect that to the application. This will give us the basic structure we need to grow the rest. To get started, we'll adjust the component hierarchy a notch to make it easier to implement the stub.
+Antes de entrar nos detalhes, podemos implementar um pequeno `stub` e conectar isso ao aplicativo. Isso nos dará a estrutura básica que precisamos para crescer. Para começar, ajustaremos a hierarquia de componentes facilitar a implementação do `stub`.
 
-T> The official documentation of React discusses [controlled components](https://facebook.github.io/react/docs/forms.html) in greater detail.
+T> A documentação oficial do React fala sobre [componentes controlados](https://facebook.github.io/react/docs/forms.html) em mais detalhes.
 
 ## Extracting Rendering from `Note`
 
