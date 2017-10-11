@@ -1,12 +1,12 @@
-# Styling the Notes Application
+# Estilizando nossa aplicação `Notes`
 
-Aesthetically, our current application is very barebones. As pretty applications are more fun to use, we can do a little something about that. In this case we'll be sticking to an old skool way of styling.
+Esteticamente, nosso aplicativo atual é muito básico. Como aplicações bonitas são mais divertidas de usar, podemos melhorar isso. No nosso caso, iremos usar o jeito tradicional para estilos.
 
-In other words, we'll sprinkle some CSS classes around and then apply CSS selectors based on those. The *Styling React* chapter discusses various other approaches in greater detail.
+Em outras palavras, vamos utilizar algumas classes CSS ao redor e depois aplicar seletores CSS com base nelas. O capítulo *Estilos em React* discute várias outras abordagens em maior detalhe.
 
-## Styling "Add Note" Button
+## Estilizando o botão `Add Note`
 
-To style the "Add Note" button we'll need to attach a class to it first:
+Para estilizar o botão `Add Note`, precisamos adicionar uma classe primeiro:
 
 **app/components/App.jsx**
 
@@ -41,7 +41,7 @@ leanpub-end-insert
 }
 ```
 
-We also need to add corresponding styling:
+Também precisamos adicionar o correspondente estilo:
 
 **app/main.css**
 
@@ -57,11 +57,11 @@ leanpub-start-insert
 leanpub-end-insert
 ```
 
-A more general way to handle this would be to set up a `Button` component and style it. That would give us nicely styled buttons across the application.
+Uma maneira mais geral de lidar com isso seria configurar um componente `Button` e estiliza-lo. Isso nos daria botões estilizados em toda a aplicação.
 
-## Styling `Notes`
+## Estilizando `Notes`
 
-Currently the `Notes` list looks a little rough. We can improve that by hiding the list specific styling. We can also fix `Notes` width so if the user enter a long task, our user interface still remains fixed to some maximum width. A good first step is to attach some classes to `Notes` so it's easier to style:
+Atualmente, a lista `Notes` parece um pouco áspera. Podemos melhorar isso escondendo o estilo específico de lista. Também podemos corrigir a largura `Notes`, portanto, se o usuário entrar em uma tarefa longa, nossa interface ainda permanecerá fixa com alguma largura máxima. Um bom primeiro passo é anexar algumas classes a `Notes`, ficando mais fácil adicionar seus estilos:
 
 **app/components/Notes.jsx**
 
@@ -108,7 +108,7 @@ leanpub-end-insert
 )
 ```
 
-In order to eliminate the list specific styling, we can apply rules like these:
+Para eliminar o estilo específico da lista, podemos aplicar regras como estas:
 
 **app/main.css**
 
@@ -126,9 +126,9 @@ leanpub-start-insert
 leanpub-end-insert
 ```
 
-## Styling Individual Notes
+## Estilizando notas individuais
 
-There is still `Note` related portions left to style. Before attaching any rules, we should make sure we have good styling hooks on `Editable`:
+Ainda está faltando os estilos para nosso componente `Note`. Antes de criar qualquer regra, devemos ter certeza de que temos nossas classes em `Editable`:
 
 **app/components/Editable.jsx**
 
@@ -191,9 +191,9 @@ leanpub-end-insert
 }
 ```
 
-Given `className` accepts only a string, it can be difficult to work with when you have multiple classes depending on some logic. This is where a package known as [classnames](https://www.npmjs.org/package/classnames) can be useful. It accepts almost arbitrary input and converts that to a string solving the problem.
+Dado que `className` aceita apenas uma *string*, pode ser difícil trabalhar com várias classes dependendo de alguma lógica. Este é o lugar onde um pacote conhecido como [classnames](https://www.npmjs.org/package/classnames) pode ser útil. Ele aceita valores quase arbitrários e converte isso em uma *string*, resolvendo o problema.
 
-There are enough classes to style the remainder now. We can show a shadow below the hovered note. It's also a good touch to show the delete control on hover as well. Unfortunately this won't work on touch based interfaces, but it's good enough for this demo:
+Agora, existem classes suficientes para estilizarmos o restante da aplicação. Podemos mostrar uma sombra abaixo da nota ao colocar o mouse. Também é um bom detalhe para mostrar o controle de exclusão no *hover*. Infelizmente, isso não funcionará em interfaces baseadas em toque, mas é bom o suficiente para essa demo:
 
 **app/main.css**
 
@@ -217,7 +217,7 @@ leanpub-start-insert
 }
 
 .note .value {
-  /* force to use inline-block so that it gets minimum height */
+  /* Força usar inline-block para que ele obtenha altura mínima */
   display: inline-block;
 }
 
@@ -242,14 +242,14 @@ leanpub-start-insert
 leanpub-end-insert
 ```
 
-Assuming everything went fine, your application should look roughly like this now:
+Supondo que tudo correu bem, sua aplicação deve parecer mais ou menos assim agora:
 
-![Styled Notes Application](images/style_01.png)
+![Styled Notes Application](../images/style_01.png)
 
-## Conclusion
+## Conclusão
 
-This is only one way to style a React application. Relying on classes like this will become problematic as the scale of your application grows. That is why there are alternative ways to style that address this particular problem. The *Styling React* chapter touches a lot of those techniques.
+Esta é apenas uma forma de estilizar uma aplicação de React. Confiar em classes como essa, pode se tornar um problema à medida que a escala do seu aplicativo cresce. É por isso que existem formas alternativas de estilo que abordam esse problema específico. O capítulo *Estilos em React* toca muitas dessas técnicas.
 
-It can be a good idea to try out a couple of alternative ways to find something you are comfortable with. Particularly **CSS Modules** are promising as they solve the fundamental problem of CSS - the problem of globals. The technique allows styling locally per component. That happens to fit React very well since we are dealing with components by default.
+Pode ser uma boa idéia experimentar algumas maneiras alternativas, e encontrar algo com o qual você se sinta confortável. Particularmente, **CSS Modules** é uma idéia promissora, à medida que resolvem o problema fundamental do CSS - o problema dos estados globais. A técnica permite criar um escopo local por componente. E isso se encaixa muito bem com React, já que estamos trabalhando com componentes por padrão.
 
-Now that we have a simple Notes application up and running, we can begin to generalize it into a full blown Kanban. It will take some patience as we'll need to improve the way we are dealing with the application state. We also need to add some missing structure and make sure it's possible to drag and drop things around. Those are good goals for the next part of the book.
+Agora que temos um aplicativo simples e funcionando, podemos começar a implementar nosso quadro Kanban. Isso levará muita paciência, pois precisamos melhorar a maneira como lidamos com o estado da aplicação. Também precisamos adicionar alguma estrutura que está em falta, e ter certeza de que é possível arrastar e soltar as coisas. Esses são bons objetivos para a próxima parte do livro.
