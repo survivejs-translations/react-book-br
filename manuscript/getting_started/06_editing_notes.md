@@ -239,19 +239,19 @@ Agora, se você tentar editar uma `Note`, você deve ver algo assim:
 
 ![Tracking `editing` state](../images/react_07.png)
 
-Se você clicar na `Note` duas vezes para confirmar a edição, você deverá ver um error como `Uncaught Invariant Violation` no console do navegador. Isso acontece porque não estamos lidando com `task` corretamente, ainda! We have bound only `id` and `task` will actually point to an `event` object provided by React. This is something we should fix next.
+Se você clicar na `Note` duas vezes para fazer a edição, você deverá ver um error como `Uncaught Invariant Violation` no console do navegador. Isso acontece porque não estamos lidando com `task` corretamente, ainda! Nós ligamos apenas o `id` e` task` apontará para um objeto `event` fornecido pelo React. Isso é algo que devemos corrigir.
 
-T> If we used a normalized data structure (i.e., `{<id>: {id: <id>, task: <str>}}`), it would be possible to write the operations using `Object.assign` and avoid mutation.
+T> Se usarmos uma estrutura de dados normalizada (ex: `{<id>: {id: <id>, task: <str>}}`), seria possível escrever as operações usando`Object.assign` e evitar mutações.
 
-T> In order to clean up the code, you could extract a method to contain the logic shared by `activateNoteEdit` and `editNote`.
+T> Para limpar o código, você pode extrair um método para guardar a lógica compartilhada por `activateNoteEdit` e `editNote`.
 
-## Implementing `Edit`
+## Implementando `Edit`
 
-We are missing one more part to make this work. Even though we can manage the `editing` state per `Note` now, we still can't actually edit them. For this purpose we need to expand `Edit` and make it render a text input for us.
+Falta mais uma parte para que isso funcione. No momento, conseguimos controlar o estado `editing` por `Note`, mas ainda não podemos editá-los. Para este propósito, precisamos expandir `Edit` e fazer com que ele gere um campo de texto para nós.
 
-In this case we'll be using **uncontrolled** design and extract the value of the input from the DOM only when we need it. We don't need more control than that here.
+Neste caso, vamos usar um componente **não controlado** e extrair seu valor do DOM somente quando precisarmos. Não há necessidade de mais controle do que isso.
 
-Consider the code below for the full implementation. Note how we are handling finishing the editing. We capture `onKeyPress` and check for `Enter` to confirm editing. We also run the finish logic `onBlur` so that we can end the editing when the input loses focus:
+Considere o código abaixo para a implementação completa. Observe como estamos lidando com a edição. Capturamos `onKeyPress` e verificamos o `Enter` para confirmar a edição. Nós também executamos a lógica em `onBlur` para que possamos terminar a edição quando o campo de texto perca o foco:
 
 **app/components/Editable.jsx**
 
@@ -308,17 +308,17 @@ class Edit extends React.Component {
 leanpub-end-insert
 ```
 
-If you refresh and edit a note, the commits should go through:
+Se você atualizar e editar uma nota, iremos ver:
 
-![Editing a `Note`](images/react_08.png)
+![Editing a `Note`](../images/react_08.png)
 
-## On Namespacing Components
+## Um pouco sobre nomenclatura de componentes
 
-We could have approached `Editable` in a different way. In an earlier edition of this book I ended up developing it as a single component. I handled rendering the value and the edit control through methods (i.e., `renderValue`). Often method naming like that is a clue that it's possible to refactor your code and extract separate components like we did here.
+Nós poderíamos ter abordado `Editable` de uma maneira diferente. Em uma edição anterior deste livro acabei criando um componente único. Controlando a renderização do valor/campo de texto a partir de métodos (ou seja, `renderValue`). Muitas vezes, o nome do método como esse é uma pista de que é possível refatorar seu código e extrair componentes separados, como fizemos aqui.
 
-You can go one step further and [namespace](https://facebook.github.io/react/docs/jsx-in-depth.html#namespaced-components)  your component parts. It would have been possible to define `Editable.Value` and `Editable.Edit` components. Better yet, we could have allowed the user to swap those components through props. As long as the interface is the same, the components should work. This would give an extra dimension of customizability.
+Você pode dar um passo adiante e [criar namespaces](https://facebook.github.io/react/docs/jsx-in-depth.html#namespaced-components) para seus componentes. Seria possível definir os componentes `Editable.Value` e `Editable.Edit`. Melhor ainda, poderíamos ter permitido ao usuário trocar esses componentes através de `props`. Enquanto a interface for a mesma, os componentes devem funcionar. Isso proporcionaria uma personalização extra.
 
-Implementation-wise we would have had to do something like this in case we had gone with namespacing:
+Um exemplo para isso, teríamos que fazer algo como:
 
 **app/components/Editable.jsx**
 
@@ -345,10 +345,10 @@ Editable.Edit = Edit;
 export default Editable;
 ```
 
-You can use a similar approach for more generic components as well. Consider something like `Form`. You could easily have `Form.Label`, `Form.Input`, `Form.Textarea` and so on. Each would contain your custom formatting and logic as needed. This is one way to make your designs more flexible.
+Você também pode usar uma abordagem similar para componentes mais genéricos. Considere algo como `Form`. Você poderia facilmente ter `Form.Label`,` Form.Input`, `Form.Textarea` e assim por diante. Cada um conteria sua formatação e lógica personalizada conforme necessário. Esta é uma maneira de tornar seus projetos mais flexíveis.
 
-## Conclusion
+## Conclusão
 
-It took quite a few steps, but we can edit our notes now. Best of all, `Editable` should be useful whenever we need to edit some property. We could have extracted the logic later on as we see duplication, but this is one way to do it.
+Foram necessários alguns passos, mas agora, podemos editar nossas anotações. O melhor de tudo, `Editable` deve ser útil sempre que precisarmos editar alguma propriedade. Poderíamos ter extraído a lógica mais tarde, conforme a duplicação aparecesse, mas essa é uma maneira de se fazer.
 
-Even though the application kind of works, it is still quite ugly. We'll do something about that in the next chapter as we add basic styling to it.
+Mesmo que nossa aplicação funcione, ainda é bastante feio. Vamos fazer algo sobre isso no próximo capítulo, pois iremos adicionar alguns estilos básicos.
