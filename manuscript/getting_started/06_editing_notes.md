@@ -116,9 +116,9 @@ const Edit = ({onEdit = () => {}, value, ...props}) => (
 
 Para ver o nosso `stub` em ação, ainda precisamos conectá-lo ao nosso aplicativo.
 
-## Connecting `Editable` with `Notes`
+## Conectando `Editable` com `Notes`
 
-We still need to replace the relevant portions of the code to point at `Editable`. There are more props to track and to connect:
+Ainda precisamos substituir as partes relevantes do código para usarmos o `Editable`. Ainda restam algumas `props` para conectar:
 
 **app/components/Notes.jsx**
 
@@ -164,13 +164,13 @@ leanpub-end-insert
 )
 ```
 
-If everything went right, you should see something like this:
+Se tudo correu bem, você deveria ver algo assim:
 
-![Connected `Editable`](images/react_06.png)
+![Connected `Editable`](../images/react_06.png)
 
-## Tracking `Note` `editing` State
+## Identificando o estado `editing` em `Note`
 
-We are still missing logic needed to control the `Editable`. Given the state of our application is maintained at `App`, we'll need to deal with it there. It should set the `editable` flag of the edited note to `true` when we begin to edit and set it back to `false` when we complete the editing process. We should also adjust its `task` using the new value. For now we are interested in just getting the `editable` flag to work, though. Modify as follows:
+Ainda está em falta, lógicas necessárias para controlar o `Editable`. Dado que o estado do nosso aplicativo é mantido no `App`, precisamos conectar esse estado. Devemos configurar o estado `editable` da nota em questão para `true` quando começamos a editar e configurá-lo de novo para `false` quando concluirmos o processo de edição. Devemos também, atualizar `task` para usar o novo valor. Por enquanto, estamos interessados em obter apenas a o estado `editable`. Vamos atualizar da seguinte maneira:
 
 **app/components/App.jsx**
 
@@ -235,11 +235,11 @@ leanpub-end-insert
 }
 ```
 
-If you try to edit a `Note` now, you should see something like this:
+Agora, se você tentar editar uma `Note`, você deve ver algo assim:
 
-![Tracking `editing` state](images/react_07.png)
+![Tracking `editing` state](../images/react_07.png)
 
-If you click a `Note` twice to confirm the edit, you should see an `Uncaught Invariant Violation` error at the browser console. This happens because we don't deal with `task` correctly yet. We have bound only `id` and `task` will actually point to an `event` object provided by React. This is something we should fix next.
+Se você clicar na `Note` duas vezes para confirmar a edição, você deverá ver um error como `Uncaught Invariant Violation` no console do navegador. Isso acontece porque não estamos lidando com `task` corretamente, ainda! We have bound only `id` and `task` will actually point to an `event` object provided by React. This is something we should fix next.
 
 T> If we used a normalized data structure (i.e., `{<id>: {id: <id>, task: <str>}}`), it would be possible to write the operations using `Object.assign` and avoid mutation.
 
