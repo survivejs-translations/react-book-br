@@ -64,26 +64,26 @@ Mesmo que isso pareça um pouco complicado, o arranjo dá flexibilidade na aplic
 
 A implementação da arquitetura Flux no seu aplicativo aumentará um pouco a quantidade de código. É importante entender que minimizar a quantidade de código escrito não é o objetivo do Flux. Ele foi projetado para permitir a produtividade em equipes maiores. Você poderia dizer que explícito é melhor do que implícito.
 
-## Porting to Alt
+## Portando para Alt
 
-![Alt](images/alt.png)
+![Alt](../images/alt.png)
 
-In Alt, you'll deal with actions and stores. The dispatcher is hidden, but you will still have access to it if needed. Compared to other implementations, Alt hides a lot of boilerplate. There are special features to allow you to save and restore the application state. This is handy for implementing persistency and universal rendering.
+Utilizando Alt, você lida com **actions** e **stores8*. O **dispatcher** está oculto, mas você ainda terá acesso a ele, se necessário. Comparado com outras implementações, Alt esconde muito do boilerplate. Existem recursos especiais que permitem salvar e restaurar o estado do aplicativo. Isso é útil para implementar persistência e renderização universal.
 
-There are a couple of steps we must take to push our application state to Alt:
+Há alguns passos que devemos realizar para utilizar Alt na nossa aplicação:
 
-1. Set up an Alt instance to keep track of actions and stores and to coordinate communication.
-2. Connect Alt with views.
-3. Push our data to a store.
-4. Define actions to manipulate the store.
+1. Configurar uma instância do Alt para coordenar a comunicação entre **actions** e **stores**.
+2. Conectar Alt com nossas **views**.
+3. Mover nossos dados para **stores**.
+4. Definir **actions** para manipular as **stores**.
 
-We'll do this gradually. The Alt specific portions will go behind adapters. The adapter approach allows us to change our mind later easier so it's worth implementing.
+Faremos isso gradualmente. As porções específicas do Alt ficarão por trás de um adaptador. A abordagem do adaptador nos permite mudar nossa opinião mais tarde, por isso vale a pena implementar.
 
-### Setting Up an Alt Instance
+### Configurando uma instância do Alt
 
-Everything in Alt begins from an Alt instance. It keeps track of actions and stores and keeps communication going on. To keep things simple, we'll be treating all Alt components as a [singleton](https://en.wikipedia.org/wiki/Singleton_pattern). With this pattern, we reuse the same instance within the whole application.
+Tudo em Alt começa a partir de uma instância Alt. Ele mantém a comunicação em andamento entre **actions** e **stores**. Para manter as coisas simples, trataremos todos os componentes Alt como um [singleton](https://en.wikipedia.org/wiki/Singleton_pattern). Com esse padrão, reutilizamos a mesma instância dentro de toda a aplicação.
 
-To achieve this we can push it to a module of its own and then refer to that from everywhere. Configure it as follows:
+Para conseguir isso, podemos mover esse código para um módulo próprio e depois nos referir a isso em todos os lugares. Dessa maneira:
 
 **app/libs/alt.js**
 
@@ -95,29 +95,29 @@ const alt = new Alt();
 export default alt;
 ```
 
-This is a standard way to implement *singletons* using ES6 syntax. It caches the modules so the next time you import Alt from somewhere, it will return the same instance again.
+Esta é uma maneira padrão de implementar *singletons* usando sintaxe ES6. Ele armazena em cache os módulos, então a próxima vez que você importar Alt de algum lugar, ele retornará a mesma instância novamente.
 
-T> Note that `alt.js` should go below `app/libs`, not project root `libs`!
+T> Perceba que `alt.js` deve viver em `app/libs`, e não na raiz do projeto `libs`!
 
-T> The singleton pattern guarantees that there can be only one instance. That is exactly the behavior we want here.
+T> O padrão singleton garante que pode haver apenas uma instância. Esse é exatamente o comportamento que queremos aqui.
 
-### Connecting Alt with Views
+### Conectando Alt com views
 
-Normally state management solutions provide two parts you can use to connect them with a React application. These are a `Provider` component and a `connect` higher order function (function returning function generating a component). The `Provider` sets up a React [context](https://facebook.github.io/react/docs/context.html).
+Normalmente, as soluções de gerenciamento de estado fornecem duas partes que você pode usar para conectá-las com um aplicativo React. Estes são um componente `Provider` e a **high order function** `connect` (função que retorna uma função que gera um componente). O `Provider` configura um [context](https://facebook.github.io/react/docs/context.html) em React.
 
-Context is an advanced feature that can be used to pass data through a component hierarchy implicitly without going through props. The `connect` function uses the context to dig the data we want and then passes it to a component.
+`context` é um recurso avançado que pode ser usado para passar dados através de uma hierarquia de componentes de forma implícita sem passar por `props`. a função `connect` usa o `context` para conectar os dados que queremos e depois passa para um componente.
 
-It is possible to use a `connect` through function invocation or a decorator as we'll see soon. The *Understanding Decorators* appendix digs deeper into the pattern.
+É possível usar um `connect` através da invocação dessa função ou de um **decorator**, como veremos em breve. O apêndice *Entendendo Decorators* fala mais sobre esse padrão.
 
-To keep our application architecture easy to modify, we'll need to set up two adapters. One for `Provider` and one for `connect`. We'll deal with Alt specific details in both places.
+Para manter nossa arquitetura de aplicativos fácil de modificar, precisamos configurar dois adaptadores. Um para `Provider` e um para `connect`. Vamos lidar com os detalhes específicos do Alt em ambos os lugares.
 
-### Setting Up a `Provider`
+### Configurando `Provider`
 
-In order to keep our `Provider` flexible, I'm going to use special configuration. We'll wrap it within a module that will choose a `Provider` depending on our environment. This enables us to use development tooling without including it to the production bundle. There's some additional setup involved, but it's worth it given you end up with a cleaner result.
+A fim de manter nosso `Provider` flexível, eu vou usar uma configuração especial. Vamos envolvê-lo dentro de um módulo que escolherá um `Provider` dependendo do nosso ambiente. Isso nos permite usar ferramentas de desenvolvimento sem incluí-lo no pacote de produção. Há alguma configuração adicional envolvida, mas vale a pena dar uma olahda, resultando em um código mais limpo.
 
-The core of this arrangement is the index of the module. CommonJS picks up the **index.js** of a directory by default when we perform an import against the directory. Given the behavior we want is dynamic, we cannot rely on ES6 modules here.
+O principal aqui é o índice do módulo. CommonJS escolhe o **index.js** de um diretório por padrão quando realizamos uma importação a partir de um diretório. Dado o comportamento que queremos é dinâmico, não podemos confiar nos módulos ES6 aqui.
 
-The idea is that our tooling will rewrite the code depending on `process.env.NODE_ENV` and choose the actual module to include based on that. Here's the entry point of our `Provider`:
+A idéia é que nossa ferramenta reescreva o código dependendo do `process.env.NODE_ENV`, includingo o módulo para esse ambiente. Aqui está o ponto de entrada do nosso `Provider`:
 
 **app/components/Provider/index.js**
 
@@ -130,9 +130,9 @@ else {
 }
 ```
 
-We also need the files the index is pointing at. The first part is easy. We'll need to point to our Alt instance there, connect it with a component known as `AltContainer`, and then render our application within it. That's where `props.children` comes in. It's the same idea as before.
+Também precisamos dos arquivos que o índice está apontando. A primeira parte é fácil. Precisamos apontar para a nossa instância Alt, conectar com um componente conhecido como `AltContainer` e, em seguida, processar nosso aplicativo dentro dele. É aí que entra `props.children`. É a mesma idéia que antes.
 
-`AltContainer` will enable us to connect the data of our application at component level when we implement `connect`. To get to the point, here's the production level implementation:
+O `AltContainer` nos permitirá conectar os dados de nossa aplicação aos componentes quando implementarmos `connect`. Para chegar lá, aqui está a implementação do nível de produção::
 
 **app/components/Provider/Provider.prod.jsx**
 
@@ -150,11 +150,11 @@ export default ({children}) =>
   </AltContainer>
 ```
 
-The implementation of `Provider` can change based on which state management solution we are using. It is possible it ends up doing nothing, but that's acceptable. The idea is that we have an extension point where to alter our application if needed.
+A implementação do `Provider` pode mudar de acordo com a solução de gerenciamento de estado que estamos usando. É possível que ele acabe não fazendo nada, mas isso é aceitável. A idéia é que temos um ponto de extensão onde podemos alterar nossa aplicação, se necessário.
 
-We are still missing one part, the development related setup. It is like the production one except this time we can enable development specific tooling. This is a good chance to move the *react-addons-perf* setup here from the *app/index.jsx* of the application. I'm also enabling [Alt's Chrome debug utilities](https://github.com/goatslacker/alt-devtool). You'll need to install the Chrome portion separately if you want to use those.
+Ainda está faltando uma parte, a configuração relacionada ao desenvolvimento. É como a produção, exceto que desta vez podemos habilitar ferramentas específicas de desenvolvimento. Esta é uma boa chance de mover a configuração do *react-addons-perf* para cá, removendo do *app/index.jsx*. Eu também estou ativando [Alt's Chrome Debug] (https://github.com/goatslacker/alt-devtool). Você precisará instalar o plugin do Chrome separadamente se desejar usá-las.
 
-Here's the full code of the development provider:
+Aqui está o código completo do `Provider` de desenvolvimento:
 
 **app/components/Provider/Provider.dev.jsx**
 
@@ -177,7 +177,7 @@ export default ({children}) =>
   </AltContainer>
 ```
 
-That `setup` module allows us to perform Alt related setup that's common for both production and development environment. For now it's enough to do nothing there like this:
+Aquele módulo `setup` nos permite realizar a configuração relacionada com Alt que é comum para o ambiente de produção e desenvolvimento. Por enquanto, basta fazer nada assim:
 
 **app/components/Provider/setup.js**
 
@@ -185,7 +185,7 @@ That `setup` module allows us to perform Alt related setup that's common for bot
 export default alt => {}
 ```
 
-We still need to connect the `Provider` with our application by tweaking *app/index.jsx*. Perform the following changes to hook it up:
+Nós ainda precisamos conectar o `Provider` com nossa aplicação ajustando *app/index.jsx*. Execute as seguintes alterações para conectá-lo:
 
 **app/index.jsx**
 
@@ -214,15 +214,15 @@ leanpub-end-insert
 );
 ```
 
-If you check out Webpack output, you'll likely see it is installing new dependencies to the project. That's expected given the changes. The process might take a while to complete. Once completed, refresh the browser.
+Se você verificar a saída do Webpack, provavelmente verá que está instalando novas dependências no projeto. Isso é esperado dado as nossas mudanças. O processo pode demorar um pouco para ser concluído. Uma vez concluído, atualize o navegador.
 
-Given we didn't change the application logic in any way, everything should still look the same. A good next step is to implement an adapter for connecting data to our views.
+Dado que não alteramos a lógica do aplicativo de forma alguma, tudo deve parecer o mesmo. Um bom próximo passo é implementar um adaptador para conectar dados às nossas **views**.
 
-T> You can see a similar idea in [react-redux](https://www.npmjs.com/package/react-redux). MobX won't need a Provider at all. In that case our implementation would simply return `children`.
+T> Você pode ver uma idéia semelhante em [react-redux](https://www.npmjs.com/package/react-redux). MobX não precisará de um `Provider`. Nesse caso, nossa implementação simplesmente retornaria `children`.
 
-## Understanding `connect`
+## Entendendo `connect`
 
-The idea of `connect` is to allow us to attach specific data and actions to components. I've modeled the API after react-redux. Fortunately we can adapt various data management systems to work against it. Here's how you would connect lane data and actions with `App`:
+A idéia do `connect` é permitir anexar dados e ações específicas aos componentes. Eu modelei a API a partir do `react-redux`. Felizmente, podemos adaptar vários sistemas de gerenciamento de dados para trabalhar com isso. Veja como você conectaria os dados e ações no `App`:
 
 ```javascript
 @connect(({lanes}) => ({lanes}), {
@@ -243,7 +243,7 @@ export default class App extends React.Component {
 }
 ```
 
-The same could be written without decorators. This is the syntax we'll be using in our application:
+O mesmo pode ser escrito sem decoradores. Esta é a sintaxe que usaremos em nossa aplicação:
 
 ```javascript
 class App extends React.Component {
@@ -255,21 +255,21 @@ export default connect(({lanes}) => ({lanes}), {
 })(App)
 ```
 
-In case you need to apply multiple higher order functions against a component, you could use an utility like `compose` and end up with `compose(a, b)(App)`. This would be equal to `a(b(App))` and it would read a little better.
+No caso de você precisar aplicar várias funções em um componente, você poderia usar um utilitário como `compose`, e acabaria escrevendo `compose(a, b)(App)`. Isso seria igual a `a(b(App))` e seria um pouco melhor.
 
-As the examples show, `compose` is a function returning a function. That's why we call it a higher order function. In the end we get a component out of it. This wrapping allows us to handle our data connection concern.
+Como os exemplos mostram, `compose` é uma função que retorna uma função. É por isso que chamamos de uma **higher order function**. No final, obtemos um componente disso. Esse "embrulho" nos permite lidar com a conexão de dados.
 
-We could use a higher order function to annotate our components to give them other special properties as well. We will see the idea again when we implement drag and drop later in this part. Decorators provide a nicer way to attach these types of annotations. The *Understanding Decorators* appendix delves deeper into the topic.
+Poderíamos usar uma **higher order function** para anotar nossos componentes e possibilitar propriedades especiais também. Vamos ver a idéia novamente quando implementarmos arrastar e soltar mais tarde nesta parte. Os decoradores oferecem uma maneira mais agradável de anexar esses tipos de anotações.
 
-Now that we have a basic understanding of how `connect` should work, we can implement it.
+Agora que temos uma compreensão básica de como `connect` deve funcionar, podemos implementá-lo.
 
-### Setting Up `connect`
+### Configurando `connect`
 
-In this case I'm going to plug in a custom `connect` to highlight a couple of key ideas. The implementation isn't optimal when it comes to performance. It is enough for this application, though.
+Neste caso, vamos usar um `connect` personalizado para destacar algumas idéias-chave. A implementação não é ideal quando se trata de desempenho. No entanto, é suficiente para essa aplicação.
 
-It would be possible to optimize the behavior with further effort. You could use one of the established connectors instead or develop your own here. That's one reason why having control over `Provider` and `connect` is useful. It allows further customization and understanding of how the process works.
+Seria possível otimizar o comportamento com mais esforço. Você pode usar um dos conectores estabelecidos ou desenvolver o seu próprio aqui. Essa é uma razão pela qual ter controle sobre `Provider` e `connect` é útil. Permitindo uma maior personalização e compreensão de como o processo funciona.
 
-In case we have a custom state transformation defined, we'll dig the data we need from the `Provider`, apply it over our data as we defined, and then pass the resulting data to the component through props:
+Caso tenhamos uma transformação de estado personalizada definida, iremos manipular os dados que precisamos a partir do `Provider` e, em seguida, passar os dados resultantes para nosso componente através de `props`:
 
 **app/libs/connect.jsx**
 
@@ -287,10 +287,10 @@ export default (state, actions) => {
   );
 }
 
-// Connect to Alt through context. This hasn't been optimized
-// at all. If Alt store changes, it will force render.
+// `connect` do Alt através de `context`. Isso não está otimizado!
+// Se alguma `store` do Alt, forçará uma renderização.
 //
-// See *AltContainer* and *connect-alt* for optimized solutions.
+// Veja *AltContainer* e *connect-alt* para soluções otimizadas.
 function connect(state = () => {}, actions = {}, target) {
   class Connect extends React.Component {
     componentDidMount() {
@@ -325,14 +325,14 @@ function connect(state = () => {}, actions = {}, target) {
   return Connect;
 }
 
-// Transform {store: <AltStore>} to {<store>: store.getState()}
+// Transforma {store: <AltStore>} em {<store>: store.getState()}
 function composeStores(stores) {
   let ret = {};
 
   Object.keys(stores).forEach(k => {
     const store = stores[k];
 
-    // Combine store state
+    // Combinando os estados das `store`
     ret = Object.assign({}, ret, store.getState());
   });
 
@@ -340,7 +340,7 @@ function composeStores(stores) {
 }
 ```
 
-As `flux.FinalStore` won't be available by default, we'll need to alter our Alt instance to contain it. After that we can access it whenever we happen to need it:
+Como `flux.FinalStore` não estará disponível por padrão, precisaremos alterar nossa instância do Alt para contê-la. Depois disso, podemos acessá-la sempre que for necessário:
 
 **app/libs/alt.js**
 
@@ -370,7 +370,7 @@ export default flux;
 leanpub-end-insert
 ```
 
-In order to see `connect` in action, we could use it to attach some dummy data to `App` and then render it. Adjust it as follows to pass data `test` to `App` and then show it in the user interface:
+Para ver `connect` em ação, poderíamos usá-lo para anexar alguns dados temporários à` App` e depois renderizá-lo. Vamos modifica-los da seguinte forma para passar dados `test` para` App` e depois mostrar na interface:
 
 **app/components/App.jsx**
 
@@ -419,14 +419,14 @@ export default connect(() => ({
 leanpub-end-insert
 ```
 
-To make the text show up, refresh the browser. You should see the text that we connected to `App` now.
+Para exibir o texto, atualize o navegador. Você deve ver o texto que nos conectamos à `App`.
 
-## Dispatching in Alt
+## Usando dispatcher em Alt
 
-Even though you can get far without ever using Flux dispatcher, it can be useful to know something about it. Alt provides two ways to use it. If you want to log everything that goes through your `alt` instance, you can use a snippet, such as `alt.dispatcher.register(console.log.bind(console))`. Alternatively, you could trigger `this.dispatcher.register(...)` at a store constructor. These mechanisms allow you to implement effective logging.
+Mesmo que você possa ir longe sem nunca usar o Flux **dispatcher**, pode ser útil saber sobre isso. Alt fornece duas maneiras de usá-lo. Se você deseja registrar tudo que passa pela sua instância `alt`, você pode usar um trecho, como `alt.dispatcher.register(console.log.bind(console))`. Alternativamente, você pode chamar `this.dispatcher.register(...)` em uma **store**. Esses mecanismos permitem implementar um efetivo sistema de log.
 
-Other state management systems provide similar hooks. It is possible to intercept the data flow in many ways and even build custom logic on top of that.
+Outros sistemas de gerenciamento de estado fornecem funcionalidades semelhantes. É possível interceptar o fluxo de dados de várias maneiras e até mesmo criar uma lógica personalizada além disso.
 
-## Conclusion
+## Conclusão
 
-In this chapter we discussed the basic idea of the Flux architecture and started porting our application to it. We pushed the state management related concerns behind an adapter to allow altering the underlying system without having to change the view related code. The next step is to implement a store for our application data and define actions to manipulate it.
+Neste capítulo, discutimos a ideia básica da arquitetura Flux e começamos a portar nosso aplicativo para ela. Nós falamos sobre as preocupações relacionadas ao gerenciamento de estado por trás de um adaptador para permitir a alteração do sistema sem ter que alterar o código relacionado à apresentação. O próximo passo é implementar uma **store** para os dados do nosso aplicativo e definir ações para manipulá-lo.
