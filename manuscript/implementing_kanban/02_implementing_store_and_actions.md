@@ -1,18 +1,18 @@
-# Implementing `NoteStore` and `NoteActions`
+# Implementando `NoteStore` e `NoteActions`
 
-Now that we have pushed data management related concerns in the right places, we can focus on implementing the remaining portions - `NoteStore` and `NoteActions`. These will encapsulate the application data and logic.
+Agora que temos nossas preocupações relacionadas ao gerenciamento de dados nos lugares certos, podemos nos concentrar na implementação das porções restantes - `NoteStore` e `NoteActions`. Isso encapsulará os dados e a lógica do aplicativo.
 
-No matter what state management solution you end up using, there is usually something equivalent around. In Redux you would end up using actions that then trigger a state change through a reducer. In MobX you could model an action API within an ES6 class. The idea is that you will manipulate the data within the class and that will cause MobX to refresh your components as needed.
+Independentemente da solução de gerenciamento de estado que você acabar usando, geralmente há algo equivalente ao redor. No Redux você acabaria usando ações que desencadeiam uma mudança de estado através de um redutor. No MobX, você pode modelar uma API de ação dentro de uma classe ES6. A idéia é que você manipulará os dados dentro da classe e isso fará com que o MobX atualize seus componentes conforme necessário.
 
-The idea is similar here. We will set up actions that will end up triggering our store methods that modify the state. As the state changes, our views will update. To get started, we can implement a `NoteStore` and then define logic to manipulate it. Once we have done that, we have completed porting our application to the Flux architecture.
+A idéia é similar aqui. Vamos configurar ações que irão desencadear métodos nas **stores** que modificam o estado. À medida que o estado muda, nossas **views** serão atualizadas. Para começar, podemos implementar um `NoteStore` e depois definer a lógica para manipulá-la. Uma vez que fizemos isso, iremos concluir nossa implantação da arquitetura Flux.
 
-## Setting Up a `NoteStore`
+## Configurando `NoteStore`
 
-Currently we maintain the application state at `App`. The first step towards pushing it to Alt is to define a store and then consume it from there. This will break the logic of our application temporarily as that needs to be pushed to Alt as well. Setting up an initial store is a good step towards this overall goal, though.
+Atualmente mantemos o estado da aplicação em `App`. O primeiro passo para portar isso para Alt é definir uma **store** e depois consumi-la a partir daí. Isso irá quebrar a lógica do nosso aplicativo temporariamente, precisamos conectá-lo ao Alt. A criação de uma **store** inicial é um bom passo para esse objetivo geral.
 
-To set up a store we need to perform three steps. We'll need to set it up, then connect it with Alt at `Provider`, and finally connect it with `App`.
+Para configurar uma **store**, precisamos executar três etapas. Precisamos configurá-la, conecte-la com Alt em `Provider`, e finalmente, conecta-la no `App`.
 
-In Alt we model stores using ES6 classes. Here's a minimal implementation modeled after our current state:
+Em Alt, modelamos **stores** usando classes ES6. Aqui está uma implementação mínima do nosso estado atual:
 
 **app/stores/NoteStore.js**
 
@@ -35,7 +35,7 @@ export default class NoteStore {
 }
 ```
 
-The next step is connecting the store with `Provider`. This is where that `setup` module comes in handy:
+O próximo passo é conectar a **store** com `Provider`. É aí que o módulo `setup` é útil:
 
 **app/components/Provider/setup.js**
 
@@ -52,7 +52,7 @@ export default alt => {
 leanpub-end-insert
 ```
 
-To prove that our setup works, we can adjust `App` to consume its data from the store. This will break the logic since we don't have any way to adjust the store data yet, but that's something we'll fix in the next section. Tweak `App` as follows to make `notes` available there:
+Para provar que nossa configuração funciona, podemos ajustar a `App` para consumir seus dados na **store**. Isso vai quebrar a lógica, uma vez que ainda não temos como atualizar os dados da **store**, mas isso é algo que vamos ver na próxima seção. Mude `App` da seguinte forma para permitir que as notas fiquem a disposição:
 
 **app/components/App.jsx**
 
@@ -116,29 +116,29 @@ export default connect(({notes}) => ({
 leanpub-end-insert
 ```
 
-If you refresh the application now, you should see exactly the same data as before. This time, however, we are consuming the data from our store. As a result our logic is broken. That's something we'll need to fix next as we define `NoteActions` and push our state manipulation to the `NoteStore`.
+Se você atualizar o aplicativo, você deve ver exatamente os mesmos dados que antes. Desta vez, no entanto, estamos consumindo os dados da nossa **store**. Como resultado, nossa lógica está quebrada. Isso é algo que precisamos corrigir na próxima parte, onde iremos definir `NoteActions` e fazer a manipulação de estado para `NoteStore`.
 
-T> Given `App` doesn't depend on state anymore, it would be possible to port it as a function based component. Often most of your components will be based on functions just for this reason. If you aren't using state or refs, then it's safe to default to functions.
+T> Dado que `App` não contém mais estado, seria possivel portá-lo como um componente baseado em função. Muitas vezes, a maioria dos seus componentes será baseado em funções, principalmente por esse motivo. Se você não estiver usando estado ou refs, então é seguro usar funções como padrão.
 
-## Understanding Actions
+## Entendendo ações
 
-Actions are one of the core concepts of the Flux architecture. To be exact, it is a good idea to separate **actions** from **action creators**. Often the terms might be used interchangeably, but there's a considerable difference.
+Ações são um dos conceitos fundamentais da arquitetura Flux. Para ser exato, é uma boa idéia separar **actions** de **action creators**. Muitas vezes, os termos podem ser usados de forma intercambiável, mas há uma diferença considerável.
 
-Action creators are literally functions that *dispatch* actions. The payload of the action will then be delivered to the interested stores. It can be useful to think them as messages wrapped into an envelope and then delivered.
+**action creators** são literalmente funções que *despacham* ações. Os dados dessa ação serão então entregues às **stores** interessadas. Pode ser fácil de pensar neles como mensagens envolvidas em um envelope e depois entregues.
 
-This split is useful when you have to perform asynchronous actions. You might for example want to fetch the initial data of your Kanban board. The operation might then either succeed or fail. This gives you three separate actions to dispatch. You could dispatch when starting to query and when you receive some response.
+Esta divisão é útil quando você precisa executar ações assíncronas. Você pode, por exemplo, querer obter os dados iniciais do seu quadro Kanban. A operação pode então ter êxito ou falhar. Isso lhe dá três ações separadas para despachar. Você pode despachar ao iniciar a consulta e quando receber alguma resposta.
 
-All of this data is valuable as it allows you to control the user interface. You could display a progress widget while a query is being performed and then update the application state once it has been fetched from the server. If the query fails, you can then let the user know about that.
+Todos esses dados são valiosos, pois permitem controlar a interface do usuário. Você pode exibir um widget de progresso enquanto uma consulta está sendo realizada e, em seguida, atualizar o estado do aplicativo uma vez que ele foi buscado do servidor. Se a consulta falhar, você pode deixar o usuário saber sobre isso.
 
-You can see this theme across different state management solutions. Often you model an action as a function that returns a function (a *thunk*) that then dispatches individual actions as the asynchronous query progresses. In a naïve synchronous case it's enough to return the action payload directly.
+Você pode ver esse tema em diferentes soluções de gerenciamento de estado. Muitas vezes você modela uma ação como uma função que retorna uma função (conhecida como *thunk*) que despacha ações individuais à medida que a consulta assíncrona progride. Em um caso síncrono e ingênuo, é suficiente retornar os dados da ação diretamente.
 
-T> The official documentation of Alt covers [asynchronous actions](http://alt.js.org/docs/createActions/) in greater detail.
+T> A documentação do Alt fala sobre [ações assíncronas](http://alt.js.org/docs/createActions/) em grandes detalhes.
 
-## Setting Up `NoteActions`
+## Configurando `NoteActions`
 
-Alt provides a little helper method known as `alt.generateActions` that can generate simple action creators for us. They will simply dispatch the data passed to them. We'll then connect these actions at the relevant stores. In this case that will be the `NoteStore` we defined earlier.
+Alt fornece um pequeno método auxiliar conhecido como `alt.generateActions` que pode gerar **action creators** para nós. Eles simplesmente enviarão os dados forem passados. Em seguida, conectaremos essas ações nas **stores** relevantes. Neste caso, será o `NoteStore` que definimos anteriormente.
 
-When it comes to the application, it is enough if we model basic CRUD (Create, Read, Update, Delete) operations. Given Read is implicit, we can skip that. But having the rest available as actions is useful. Set up `NoteActions` using the `alt.generateActions` shorthand like this:
+Se tratando da nossa aplicação, vamos modelar as operações básicas de CRUD (Create, Read, Update, Delete). Como a leitura (Read) está implícita, podemos ignorar isso. Mas ter o restante disponível como ações é útil. Configure `NoteActions` usando a abreviatura` alt.generateActions` como a seguir:
 
 **app/actions/NoteActions.js**
 
@@ -148,7 +148,7 @@ import alt from '../libs/alt';
 export default alt.generateActions('create', 'update', 'delete');
 ```
 
-This doesn't do much by itself. Given we need to `connect` the actions with `App` to actually trigger them, this would be a good place to do that. We can start worrying about individual actions after that as we expand our store. To `connect` the actions, tweak `App` like this:
+Por si só, isso não faz muito. Dado que precisamos fazer o `connect`  das ações com `App` para realmente ativá-las, isso seria um bom lugar para fazer isso. Podemos começar a nos preocupar com ações individuais depois, ao expandir nossa **store**. Para fazer o `connect` das ações, vamos mudar `App` da seguinte maneira:
 
 **app/components/App.jsx**
 
@@ -179,17 +179,17 @@ export default connect(({notes}) => ({
 leanpub-end-insert
 ```
 
-This gives us `this.props.NoteActions.create` kind of API for triggering various actions. That's good for expanding the implementation further.
+Isso nos dá a API `this.props.NoteActions.create` para desencadear várias ações. Com isso, podemos expandir ainda mais a implementação.
 
-## Connecting `NoteActions` with `NoteStore`
+## Conectando `NoteActions` com `NoteStore`
 
-Alt provides a couple of convenient ways to connect actions to a store:
+Alt fornece algumas maneiras convenientes de conectar ações a uma loja:
 
-* `this.bindAction(NoteActions.CREATE, this.create)` - Bind a specific action to a specific method.
-* `this.bindActions(NoteActions)`- Bind all actions to methods by convention. I.e., `create` action would map to a method named `create`.
-* `reduce(state, { action, data })` - It is possible to implement a custom method known as `reduce`. This mimics the way Redux reducers work. The idea is that you'll return a new state based on the given state and payload.
+* `this.bindAction(NoteActions.CREATE, this.create)` - Vincula uma ação específica a um método específico.
+* `this.bindActions(NoteActions)`- Vincula todas as ações aos métodos por convenção. ex:, ação `create` irá ser mapeada para o método `create`.
+* `reduce(state, { action, data })` - É possível implementar um método personalizado conhecido como `reduce`. Isso imita o modo como os redutores do Redux funcionam. A idéia é que você retornará um novo estado com base no estado e dados fornecidos.
 
-We'll use `this.bindActions` in this case as it's enough to rely on convention. Tweak the store as follows to connect the actions and to add initial stubs for the logic:
+Vamos usar `this.bindActions` neste caso, basta confiar na convenção. Ajuste a **store** da seguinte maneira para conectar as ações e adicionar `stubs` iniciais para nossa lógica:
 
 **app/stores/NoteStore.js**
 
@@ -230,7 +230,7 @@ leanpub-end-insert
 }
 ```
 
-To actually see it working, we'll need to start connecting our actions at `App` and the start porting the logic over.
+Para realmente vê-lo funcionar, teremos de começar a conectar nossas ações na `App` e começar a controlar a lógica.
 
 ## Porting `App.addNote` to Flux
 
