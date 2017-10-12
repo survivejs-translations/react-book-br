@@ -1,68 +1,68 @@
-# React and Flux
+# React e Flux
 
-You can get pretty far by keeping everything in components. That's an entirely valid way to get started. The problems begin as you add state to your application and need to share it across different parts. This is the reason why various state management solutions have emerged. Each one of those tries to solve the problem in its own way.
+Você pode ir bastante longe mantendo tudo em componentes. Essa é uma maneira inteiramente válida de começar. Os problemas começam quando você adiciona o estado ao seu aplicativo e precisa compartilhá-lo em diferentes partes. Esta é a razão pela qual várias soluções de gerenciamento de estado surgiram. Cada um desses tenta resolver o problema à sua maneira.
 
-The [Flux application architecture](https://facebook.github.io/flux/docs/overview.html) was the first proper solution to the problem. It allows you to model your application in terms of **Actions**, **Stores**, and **Views**. It also has a part known as **Dispatcher** to manage actions and allow you to model dependencies between different calls.
+A primeira solução para esse problema foi [arquitetura Flux](https://facebook.github.io/flux/docs/overview.html). Ele permite modelar sua aplicação em termos de **Actions**, **Stores**, e **Views**. Também tem uma parte conhecida como **Dispatcher** para gerenciar ações e permitir que você modelo dependências entre diferentes chamadas.
 
-This separation is particularly useful when you are working with large teams. The unidirectional flow makes it easy to tell what's going on. That's a common theme in various data management solutions available for React.
+Esta separação é particularmente útil quando você está trabalhando com grandes equipes. O fluxo unidireccional torna fácil de dizer o que está acontecendo. Esse é um tema comum em várias soluções de gerenciamento de dados disponíveis para o React.
 
-## Quick Introduction to Redux
+## Introdução rápida ao Redux
 
-A solution known as [Redux](http://redux.js.org/) took the core ideas of Flux and pushed them to a certain form. Redux is more of a guideline, though a powerful one, that gives your application certain structure and pushes you to model data related concerns in a certain way. You will maintain the state of your application in a single tree which you then alter using pure functions (no side effects) through reducers.
+Uma solução conhecida como [Redux](http://redux.js.org/) tomou as idéias centrais do Flux e as empurrou para uma certa forma. Redux é mais uma diretriz, embora poderosa, que dá à sua aplicação certa estrutura e modela preocupações relacionadas a dados de uma determinada maneira. Você manterá o estado do seu aplicativo em uma única árvore que você altera usando funções puras (sem efeitos colaterais) através de redutores.
 
-This might sound a little complex but in practice Redux makes your data flow very explicit. Standard Flux isn't as opinionated in certain parts. I believe understanding basic Flux before delving into Redux is a good move as you can see shared themes in both.
+Isso pode soar um pouco complexo, mas, na prática, o Redux torna o fluxo de dados muito explícito. Flux por si só, não é tão apreciado em certas partes. Eu acredito que entender Flux antes de mergulhar no Redux é uma boa jogada, pois você pode ver temas compartilhados em ambos.
 
-## Quick Introduction to MobX
+## Introdução rápida ao MobX
 
-[MobX](https://mobxjs.github.io/mobx/) takes an entirely different view on data management. If Redux helps you to model data flow explicitly, MobX makes a large part of that implicit. It doesn't force you to any certain structure. Instead you will annotate your data structures as **observable** and let MobX handle updating your views.
+[MobX](https://mobxjs.github.io/mobx/) assume uma visão completamente diferente sobre o gerenciamento de dados. Se o Redux ajuda a modelar o fluxo de dados explicitamente, o MobX faz uma grande parte disso implícito. Não o força a nenhuma estrutura específica. Ao invés disso, você anotará suas estruturas de dados com **observable** e MobX irá lidar com a atualização do modelo e suas **views**.
 
-Whereas Redux embraces the concept of immutability through its idea of reducers, MobX does something opposite and relies on mutation. This means aspects like reference handling can be surprisingly simple in MobX while in Redux you will most likely be forced to normalize your data so that it is easy to manipulate through reducers.
+Enquanto a Redux abraça o conceito de imutabilidade através da idéia de redutores, a MobX faz algo oposta e depende da mutação. Isso significa que aspectos como o gerenciamento de referência podem ser surpreendentemente simples no MobX enquanto que no Redux você provavelmente será forçado a normalizar seus dados para que seja fácil manipular através de redutores.
 
-Both Redux and MobX are valuable in their own ways. There's no one right solution when it comes to data management. I'm sure more alternatives will appear as time goes by. Each solution comes with its pros/cons. By understanding the alternatives you have a better chance of picking a solution that fits your purposes at a given time.
+Tanto o Redux como o MobX são valiosos em suas próprias formas. Não há uma solução certa quando se trata de gerenciamento de dados. Tenho certeza de que mais alternativas aparecerão com o passar do tempo. Cada solução vem com seus prós / contras. Ao entender as alternativas, você tem uma melhor chance de escolher uma solução que se ajuste aos seus propósitos em um determinado momento.
 
-## Which Data Management Solution to Use?
+## Qual solução de gerenciamento de dados usar?
 
-The data management situation is changing constantly. At the moment [Redux](http://rackt.org/redux/) is very strong, but there are good alternatives in sight. [voronianski/flux-comparison](https://github.com/voronianski/flux-comparison) provides a nice comparison between some of the more popular ones.
+A situação de gerenciamento de dados está mudando constantemente. No momento [Redux](http://rackt.org/redux/) é uma opção bem usada, mas existem boas alternativas. [voronianski/flux-comparison](https://github.com/voronianski/flux-comparison) oferece uma boa comparação entre alguns dos mais populares.
 
-When choosing a library, it comes down to your own personal preferences. You will have to consider factors, such as API, features, documentation, and support. Starting with one of the more popular alternatives can be a good idea. As you begin to understand the architecture, you are able to make choices that serve you better.
+Ao escolher uma biblioteca, ela se resume às suas próprias preferências pessoais. Você terá que considerar fatores, como API, recursos, documentação e suporte. Começar com uma das alternativas mais populares pode ser uma boa idéia. À medida que você começa a entender a arquitetura, você pode fazer escolhas que melhor atendam você.
 
-In this application we'll use a Flux implementation known as [Alt](http://alt.js.org/). The API is neat and enough for our purposes. As a bonus, Alt has been designed universal (isomorphic) rendering in mind. If you understand Flux, you have a good starting point for understanding the alternatives.
+Neste aplicativo, usaremos uma implementação Flux conhecida como [Alt](http://alt.js.org/). A API é pura e suficiente para nossos propósitos. Como bônus, a Alt foi projetada a renderização universal (isomórfica) em mente. Se você entender o Flux, você tem um bom ponto de partida para entender as alternativas.
 
-The book doesn't cover the alternative solutions in detail yet, but we'll design our application architecture so that it's possible to plug in alternatives at a later time. The idea is that we isolate our view portion from the data management so that we can swap parts without tweaking our React code. It's one way to design for change.
+O livro ainda não cobre as soluções alternativas, mas nós vamos projetar nossa arquitetura de aplicativos para que seja possível inserir alternativas mais tarde. A idéia é que isolamos nossa porção do gerenciamento de dados para que possamos trocar peças sem ajustar nosso código React. É uma maneira de projetar para a mudança.
 
-## Introduction to Flux
+## Introdução ao Flux
 
-![Unidirectional Flux dataflow](images/flux_linear.png)
+![Unidirectional Flux dataflow](../images/flux_linear.png)
 
-So far, we've been dealing only with views. Flux architecture introduces a couple of new concepts to the mix. These are actions, dispatcher, and stores. Flux implements unidirectional flow in contrast to popular frameworks, such as Angular or Ember. Even though two-directional bindings can be convenient, they come with a cost. It can be hard to deduce what's going on and why.
+Até agora, lidamos apenas com **views**. A arquitetura Flux introduz novos conceitos para a mistura. São **actions**, **dispatcher** e **store**. Flux implementa um fluxo unidirecional em contraste com estruturas populares, como Angular ou Ember. Mesmo que as ligações bidirecionais possam ser convenientes, elas vêm com um custo. Pode ser difícil deduzir o que está acontecendo e por quê.
 
-### Actions and Stores
+### Actions e Stores
 
-Flux isn't entirely simple to understand as there are many concepts to worry about. In our case, we will model `NoteActions` and `NoteStore`. `NoteActions` provide concrete operations we can perform over our data. For instance, we can have `NoteActions.create({task: 'Learn React'})`.
+O Flux não é inteiramente simples de entender, pois há muitos conceitos a se preocupar. No nosso caso, vamos modelar `NoteActions` e `NoteStore`. `NoteActions` fornecerá operações concretas que podemos realizar ao longo dos nossos dados. Por exemplo, podemos ter `NoteActions.create({task: 'Learn React'})`.
 
 ### Dispatcher
 
-When we trigger an action, the dispatcher will get notified. The dispatcher will be able to deal with possible dependencies between stores. It is possible that a certain action needs to happen before another. The dispatcher allows us to achieve this.
+Quando desencadearmos uma ação, o **dispatcher** será notificado. O **dispatcher** poderá lidar com possíveis dependências entre **stores**. É possível que uma certa ação precise acontecer antes de outra. O **dispatcher** nos permite fazer isso.
 
-At the simplest level, actions can just pass the message to the dispatcher as is. They can also trigger asynchronous queries and hit the dispatcher based on the result eventually. This allows us to deal with received data and possible errors.
+Em uma analogia simples, as ações podem apenas passar uma mensagem para o **dispatcher**. Eles também podem desencadear consultas assíncronas e chamar o **dispatcher** com base no resultado. Isso nos permite lidar com dados recebidos e possíveis erros.
 
-Once the dispatcher has dealt with an action, the stores listening to it get triggered. In our case, `NoteStore` gets notified. As a result, it will be able to update its internal state. After doing this, it will notify possible listeners of the new state.
+Uma vez que o **dispatcher** tenha lidado com uma ação, as **stores** que estão "escutando" essas ações, são ativadas. No nosso caso, o `NoteStore` é notificado. Como resultado, ele poderá atualizar seu estado interno. Depois de fazer isso, ele notificará possíveis "ouvintes" do novo estado.
 
-### Flux Dataflow
+### Flux e o fluxo de dados
 
-This completes the basic unidirectional, yet linear, process flow of Flux. Usually, though, the unidirectional process has a cyclical flow and it doesn't necessarily end. The following diagram illustrates a more common flow. It is the same idea again, but with the addition of a returning cycle. Eventually, the components depending on our store data become refreshed through this looping process.
+Isso completa o processo de fluxo unidirecional, mesmo que ainda linear, do Flux. Normalmente, porém, o processo unidirecional tem um fluxo cíclico e não necessariamente termina. O diagrama a seguir ilustra um fluxo mais comum. É a mesma idéia novamente, mas com a adição de um ciclo de retorno. Eventualmente, os componentes dependendo dos dados da nossa **store** irão sse atualizar através deste processo de looping.
 
-![Cyclical Flux dataflow](images/flux.png)
+![Cyclical Flux dataflow](../images/flux.png)
 
-This sounds like a lot of steps for achieving something simple as creating a new `Note`. The approach does come with its benefits. Given the flow is always in a single direction, it is easy to trace and debug. If there's something wrong, it's somewhere within the cycle.
+Isso soa como uma série de passos para alcançar algo simples como criar uma nova `Note`. A abordagem vem com seus benefícios. Dado que o fluxo está sempre em uma única direção, é fácil rastrear e depurar. Se houver algo errado, está em algum lugar dentro do ciclo.
 
-Better yet, we can consume the same data across our application. You will just connect your view to a store and that's it. This is one of the great benefits of using a state management solution.
+Melhor ainda, podemos consumir os mesmos dados em nossa aplicação. Você apenas conectará sua **view** a uma **store** e é isso. Este é um dos grandes benefícios de usar uma solução de gerenciamento de estado.
 
-### Advantages of Flux
+### Vantagens do Flux
 
-Even though this sounds a little complicated, the arrangement gives our application flexibility. We can, for instance, implement API communication, caching, and i18n outside of our views. This way they stay clean of logic while keeping the application easier to understand.
+Mesmo que isso pareça um pouco complicado, o arranjo dá flexibilidade na aplicação. Podemos, por exemplo, implementar a comunicação com uma API, armazenamento em cache e i18n fora das nossas **views**. Desta forma, ficamos com uma lógica limpa, mantendo a aplicação mais fácil de entender.
 
-Implementing Flux architecture in your application will actually increase the amount of code somewhat. It is important to understand that minimizing the amount of code written isn't the goal of Flux. It has been designed to allow productivity across larger teams. You could say that explicit is better than implicit.
+A implementação da arquitetura Flux no seu aplicativo aumentará um pouco a quantidade de código. É importante entender que minimizar a quantidade de código escrito não é o objetivo do Flux. Ele foi projetado para permitir a produtividade em equipes maiores. Você poderia dizer que explícito é melhor do que implícito.
 
 ## Porting to Alt
 
