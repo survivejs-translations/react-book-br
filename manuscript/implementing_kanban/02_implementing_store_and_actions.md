@@ -481,16 +481,16 @@ Na verdade, temos mais código agora do que antes, mas está tudo bem. `App` est
 
 T> A implementação atual é ingênua na medida em que não valida os parâmetros de forma alguma. Seria uma boa idéia validar a forma do objeto para evitar incidentes durante o desenvolvimento. [Flow](http://flowtype.org/) fornece uma maneira de fazer isso. Além disso, você pode escrever testes unitários.
 
-### What's the Point?
+### Qual é o motivo?
 
-Even though integrating a state management system took a lot of effort, it was not all in vain. Consider the following questions:
+Embora essa integração de um sistema de gerenciamento de estado tenha custado muito esforço, não foi tudo em vão. Considere as seguintes questões:
 
-1. Suppose we wanted to persist the notes within `localStorage`. Where would you implement that? One approach would be to handle that at the `Provider` `setup`.
-2. What if we had many components relying on the data? We would just consume the data through `connect` and display it, however we want.
-3. What if we had many, separate Note lists for different types of tasks? We could set up another store for tracking these lists. That store could refer to actual Notes by id. We'll do something like this in the next chapter, as we generalize the approach.
+1. Suponhamos que queremos persistir as notas dentro do `localStorage`. Onde você implementaria isso? Uma abordagem seria lidar com isso no `setup` do `Provider`.
+2. E se tivéssemos muitos componentes confiando nos dados/`props`? Nós estamos apenas consumimos os dados através de `connect` e exibindo-os do jeito que queremos.
+3. E se tivéssemos listas de notas diferentes e separadas por tipos de tarefas? Poderíamos configurar outra `store` para rastrear essas listas. Essa `store` pode se referir a notas reais por ID. Vamos fazer algo como isto no próximo capítulo, à medida que generalizamos nossa abordagem.
 
-Adopting a state management system can be useful as the scale of your React application grows. The abstraction comes with some cost as you end up with more code. But on the other hand if you do it right, you'll end up with something that's easy to reason and develop further. Especially the unidirectional flow embraced by these systems helps when it comes to debugging and testing.
+A adoção de um sistema de gerenciamento de estado pode ser útil à medida que você escala o seu aplicativo React. A abstração vem com algum custo, como você acabou de ver, mais código! Mas, por outro lado, se você fizer isso direito, você acabará com algo que é fácil de raciocinar, desenvolver e manter. Especialmente, com o fluxo unidirecional, adotado por esses sistemas, ajudam quando se trata de depuração e teste.
 
-## Conclusion
+## Conclusão
 
-In this chapter, you saw how to port our simple application to use Flux architecture. In the process we learned more about **actions** and **stores** of Flux. Now we are ready to start adding more functionality to our application. We'll add `localStorage` based persistency to the application next and perform a little clean up while at it.
+Neste capítulo, você viu como portar nossa aplicação simples para usar a arquitetura Flux. No processo, aprendemos mais sobre **actions** e **stores** do Flux. Agora estamos prontos para começar a adicionar mais funcionalidades à nossa aplicação. A seguir, vamos adicionar `localStorage` no nosso aplicativo, criando uma persistência dos dados, e também, iremos limpar algumas partes do nosso código para uma melhor implementação..
