@@ -232,9 +232,9 @@ leanpub-end-insert
 
 Para realmente vê-lo funcionar, teremos de começar a conectar nossas ações na `App` e começar a controlar a lógica.
 
-## Porting `App.addNote` to Flux
+## Portando `App.addNote` para Flux
 
-`App.addNote` is a good starting point. The first step is to trigger the associate action (`NoteActions.create`) from the method and see if we see something at the browser console. If we do, then we can manipulate the state. Trigger the action like this:
+`App.addNote` é um bom ponto de partida. O primeiro passo é associar a ação (`NoteActions.create`) do método e ver se algo aparece no console do navegador. Ao fazermos isso, podemos então, manipular o estado. Adicione a ação dessa maneira:
 
 **app/components/App.jsx**
 
@@ -247,16 +247,15 @@ class App extends React.Component {
   }
   addNote = () => {
 leanpub-start-delete
-    // It would be possible to write this in an imperative style.
-    // I.e., through `this.state.notes.push` and then
-    // `this.setState({notes: this.state.notes})` to commit.
+    // Seria possível escrever isso em um estilo imperativo.
+    // ex: através de `this.state.notes.push` e depois
+    // `this.setState({notes: this.state.notes})` para
+    // persistir a mudança.
+    // Eu prefiro favorecer o estilo funcional sempre que possível.
+    // Embora possa levar mais código às vezes, eu sinto
+    // que os benefícios (fácil de entender, sem efeitos colaterais) valem a pena!
     //
-    // I tend to favor functional style whenever that makes sense.
-    // Even though it might take more code sometimes, I feel
-    // the benefits (easy to reason about, no side effects)
-    // more than make up for it.
-    //
-    // Libraries, such as Immutable.js, go a notch further.
+    // Bibliotecas, como `Immutable.js`, vão um passo além!
     this.setState({
       notes: this.state.notes.concat([{
         id: uuid.v4(),
@@ -277,13 +276,13 @@ leanpub-end-insert
 ...
 ```
 
-If you refresh and click the "add note" button now, you should see messages like this at the browser console:
+Se você atualizar e clicar no botão "add note", você deve ver uma mensagem como esta no console do navegador:
 
 ```bash
 create note Object {id: "62098959-6289-4894-9bf1-82e983356375", task: "New task"}
 ```
 
-This means we have the data we need at the `NoteStore` `create` method. We still need to manipulate the data. After that we have completed the loop and we should see new notes through the user interface. Alt follows a similar API as React here. Consider the implementation below:
+Isso significa que temos os dados que precisamos no método `create` da `NoteStore`. Nós ainda precisamos manipular os dados. Depois disso, iremos concluir o loop e devemos ver novas notas através da interface do usuário. Alt usa uma API semelhante ao React. Veja a implementação abaixo:
 
 **app/stores/NoteStore.js**
 
@@ -309,11 +308,11 @@ leanpub-end-insert
 }
 ```
 
-If you try adding a note now, the update should go through. Alt maintains the state now and the edit goes through thanks to the architecture we set up. We still have to repeat the process for the remaining methods to complete the work.
+Se você tentar adicionar uma nota agora, a atualização deve ser realizada. Alt está guardando o estado e a edição está funcionando, graças à arquitetura que configuramos. Ainda temos que repetir o processo para os métodos restantes para completar o trabalho.
 
-## Porting `App.deleteNote` to Flux
+## Portando `App.deleteNote` para Flux
 
-The process exactly the same for `App.deleteNote`. We'll need to connect it with our action and then port it over. Here's the `App` portion:
+O processo é exatamente o mesmo para `App.deleteNote`. Precisamos conectá-lo com a nossa ação e depois transferi-lo. Aqui está as mudanças do `App`:
 
 **app/components/App.jsx**
 
@@ -323,7 +322,7 @@ The process exactly the same for `App.deleteNote`. We'll need to connect it with
 class App extends React.Component {
   ...
   deleteNote = (id, e) => {
-    // Avoid bubbling to edit
+    // Evitando a propagação para `edit`
     e.stopPropagation();
 
 leanpub-start-delete
@@ -341,13 +340,13 @@ leanpub-end-insert
 ...
 ```
 
-If you refresh and try to delete a note now, you should see a message like this at the browser console:
+Se você atualizar e tentar excluir uma nota, você deve ver uma mensagem como essa no console do navegador:
 
 ```bash
 delete note 501c13e0-40cb-47a3-b69a-b1f2f69c4c55
 ```
 
-To finalize the porting, we'll need to move the `setState` logic to the `delete` method. Remember to drop `this.state.notes` and replace that with just `this.notes`:
+Para finalizar, precisaremos mover o a lógica do `setState` para o método `delete`. Lembre-se de remover `this.state.notes` e usar apenas `this.notes`:
 
 **app/stores/NoteStore.js**
 
@@ -370,11 +369,11 @@ leanpub-end-insert
 }
 ```
 
-After this change you should be able to delete notes just like before. There are still a couple of methods to port.
+Após essa alteração, você pode apagar as notas como antes. Ainda há alguns métodos para modificar.
 
-## Porting `App.activateNoteEdit` to Flux
+## Portando `App.activateNoteEdit` para Flux
 
-`App.activateNoteEdit` is essentially an `update` operation. We'll need to change the `editing` flag of the given note as `true`. That will initiate the editing process. As usual, we can port `App` to the scheme first:
+`App.activateNoteEdit` é essencialmente, a operação `update`. Nós só precisamos mudar o valor de `editing` da nota para `true`. E isso iniciará o processo de edição. Como de costume, podemos atualizar o `App` da seguinte maneira:
 
 **app/components/App.jsx**
 
@@ -405,13 +404,13 @@ leanpub-end-insert
 ...
 ```
 
-If you refresh and try to edit now, you should see messages like this at the browser console:
+Se você atualizar e tentar editar uma nota, você deve ver uma mensagem como essa no console do navegador:
 
 ```bash
 update note Object {id: "2c91ba0f-12f5-4203-8d60-ea673ee00e03", editing: true}
 ```
 
-We still need to commit the change to make this work. The logic is the same as in `App` before except we have generalized it further using `Object.assign`:
+Ainda precisamos persistir a mudança para que isso funcione. A lógica é a mesma que em `App`, exceto que, antes, o ela estava ainda mais genérica pois usávamos `Object.assign`:
 
 **app/stores/NoteStore.js**
 
@@ -441,11 +440,11 @@ leanpub-end-insert
 }
 ```
 
-It should be possible to start editing a note now. If you try to finish editing, you should get an error like `Uncaught TypeError: Cannot read property 'notes' of null`. This is because we are missing one final portion of the porting effort, `App.editNote`.
+Agora, deve ser possível começar a editar uma nota. Se você tentar terminar uma edição, você deve obter um erro como `Uncaught TypeError: Cannot read property 'notes' of null`. Isso acontece porque está faltando uma parte final desse processo, o `App.editNote`.
 
-## Porting `App.editNote` to Flux
+## Portando `App.editNote` para Flux
 
-This final part is easy. We have already the logic we need. Now it's just a matter of connecting `App.editNote` to it in a correct way. We'll need to call our `update` method the correct way:
+Esta parte final é fácil. Já temos a lógica de que precisamos. Agora é apenas uma questão de conectar`App.editNote` da maneira correta. Nós precisaremos chamar o método `update` da seguinte maneira:
 
 **app/components/App.jsx**
 
@@ -476,11 +475,11 @@ leanpub-end-insert
 ...
 ```
 
-After refreshing you should be able to modify tasks again and the application should work just like before now. As we alter `NoteStore` through actions, this leads to a cascade that causes our `App` state to update through `setState`. This in turn will cause the component to `render`. That's Flux's unidirectional flow in practice.
+Após a atualização, você pode modificar as tarefas novamente e o aplicativo deve funcionar como antes. Como nós alteramos `NoteStore` através de ações, Isso leva a uma atualização cascata do nosso `App` através do `setState`. Que por sua vez, fará com que o componente execute o método `render`. Esse é o fluxo unidirecional do Flux na prática.
 
-We actually have more code now than before, but that's okay. `App` is a little neater and it's going to be easier to develop as we'll soon see. Most importantly we have managed to implement the Flux architecture for our application.
+Na verdade, temos mais código agora do que antes, mas está tudo bem. `App` está um pouco mais limpo e vai ser mais fácil de desenvolver, como veremos em breve. O mais importante, conseguimos implementar a arquitetura Flux para nossa aplicação.
 
-T> The current implementation is naïve in that it doesn't validate parameters in any way. It would be a very good idea to validate the object shape to avoid incidents during development. [Flow](http://flowtype.org/) based gradual typing provides one way to do this. In addition you could write tests to support the system.
+T> A implementação atual é ingênua na medida em que não valida os parâmetros de forma alguma. Seria uma boa idéia validar a forma do objeto para evitar incidentes durante o desenvolvimento. [Flow](http://flowtype.org/) fornece uma maneira de fazer isso. Além disso, você pode escrever testes unitários.
 
 ### What's the Point?
 
