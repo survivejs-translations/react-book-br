@@ -19,9 +19,9 @@ Se você estivesse trabalhando com um back-end, isso não seria um problema. Mes
 
 T> Você pode dar suportar ao Safari no modo privado, ao tentar escrever em `localStorage`, se isso falhar, você pode usar o espaço em memória no Safari, ou apenas notifique o usuário sobre a situação. Veja esse discussão no [Stack Overflow](https://stackoverflow.com/questions/14555347/html5-localstorage-error-with-safari-quota-exceeded-err-dom-exception-22-an).
 
-## Implementing a Wrapper for `localStorage`
+## Implementando um serviço com `localStorage`
 
-To keep things simple and manageable, we will implement a little wrapper for `storage` to wrap the complexity. The API will consist of `get(k)` to fetch items from the storage and `set(k, v)` to set them. Given the underlying API is string based, we'll use `JSON.parse` and `JSON.stringify` for serialization. Since `JSON.parse` can fail, that's something we need to take into account. Consider the implementation below:
+Para manter as coisas simples e gerenciáveis, implementaremos um pequeno serviç, `storage`, para guardar essas complexidades. A API terá `get(k)`, para buscar itens armazenados, e `set(k, v)`, para salvar um item. Dado que a API do `localStorage` é baseada em strings, usaremos `JSON.parse` e `JSON.stringify` para serialização. Como `JSON.parse` pode falhar, isso é algo que precisamos levar em consideração. Considere a implementação abaixo:
 
 **app/libs/storage.js**
 
@@ -41,27 +41,27 @@ export default storage => ({
 })
 ```
 
-The implementation is enough for our purposes. It's not foolproof and it will fail if we put too much data into a storage. To overcome these problems without having to solve them yourself, it would be possible to use a wrapper such as [localForage](https://github.com/mozilla/localForage) to hide the complexity.
+Essa implementação é suficiente para os nossos propósitos. Não é infalível e falhará se colocarmos muitos dados em um armazenamento. Para superar esses problemas sem ter que resolvê-los você mesmo, seria possível usar uma biblioteca como [localForage](https://github.com/mozilla/localForage) para gerenciar essa complexidade.
 
-## Persisting the Application Using `FinalStore`
+## Persistindo os dados da aplicação usando `FinalStore`
 
-Just having means to write and read from the `localStorage` won't do. We still need to connect out application to it somehow. State management solutions provide hooks for this purpose. Often you'll find a way to intercept them somehow. In Alt's case that happens through a built-in store known as `FinalStore`.
+Ter um serviço para escrever e ler do `localStorage` não é o suficiente. Ainda precisamos conectar a aplicação de alguma forma. As soluções de gerenciamento de estado fornecem ganchos para esse propósito. Muitas vezes, você encontrará uma maneira de interceptá-los. No caso, Alt fornece uma opção embutida conhecida como `FinalStore`.
 
-We have already set it up at our Alt instance. What remains is writing the application state to the `localStorage` when it changes. We also need to load the state when we start running it. In Alt terms these processes are known as **snapshotting** and **bootstrapping**.
+Nós já configuramos isso em nossa instância Alt. O que resta é escrever o estado do aplicativo no `localStorage` quando ele for alterado. Também precisamos carregar o estado quando começamos a executá-lo. Em outras palavras, esses processos são conhecidos como **snapshotting** e **bootstrapping**.
 
-T> An alternative way to handle storing the data would be to take a snapshot only when the window gets closed. There's a Window level `beforeunload` hook that could be used. This approach is brittle, though. What if something unexpected happens and the hook doesn't get triggered for some reason? You'll lose data.
+T> Uma maneira alternativa de lidar com o armazenamento dos dados seria tirar um **snapshot** somente quando a janela for fechada. Existe um evento chamado `window.beforeunload` que poderia ser usado. No entanto, essa abordagem é frágil. E se algo inesperado acontecer e o evento não for ativado por algum motivo? Você perderá os dados.
 
-## Implementing the Persistency Logic
+## Implementando a lógica de persistência
 
-We can handle the persistency logic at a separate module dedicated to it. We will hook it up at the application setup and off we go.
+Podemos lidar com a lógica de persistência em um módulo separado, dedicado a ele. Agora, vamos conectá-lo na configuração do aplicativo.
 
-Given it can be useful to be able to disable snapshotting temporarily, it can be a good idea to implement a `debug` flag. The idea is that if the flag is set, we'll skip storing the data.
+Dado que pode ser útil para desativar temporariamente o **snapshot**, pode ser uma boa idéia implementar um parâmetro de `debug`. A idéia é que, se o parâmetro estiver configurado, ignoraremos o armazenamento dos dados.
 
-This is particularly useful if we manage to break the application state dramatically during development somehow as it allows us to restore it to a blank slate easily through `localStorage.setItem('debug', 'true')` (`localStorage.debug = true`), `localStorage.clear()`, and finally a refresh.
+Isso é particularmente útil se, de alguma forma, conseguirmos quebrar drasticamente o estado do aplicativo durante o desenvolvimento, assim, ele nos permite restaurá-lo para um estado em branco facilmente através de `localStorage.setItem('debug', 'true')` (ou `localStorage.debug = true`), `localStorage.clear()` e por fim, atualizar o navegador.
 
-Given bootstrapping could fail for an unknown reason, we catch a possible error. It can still be a good idea to proceed with starting the application even if something horrible happens at this point. The snapshot portion is easier as we just need to check for the `debug` flag there and then set data if the flag is not active.
+Dado que o `bootstrapping` também pode falhar por algum motivo desconhecido, nós poderemos ter acesso a mensagem de erro. Pode ser uma boa idéia continuar com a iniciação da aplicação, mesmo que algo horrível aconteça neste momento. A fase de `snapshot` é mais fácil, pois precisamos apenas verificar se o parâmetro `debug` está ativo, para então, salvar ou não os dados.
 
-The implementation below illustrates the ideas:
+A implementação abaixo ilustra as idéias:
 
 **app/libs/persist.js**
 
@@ -82,7 +82,7 @@ export default function(alt, storage, storageName) {
 }
 ```
 
-You would end up with something similar in other state management systems. You'll need to find equivalent hooks to initialize the system with data loaded from the `localStorage` and write the state there when it happens to change.
+Você acabaria com algo semelhante em outros sistemas de gerenciamento de estado. Você precisará encontrar ganchos equivalentes para inicializar o sistema com dados carregados a partir do `localStorage` e escreva seu estado lá quando alterado.
 
 ## Connecting Persistency Logic with the Application
 
