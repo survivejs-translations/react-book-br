@@ -84,9 +84,9 @@ export default function(alt, storage, storageName) {
 
 Você acabaria com algo semelhante em outros sistemas de gerenciamento de estado. Você precisará encontrar ganchos equivalentes para inicializar o sistema com dados carregados a partir do `localStorage` e escreva seu estado lá quando alterado.
 
-## Connecting Persistency Logic with the Application
+## Conectando a lógica de persistência com a aplicação
 
-We are still missing one part to make this work. We'll need to connect the logic with our application. Fortunately there's a suitable place for this, the setup. Tweak as follows:
+Ainda está faltando uma parte para fazer tudo isso funcionar. Precisamos conectar a lógica com nossa aplicação. Felizmente, há um lugar adequado para isso, na nossa configuração. Vamos ajustar da seguinte maneira:
 
 **app/components/Provider/setup.js**
 
@@ -106,15 +106,15 @@ leanpub-end-insert
 }
 ```
 
-If you try refreshing the browser now, the application should retain its state. Given the solution is generic, adding more state to the system shouldn't be a problem. We could also integrate a proper back-end through the same hooks if we wanted.
+Se você tentar atualizar o navegador agora, o aplicativo deve manter seu estado. Dado que a solução é genérica, adicionar mais estado ao aplicativo não deve ser um problema. Poderíamos também integrar um back-end adequado através dos mesmos ganchos se quisermos.
 
-If we had a real back-end, we could pass the initial payload as a part of the HTML and load it from there. This would avoid a round trip. If we rendered the initial markup of the application as well, we would end up implementing basic **universal rendering** approach. Universal rendering is a powerful technique that allows you to use React to improve the performance of your application while gaining SEO benefits.
+Se tivéssemos um back-end real, poderíamos passar os dados iniciais como parte do HTML e carregá-lo a partir dali. Isso evitaria uma requisição de ida e volta ao servidor. E podemos renderizar também a marcação inicial do aplicativo, acabaríamos por implementar o básico da abordagem de **renderização universal**. A renderização universal é uma técnica poderosa que permite usar o React para melhorar o desempenho do seu aplicativo e obter benefícios de SEO.
 
-W> Our `persist` implementation isn't without its flaws. It is easy to end up in a situation where `localStorage` contains invalid data due to changes made to the data model. This brings you to the world of database schemas and migrations. The lesson here is that the more you inject state and logic to your application, the more complicated it gets to handle.
+W> Nosso serviço `persist`não é perfeiro, contém falahas. É fácil terminar em uma situação em que o `localStorage` contém dados inválidos devido a mudanças feitas no modelo de dados. Isso leva você ao mundo dos esquemas e migrações de banco de dados. A lição aqui é, quanto mais estados e lógica você adiciona na sua aplicação, mais complicado é de lidar com isso.
 
-## Cleaning Up `NoteStore`
+## Limpando `NoteStore`
 
-Before moving on, it would be a good idea to clean up `NoteStore`. There's still some code hanging around from our earlier experiments. Given persistency works now, we might as well start from a blank slate. Even if we wanted some initial data, it would be better to handle that at a higher level, such as application initialization. Adjust `NoteStore` as follows:
+Antes de seguir em frente, seria uma boa idéia para limpar `NoteStore` um pouco. Ainda há código dos nossos experimentos anteriores. Dado que a persistência funciona agora, podemos também começar de um estado em branco. Mesmo que quisessemos alguns dados iniciais, seria melhor lidar com isso em uma camada superior, como a inicialização do aplicativo. Vamos modificar `NoteStore` da seguinte maneira:
 
 **app/stores/NoteStore.js**
 
@@ -148,22 +148,22 @@ leanpub-end-insert
 }
 ```
 
-This is enough for now. Now our application should start from a blank slate.
+Isso é o suficiente por enquanto. Agora, nosso aplicativo deve começar a partir de um estado em branco.
 
-## Alternative Implementations
+## Implementações alternativas
 
-Even though we ended up using Alt in this initial implementation, it's not the only option. In order to benchmark various architectures, I've implemented the same application using different techniques. I've compared them briefly below:
+Mesmo usando Alt nesta implementação inicial, ele não é a única opção. Para comparar várias arquiteturas, implementei o mesmo aplicativo usando diferentes técnicas. Eu os comparei brevemente abaixo:
 
-* [Redux](http://rackt.org/redux/) is a Flux inspired architecture that was designed with hot loading as its primary constraint. Redux operates based on a single state tree. The state of the tree is manipulated using *pure functions* known as reducers. Even though there's some boilerplate code, Redux forces you to dig into functional programming. The implementation is quite close to the Alt based one. - [Redux demo](https://github.com/survivejs/redux-demo)
-* Compared to Redux, [Cerebral](http://www.cerebraljs.com/) had a different starting point. It was developed to provide insight on *how* the application changes its state. Cerebral provides more opinionated way to develop, and as a result, comes with more batteries included. - [Cerebral demo](https://github.com/survivejs/cerebral-demo)
-* [MobX](https://mobxjs.github.io/mobx/) allows you to make your data structures observable. The structures can then be connected with React components so that whenever the structures update, so do the React components. Given real references between structures can be used, the Kanban implementation is surprisingly simple. - [MobX demo](https://github.com/survivejs/mobx-demo)
+* [Redux](http://rackt.org/redux/) é uma arquitetura inspirada no Flux que foi projetada com o **hot loading** como sua principal intenção. O Redux opera com base em uma única árvore de estado. Essa árvore é manipulada usando *funções puras* conhecidas como redutores. Mesmo que haja um código importante, o Redux te força a usar programação funcional. A implementação é bastante próxima do Alt. - [Redux demo](https://github.com/survivejs/redux-demo)
+* Comparado com Redux, [Cerebral](http://www.cerebraljs.com/) tem um ponto de partida diferente. Foi desenvolvido para fornecer informações sobre *como* o aplicativo muda seu estado. O Cerebral é mais opinativo na maneira de desenvolver e, como resultado, vem com algumas soluções incluídas. - [Cerebral demo](https://github.com/survivejs/cerebral-demo)
+* [MobX](https://mobxjs.github.io/mobx/) permite que suas estruturas de dados sejam observáveis. As estruturas podem então ser conectadas com os componentes React para que sempre que essas estruturas se atualizem, ela faça o mesmo com os componentes React. Dado que as referências reais entre estruturas podem ser usadas, a implementação Kanban é surpreendentemente simples. - [MobX demo](https://github.com/survivejs/mobx-demo)
 
 ## Relay?
 
-Compared to Flux, Facebook's [Relay](https://facebook.github.io/react/blog/2015/02/20/introducing-relay-and-graphql.html) improves on the data fetching department. It allows you to push data requirements to the view level. It can be used standalone or with Flux depending on your needs.
+Comparado com Flux, a solução [Relay](https://facebook.github.io/react/blog/2015/02/20/introducing-relay-and-graphql.html), criada pelo Facebook, melhora a camada de busca de dados. Ele permite que você as requisições de dados sejam feitas no nível do componente. Ele pode ser usado separadamente ou com Flux, dependendo de suas necessidades.
 
-Given it's still largely untested technology, we won't be covering it in this book yet. Relay comes with special requirements of its own (GraphQL compatible API). Only time will tell how it gets adopted by the community.
+Dado que ainda é tecnologia em grande parte não testada, não vamos falar sobre ele neste livro. O Relay vem com requisitos especiais próprios (como uma API compatível com GraphQL). Só o tempo dirá como é adotado pela comunidade.
 
-## Conclusion
+## Conclusão
 
-In this chapter, you saw how to set up `localStorage` for persisting the application state. It is a useful little technique to know. Now that we have persistency sorted out, we are ready to start generalizing towards a full blown Kanban board.
+Neste capítulo, você viu como configurar `localStorage` para fazer a persistência do estado do aplicativo. É uma técnica simples e útil para se conhecer. Agora que temos a camada de persistência resolvida, estamos prontos para começar a criar nosso quadro Kanban!
