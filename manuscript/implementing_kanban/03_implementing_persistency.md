@@ -1,23 +1,23 @@
-# Implementing Persistency over `localStorage`
+# Implementando persistência com `localStorage`
 
-Currently our application cannot retain its state if refreshed. One neat way to get around this problem is to store the application state to [localStorage](https://developer.mozilla.org/en/docs/Web/API/Window/localStorage) and then restore it when we run the application again.
+Atualmente, nosso aplicativo não pode guardar seu estado se atualizarmos a página. Uma excelente maneira de resolver esse problema é armazenar o estado do aplicativo no [localStorage](https://developer.mozilla.org/en/docs/Web/API/Window/localStorage) e depois restaurá-lo quando executarmos o aplicativo novamente.
 
-If you were working against a back-end, this wouldn't be a problem. Even then having a temporary cache in `localStorage` could be handy. Just make sure you don't store anything sensitive there as it is easy to access.
+Se você estivesse trabalhando com um back-end, isso não seria um problema. Mesmo tendo um cache temporário em `localStorage` pode ser útil. Certifique-se de não armazenar nenhum dado sensível, pois é fácil acessar.
 
-## Understanding `localStorage`
+## Entendendo `localStorage`
 
-`localStorage` is a part of the Web Storage API. The other half, `sessionStorage`, exists as long as the browser is open while `localStorage` persists even in this case. They both share [the same API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API) as discussed below:
+`localStorage` é uma parte da Web Storage API. A outra metade, `sessionStorage`, existe enquanto o navegador estiver aberto enquanto, `localStorage` persiste os dados, mesmo neste caso. Ambos compartilham [a mesma API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API), conforme abaixo:
 
-* `storage.getItem(k)` - Returns the stored string value for the given key.
-* `storage.removeItem(k)` - Removes the data matching the key.
-* `storage.setItem(k, v)` - Stores the given value using the given key.
-* `storage.clear()` - Empties the storage contents.
+* `storage.getItem(k)` - Retorna o valor da string armazenada para a chave fornecida.
+* `storage.removeItem(k)` - Remove os dados que correspondem à chave.
+* `storage.setItem(k, v)` - Armazena o valor dado usando a chave fornecida.
+* `storage.clear()` - Esvazia todo o conteúdo armazenado.
 
-It is convenient to operate on the API using your browser developer tools. In Chrome especially the *Resources* tab is useful as it allows you to inspect the data and perform direct operations on it. You can even use `storage.key` and `storage.key = 'value'` shorthands in the console for quick tweaks.
+É interessante explorar a API através das ferramentas de desenvolvimento do seu navegador. No Chrome, especialmente na aba *Resources*, é uma maneira útil porque permite que você inspecione os dados e realize operações diretas nele. Você pode até mesmo usar os atalhos `storage.key` e `storage.key = 'value'` no console para ajustes rápidos.
 
-`localStorage` and `sessionStorage` can use up to 10 MB of data combined. Even though they are well supported, there are certain corner cases that can fail. These include running out of memory in Internet Explorer (fails silently) and failing altogether in Safari's private mode. It is possible to work around these glitches, though.
+`localStorage` e `sessionStorage`, combinados, podem usar até 10 MB de dados. Mesmo que atualmente eles sejam bem suportados, existem certos casos em que eles podem falhar. Esses casos incluem a falta de memória no Internet Explorer (falha silenciosa) ou falhando completamente no modo privado do Safari. No entanto, é possível resolver essas falhas.
 
-T> You can support Safari in private mode by trying to write into `localStorage` first. If that fails, you can use Safari's in-memory store instead, or just let the user know about the situation. See [Stack Overflow](https://stackoverflow.com/questions/14555347/html5-localstorage-error-with-safari-quota-exceeded-err-dom-exception-22-an) for details.
+T> Você pode dar suportar ao Safari no modo privado, ao tentar escrever em `localStorage`, se isso falhar, você pode usar o espaço em memória no Safari, ou apenas notifique o usuário sobre a situação. Veja esse discussão no [Stack Overflow](https://stackoverflow.com/questions/14555347/html5-localstorage-error-with-safari-quota-exceeded-err-dom-exception-22-an).
 
 ## Implementing a Wrapper for `localStorage`
 
