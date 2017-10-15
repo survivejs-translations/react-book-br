@@ -1,14 +1,14 @@
-# Handling Data Dependencies
+# Alterando nosso esquema de dados
 
-So far we have developed an application for keeping track of notes in `localStorage`. To get closer to Kanban, we need to model the concept of `Lane`. A `Lane` is something that should be able to contain many `Notes` within itself and track their order. One way to model this is simply to make a `Lane` point at `Notes` through an array of `Note` ids.
+Até o momento, nós desenvolvemos uma aplicação para salvar notas no `localStroage`. Para ficar mais próximo de um quadro Kanban, nós precisamos modelar o conceito de `Lane`. Uma `Lane` é algo que deve ser capaz de salvar várias `Notes` e sua ordem. Um modo de modelar dessa idéia seria manter um array de `Note` ids em `Lane` para conversar com `Notes`.
 
-This relation could be reversed. A `Note` could point at a `Lane` using an id and maintain information about its position within a `Lane`. In this case, we are going to stick with the former design as that works well with re-ordering later on.
+Essa relação poderia ser inversa. Uma `Note` poderia conter um id de uma `Lane` e manter informação sobre sua posição naquela `Lane`. Nesse caso, nós iremos utilizar a primeira abordagem, pois ao reordenar as notas, essa estrutura irá facilitar nosso trabalho.
 
-## Defining `Lanes`
+## Definindo `Lanes`
 
-As earlier, we can use the same idea of two components here. There will be a component for the higher level (i.e., `Lanes`) and for the lower level (i.e., `Lane`). The higher level component will deal with lane ordering. A `Lane` will render itself (i.e., name and `Notes`) and have basic manipulation operations.
+Como antes, iremos dividir a implementação em dois componentes. Um componente de alto nível, `Lanes`, e um outro de baixo nível, `Lane`. Nosso componente de alto nível ficará responsável pela ordenação. Uma `Lane` será responsável por renderizar conteúdo (ex: nome e `Notes`) e ter algumas operações de manipulações.
 
-Just as with `Notes`, we are going to need a set of actions. For now it is enough if we can just create new lanes so we can create a corresponding action for that as below:
+ar adicionar algumas ações. Por hora, vamos implementar a ação de criar uma novas `Lanes`, como abaixo:
 
 **app/actions/LaneActions.js**
 
@@ -18,7 +18,7 @@ import alt from '../libs/alt';
 export default alt.generateActions('create');
 ```
 
-In addition, we are going to need a `LaneStore` and a method matching to `create`. The idea is pretty much the same as for `NoteStore` earlier. `create` will concatenate a new lane to the list of lanes. After that, the change will propagate to the listeners (i.e., `FinalStore` and components).
+Além disso, nós iremos precisar de uma `LaneStore` e um método `create`. A idéia é e implementação é similar ao `NoteStore`. O método `create` irá concatenar uma nova `Lane` na lista de `Lanes`. Depois disso, a mudança será propagada para os ouvintes (ex: `FinalStore` e componentes).
 
 **app/stores/LaneStore.js**
 
@@ -32,8 +32,8 @@ export default class LaneStore {
     this.lanes = [];
   }
   create(lane) {
-    // If `notes` aren't provided for some reason,
-    // default to an empty array.
+    // Se `notes` não estiver definido, por alguma razão
+    // usamos um array em branco como padrão
     lane.notes = lane.notes || [];
 
     this.setState({
@@ -43,7 +43,7 @@ export default class LaneStore {
 }
 ```
 
-To connect `LaneStore` with our application, we need to connect it to it through `setup`:
+Para conectar `LaneStore` com nossa aplicação, nós precisamos conecta-la através do `setup`:
 
 **app/components/Provider/setup.js**
 
@@ -65,7 +65,7 @@ leanpub-end-insert
 }
 ```
 
-We are also going to need a `Lanes` container to display our lanes:
+Nós também iremos precisar de um *container* componente para renderizar nossas  `Lanes`:
 
 **app/components/Lanes.jsx**
 
@@ -80,7 +80,7 @@ export default ({lanes}) => (
 )
 ```
 
-And finally we can add a little stub for `Lane` to make sure our application doesn't crash when we connect `Lanes` with it. A lot of the current `App` logic will move here eventually:
+E finalmente, nós podemos adicionar um pequeno `stub` para `Lane` e ter certeza que nossa aplicação não irá quebrar ao conectar `Lanes`. Aliás, nós iremos mover bastante lógica do `App` para cá:
 
 **app/components/Lane.jsx**
 
@@ -92,9 +92,9 @@ export default ({lane, ...props}) => (
 )
 ```
 
-## Connecting `Lanes` with `App`
+## Conectando `Lanes` com `App`
 
-Next, we need to make room for `Lanes` at `App`. We will simply replace `Notes` references with `Lanes`, set up lane actions, and store. This means a lot of the old code can disappear. Replace `App` with the following code:
+Em seguida, nós precisamos adicionar `Lanes` para o `App`. Nós iremos substituir a referência de `Notes` por `Lanes`, também precisamos configurar as ações e `store` para `Lanes`. Isso significa que boa parte do antigo código irá desaparecer. Vamos atualizar `App` da seguinte maneira:
 
 **app/components/App.jsx**
 
@@ -128,11 +128,11 @@ export default connect(({lanes}) => ({
 })(App)
 ```
 
-If you check out the implementation at the browser, you can see that the current implementation doesn't do much. You should be able to add new lanes to the Kanban and see "New lane" text per each but that's about it. To restore the note related functionality, we need to focus on modeling `Lane` further.
+ muita coisa. Você poderá apenas adicionar novas `Lanes` no nosso quadro Kanban e ver o botão "New lane" e cada um. Para recuperar a funcionalidade de adicionar notas, nós precisamos modelar `Lane` um pouco mais.
 
-## Modeling `Lane`
+## Modelando `Lane`
 
-`Lane` will render a name and associated `Notes`. The example below has been modeled largely after our earlier implementation of `App`. Replace the file contents entirely as follows:
+`Lane` irá renderizar o nome e `Notes` associadas a esse modelo. A implementação de `Lane` abaixo foi alterada para esse propóisito, sendo bem diferente desde a primeira implementação do nosso `App`. Você pode substituir seu conteúdo por:
 
 **app/components/Lane.jsx**
 
@@ -194,21 +194,21 @@ export default connect(
 )(Lane)
 ```
 
-If you run the application and try adding new notes, you can see there's something wrong. Every note you add is shared by all lanes. If a note is modified, other lanes update too.
+Se você rodar o aplicativo e tentar adicionar notas, você verá que algo está errado. Cada nota que você adiciona é compartilhada em todas as `Lanes`. Se uma nota é modificada, a outras `Lanes` também são atualizadas.
 
-![Duplicate notes](images/kanban_01.png)
+![Duplicate notes](../images/kanban_01.png)
 
-The reason why this happens is simple. Our `NoteStore` is a singleton. This means every component that is listening to `NoteStore` will receive the same data. We will need to resolve this problem somehow.
+O motivo desse problema é simples. Nossa `NoteStore` é uma instância única. Isso significa que cada componente que está escutando as mudanças em `NoteStore`, receberão os mesmos dados. Nós precisamos resolver esse problema de alguma forma.
 
-## Making `Lanes` Responsible of `Notes`
+## Deixando as `Lanes` responsáveis por `Notes`
 
-Currently, our `Lane` contains just an array of objects. Each of the objects knows its *id* and *name*. We'll need something more sophisticated.
+Atualmente, nossa `Lane` contém apenas uma array de objetos. Cada objeto tem seu *id* e *name*. Nós iremos precisar de algo mais sofisticado.
 
-Each `Lane` needs to know which `Notes` belong to it. If a `Lane` contained an array of `Note` ids, it could then filter and display the `Notes` belonging to it. We'll implement a scheme to achieve this next.
+Cada `Lane` precisa saber qual `Notes` pertence a ela. Se uma `Lane` conter um array de id de `Notes`, ela poderia filtrar as notas e mostra-las corretamente em `Notes`. Nós iremos implementar esse esquema a seguir.
 
-### Understanding `attachToLane`
+### Entendendo `attachToLane`
 
-When we add a new `Note` to the system using `addNote`, we need to make sure it's associated to some `Lane`. This association can be modeled using a method, such as `LaneActions.attachToLane({laneId: <id>, noteId: <id>})`. Here's an example of how it could work:
+Ao adicionar uma nova `Note` no sistema através de `addNote`, nós precisamos ter certeza que ela seja associada a uma `Lane`. Essa associação pode ser modelada através de um método, por exemplo `LaneActions.attachToLane({laneId: <id>, noteId: <id>})`. Veja a implementação abaixo:
 
 ```javascript
 const addNote = e => {
@@ -227,7 +227,7 @@ const addNote = e => {
 }
 ```
 
-This is just one way to handle `noteId`. We could push the generation logic within `NoteActions.create` and then return the generated id from it. We could also handle it through a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise). This would be very useful if we added a back-end to our implementation. Here's how it would look like then:
+Essa é apenas uma maneira de utilizar o `noteId`. Nós poderíamos gerar a lógica com `NoteActions.create` e retornar o id generado de lá. Nós poderíamos também, utilizar [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise). Isso seria bem útil se nós adicionarmos um back-end em nossa implementação. A implementação se pareceria com:
 
 ```javascript
 const addNote = e => {
@@ -244,11 +244,11 @@ const addNote = e => {
 }
 ```
 
-Now we have declared a clear dependency between `NoteActions.create` and `LaneActions.attachToLane`. This would be one valid alternative especially if you need to go further with the implementation.
+Agora declaramos as dependências entre `NoteActions.create` e `LaneActions.attachToLane`. Essa é uma alternativa válida, especialmente se precisarmos ir adiante e adicionar mais funcionalidades.
 
-T> You could model the API using positional parameters and end up with `LaneActions.attachToLane(laneId, note.id)`. I prefer the object form as it reads well and you don't have to care about the order.
+T> Você poderia modelar a API usando parâmetros posicionados e seria lago como `LaneActions.attachToLane(laneId, note.id)`. Eu prefiro o modo utitlizando um objeto, a leitura é mais simples e você não precisa se preocupar com a ordem.
 
-T> Another way to handle the dependency problem would be to use Flux dispatcher related feature known as [waitFor](http://alt.js.org/guide/wait-for/). It allows us to state dependencies on store level. It is better to avoid that if you can, though, as data management solutions like Redux make it redundant. Using `Promises` as above can help as well.
+T> Outra maneira de implementar essa depêndencia seria usar a funcionalidade do *dispatcher* do Flux conhecida como [waitFor](http://alt.js.org/guide/wait-for/). Isso nos permite modelar depêndencias ao nível da *store*. É melhor evitar essa funcionalidade se você puder, soluções de gerenciamento de estado como Redux, tornam isso redundante. Usando `Promises`, como acima, pode resolver muito bem!
 
 ### Setting Up `attachToLane`
 
