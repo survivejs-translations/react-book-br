@@ -1,4 +1,4 @@
-# Alterando nosso esquema de dados
+# Cuidando das depêndencias entre dados
 
 Até o momento, nós desenvolvemos uma aplicação para salvar notas no `localStroage`. Para ficar mais próximo de um quadro Kanban, nós precisamos modelar o conceito de `Lane`. Uma `Lane` é algo que deve ser capaz de salvar várias `Notes` e sua ordem. Um modo de modelar dessa idéia seria manter um array de `Note` ids em `Lane` para conversar com `Notes`.
 
@@ -250,9 +250,9 @@ T> Você poderia modelar a API usando parâmetros posicionados e seria lago como
 
 T> Outra maneira de implementar essa depêndencia seria usar a funcionalidade do *dispatcher* do Flux conhecida como [waitFor](http://alt.js.org/guide/wait-for/). Isso nos permite modelar depêndencias ao nível da *store*. É melhor evitar essa funcionalidade se você puder, soluções de gerenciamento de estado como Redux, tornam isso redundante. Usando `Promises`, como acima, pode resolver muito bem!
 
-### Setting Up `attachToLane`
+### Configurando `attachToLane`
 
-To get started we should add `attachToLane` to actions as before:
+Para começar, devemos adicionar `attachToLane` nas nossas ações:
 
 **app/actions/LaneActions.js**
 
@@ -264,7 +264,7 @@ export default alt.generateActions(
 );
 ```
 
-In order to implement `attachToLane`, we need to find a lane matching to the given lane id and then attach note id to it. Furthermore, each note should belong only to one lane at a time. We can perform a rough check against that:
+A fim de implementar `attachToLane`, nós precisamos encontrar a `Lane` correspondente ao id e em seguida, anexar o id da nota nesse modelo. Além disso, cada nota deve pertencer há apenas uma pista ao mesmo tempo. Podemos realizar uma verificação parecida com:
 
 **app/stores/LaneStore.js**
 
@@ -293,22 +293,22 @@ leanpub-end-insert
 }
 ```
 
-Just being able to attach notes to a lane isn't enough. We are also going to need some way to detach them. This comes up when we are removing notes.
+Poder anexar notas a uma faixa não é o suficiente. Nós também precisamos, de alguma maneira, separá-las. Isso irá acontecer quando removermos alguma nota.
 
-T> We could give a warning here in case you are trying to attach a note to a lane that doesn't exist. `console.warn` would work nicely for that.
+T> Podemos dar um aviso aqui caso você esteja tentando anexar uma nota a uma faixa que não existe, `console.warn` funciona bem para isso.
 
-### Setting Up `detachFromLane`
+### Configurando `detachFromLane`
 
-We can model a similar counter-operation `detachFromLane` using an API like this:
+Podemos modelar uma operação inversa, semelhante a `detachFromLane` usando uma API como:
 
 ```javascript
 LaneActions.detachFromLane({noteId, laneId});
 NoteActions.delete(noteId);
 ```
 
-T> Just like with `attachToLane`, you could model the API using positional parameters and end up with `LaneActions.detachFromLane(laneId, noteId)`.
+T> Assim como `attachToLane`, você poderia modelar a API usando parâmetros posicionados, ficando assim: `LaneActions.detachFromLane(laneId, noteId)`.
 
-Again, we should set up an action:
+Novamente, devemos adicionar uma nova ação:
 
 **app/actions/LaneActions.js**
 
@@ -320,7 +320,7 @@ export default alt.generateActions(
 );
 ```
 
-The implementation will resemble `attachToLane`. In this case, we'll remove the possibly found `Note` instead:
+A implementação será semelhante a `attachToLane`. Mas nesse caso, iremos remover a `Note`, se encontrada, ficando assim:
 
 **app/stores/LaneStore.js**
 
@@ -345,19 +345,19 @@ leanpub-end-insert
 }
 ```
 
-Given we have enough logic in place now, we can start connecting it with the user interface.
+Agora, nós temos lógicas e métodos suficientes, podemos começar a conectá-los com a interface do usuário.
 
-T> It is possible `detachFromLane` doesn't detach anything. If this case is detected, it would be nice to use `console.warn` to let the developer know about the situation.
+T> Em certos cenários, é possível que `detachFromLane` não encontre nada para remover. Seria bom usar `console.warn` para informar o desenvolvedor sobre essa situação.
 
-### Connecting `Lane` with the Logic
+### Conectando `Lane` com nossa lógica
 
-To make this work, there are a couple of places to tweak at `Lane`:
+Para fazer isso funcionar, há alguns lugares para atualizar em `Lane`:
 
-* When adding a note, we need to **attach** it to the current lane.
-* When deleting a note, we need to **detach** it from the current lane.
-* When rendering a lane, we need to **select** notes belonging to it. It is important to render then notes in the order they belong to a lane. This needs extra logic.
+* Ao adicionar uma nota, precisamos **adicionar** na `Lane` atual.
+* Ao excluir uma nota, precisamos **remover** ela da `Lane` atual.
+* Ao renderizar uma `Lane`, precisamos **selecionar** notas que pertencem a ela. É importante renderizar as notas na ordem em que elas estão salvas. Isso precisa de uma lógica extra.
 
-These changes map to `Lane` as follows:
+Essas mudanças são definidas em `Lane`:
 
 **app/components/Lane.jsx**
 
@@ -437,12 +437,12 @@ leanpub-end-insert
 
 leanpub-start-insert
 function selectNotesByIds(allNotes, noteIds = []) {
-  // `reduce` is a powerful method that allows us to
-  // fold data. You can implement `filter` and `map`
-  // through it. Here we are using it to concatenate
-  // notes matching to the ids.
+  // `reduce` é um método poderoso que nos permite
+  // reduzir dados a um único valor. Você pode implementar
+  // `filter` e `map` com ele. Aqui estamos usando ele
+  // para concatenar notas correspondentes aos ids.
   return noteIds.reduce((notes, id) =>
-    // Concatenate possible matching ids to the result
+    // Concatenando possíveis ids correspondentes ao resultado
     notes.concat(
       allNotes.filter(note => note.id === id)
     )
@@ -465,19 +465,20 @@ leanpub-end-insert
 )(Lane)
 ```
 
-If you try using the application now, you should see that each lane is able to maintain its own notes:
+Se você tentar usar o aplicativo agora, você deve ver que cada `Lane` está mantendo suas próprias notas:
 
-![Separate notes](images/kanban_02.png)
+![Separate notes](../images/kanban_02.png)
 
-The current structure allows us to keep singleton stores and a flat data structure. Dealing with references is a little awkward, but that's consistent with the Flux architecture. You can see the same theme in the [Redux implementation](https://github.com/survivejs-demos/redux-demo). The [MobX one](https://github.com/survivejs-demos/mobx-demo) avoids the problem altogether given we can use proper references there.
+The current structure allows us to keep singleton stores and a flat data structure. Dealing with references is a little awkward, but that's consistent with the Flux architecture. You can see the same theme in the
+A estrutura atual nos permite manter `singleton stores` e uma estrutura de dados plana. Lidar com referências é um pouco estranho, mas isso é consistente com a arquitetura Flux. Você pode ver o mesmo exemplo na [implementação com Redux](https://github.com/survivejs-demos/redux-demo). O exemplo com [MobX](https://github.com/survivejs-demos/mobx-demo), evita o problema, dado que podemos usar referências adequadas lá.
 
-T> `selectNotesByIds` could have been written in terms of `map` and `find`. In that case you would have ended up with `noteIds.map(id => allNotes.find(note => note.id === id));`. You would need to polyfill `find` in this case to support older browsers, though.
+T> `selectNotesByIds` poderia ter sido escrito com `map` e `find`. Nesse caso, você teria acabado com `noteIds.map(id => allNotes.find(note => note.id === id));`. No entando, você precisaria de um polyfill para `find` para suportar navegadores mais antigos.
 
-T> Normalizing the data would have made `selectNotesByIds` trivial. If you are using a solution like Redux, normalization can make operations like this easy.
+T> Uma normalização de dados aqui teria tornado `selectNotesByIds` desnecessário. Se você estiver usando uma solução como o Redux, a normalização pode tornar essas operações fáceis.
 
-## Extracting `LaneHeader` from `Lane`
+## Extraíndo `LaneHeader` de `Lane`
 
-`Lane` is starting to feel like a big component. This is a good chance to split it up to keep our application easier to maintain. Especially the lane header feels like a component of its own. To get started, define `LaneHeader` based on the current code like this:
+`Lane` está começando a ficar um grande componente. Esta é uma boa chance de dividi-lo, para manter nossa aplicação mais fácil de manter. Especialmente, o cabeçalho, poderia ser  um componente próprio. Para começar, defina `LaneHeader` com base no código atual:
 
 **app/components/LaneHeader.jsx**
 
@@ -518,7 +519,7 @@ export default connect(() => ({}), {
 })
 ```
 
-We also need to connect the extracted component with `Lane`:
+Também precisamos conectar o componente extraído em `Lane`:
 
 **app/components/Lane.jsx**
 
@@ -595,10 +596,11 @@ leanpub-end-insert
 ...
 ```
 
-After these changes we have something that's a little easier to work with. It would have been possible to maintain all the related code in a single component. Often these are judgment calls as you realize there are nicer ways to split up your components. Sometimes the need for reuse or performance will force you to split.
+Após essas mudanças, temos algo que é um pouco mais fácil de se trabalhar. Seria possível manter todo esse código em um único componente. Muitas vezes, essas situações são baseadas no seu julgamento, pois é você quem percebe se há maneiras mais legais de dividir seus componentes. Às vezes, a necessidade de reutilização ou desempenho irá forçá-lo a dividir.
 
-## Conclusion
+## Conclusão
 
-We managed to solve the problem of handling data dependencies in this chapter. It is a problem that comes up often. Each data management solution provides a way of its own to deal with it. Flux based alternatives and Redux expect you to manage the references. Solutions like MobX have reference handling integrated. Data normalization can make these type of operations easier.
+Conseguimos resolver o problema das dependências entre dados neste capítulo. É um problema frequente quando sua aplicação começa a crescer. Cada solução de gerenciamento de dados fornece uma maneira própria de lidar com isso. Alternativas baseadas em Flux e Redux esperam que você gerencie as referências. Soluções como MobX possuem gerenciamento de referência integrado. A normalização dos dados pode tornar este tipo de operações mais fácil.
 
 In the next chapter we will focus on adding missing functionality to the application. This means tackling editing lanes. We can also make the application look a little nicer again. Fortunately a lot of the logic has been developed already.
+No próximo capítulo, ieremos nos concentraremos em adicionar mais funcionalidades ao nosso aplicativo, como a possibilidade de editar uma `Lane`. Também podemos tornar o aplicativo um pouco mais agradável visualmente e felizmente, uma grande parte da lógica já foi desenvolvida até aqui.
