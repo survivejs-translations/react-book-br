@@ -8,9 +8,9 @@ O componente `Editable` que nós implementamos anteriormente será útil. Podemo
 
 Devemos também permitir a remoção de cada `Lane`. Para isso funcionar, precisaremos adicionar um controle na UI e anexar uma lógica a ele. Mais uma vez, é uma ideia semelhante à anterior.
 
-## Implementing Editing for `Lane` names
+## Implementando edição para os nomes das `Lane`
 
-To edit a `Lane` name, we need a little bit of logic and UI hooks. `Editable` can handle the UI part. Logic will take more work. To get started, tweak `LaneHeader` as follows:
+Para editar o nome de uma `Lane`, precisamos de um pouco de lógica e ações na UI. `Editable` pode cuidar da parte da UI. Na lógica, teremos mais trabalho. Podemos começar com `LaneHeader`:
 
 **app/components/LaneHeader.jsx**
 
@@ -69,9 +69,9 @@ leanpub-end-insert
 })
 ```
 
-The user interface should look exactly the same after this change. We still need to implement `LaneActions.update` to make our setup work.
+A interface do usuário deve ser exatamente a mesma após essa alteração. Ainda precisamos implementar `LaneActions.update` para que nossa configuração funcione.
 
-Just like before, we have to tweak two places, the action definition and `LaneStore`. Here's the action part:
+Assim como antes, devemos ajustar dois lugares, a definição de ação e `LaneStore`. Aqui está a parte da ação:
 
 **app/actions/LaneActions.js**
 
@@ -83,7 +83,7 @@ export default alt.generateActions(
 );
 ```
 
-To add the missing logic, tweak `LaneStore` like this. It's the same idea as for `NoteStore`:
+Para adicionar a lógica restante, modifique `LaneStore` da seguinte maneira. É a mesma ideia que em `NoteStore`:
 
 **app/stores/LaneStore.js**
 
@@ -116,7 +116,7 @@ leanpub-end-insert
 }
 ```
 
-After these changes you should be able to edit lane names. Lane deletion is a good feature to sort out next.
+Após essas alterações, você pode editar os nomes das `Lanes`. A remoção de uma `Lane` vamos implementar a seguir.
 
 ## Implementing `Lane` Deletion
 
