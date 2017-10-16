@@ -1,12 +1,12 @@
-# Editing Lanes
+# Editando Lanes
 
-![Kanban board](images/kanban_05.png)
+![Kanban board](../images/kanban_05.png)
 
-We still have work to do to turn this into a real Kanban as pictured above. The application is still missing some logic and styling. That's what we'll focus on here.
+Nós ainda temos trabalho a fazer para transformar isso em um Kanban como ilustrado acima. Ainda falta lógica e estilos no nosso aplicativo. É sobre isso que vamos nos concentrar aqui.
 
-The `Editable` component we implemented earlier will come in handy. We can use it to make it possible to alter `Lane` names. The idea is exactly the same as for notes.
+O componente `Editable` que nós implementamos anteriormente será útil. Podemos usá-lo para tornar possível alterar os nomes de cada `Lane`. A idéia é exatamente a mesma coisa que fizemos para `Note`.
 
-We should also make it possible to remove lanes. For that to work we'll need to add an UI control and attach logic to it. Again, it's a similar idea as earlier.
+Devemos também permitir a remoção de cada `Lane`. Para isso funcionar, precisaremos adicionar um controle na UI e anexar uma lógica a ele. Mais uma vez, é uma ideia semelhante à anterior.
 
 ## Implementing Editing for `Lane` names
 
