@@ -602,5 +602,4 @@ Após essas mudanças, temos algo que é um pouco mais fácil de se trabalhar. S
 
 Conseguimos resolver o problema das dependências entre dados neste capítulo. É um problema frequente quando sua aplicação começa a crescer. Cada solução de gerenciamento de dados fornece uma maneira própria de lidar com isso. Alternativas baseadas em Flux e Redux esperam que você gerencie as referências. Soluções como MobX possuem gerenciamento de referência integrado. A normalização dos dados pode tornar este tipo de operações mais fácil.
 
-In the next chapter we will focus on adding missing functionality to the application. This means tackling editing lanes. We can also make the application look a little nicer again. Fortunately a lot of the logic has been developed already.
 No próximo capítulo, ieremos nos concentraremos em adicionar mais funcionalidades ao nosso aplicativo, como a possibilidade de editar uma `Lane`. Também podemos tornar o aplicativo um pouco mais agradável visualmente e felizmente, uma grande parte da lógica já foi desenvolvida até aqui.
