@@ -118,11 +118,11 @@ leanpub-end-insert
 
 Após essas alterações, você pode editar os nomes das `Lanes`. A remoção de uma `Lane` vamos implementar a seguir.
 
-## Implementing `Lane` Deletion
+## Implementando a remoção de uma `Lane`
 
-Deleting lanes is a similar problem. We need to extend the user interface, add an action, and attach logic associated to it.
+Remover uma `Lane` é um problema semelhante. Precisamos ampliar a interface do usuário, adicionar uma ação e anexar lógica associada a ela.
 
-The user interface is a natural place to start. Often it's a good idea to add some `console.log`s in place to make sure your event handlers get triggered as your expect. It would be even better to write tests for those. That way you'll end up with a runnable specification. Here's how to add a stub for deleting lanes:
+Vamos começar pela interface do usuário. Muitas vezes é uma boa idéia adicionar alguns `console.log` para verificar que seus eventos estão sendo ativados como esperado. Seria ainda melhor escrever testes para eles. Dessa forma, você terá uma especificação executável. Veja como adicionar um `stube` para remover uma `Lane`:
 
 **app/components/LaneHeader.jsx**
 
@@ -136,7 +136,7 @@ export default connect(() => ({}), {
   ...
 leanpub-start-insert
   const deleteLane = e => {
-    // Avoid bubbling to edit
+    // Evitando a propagação para `edit`
     e.stopPropagation();
 
     LaneActions.delete(lane.id);
@@ -160,7 +160,7 @@ leanpub-end-insert
 });
 ```
 
-Again, we need to expand our action definition:
+Novamente, precisamos expandir nossa ação:
 
 **app/actions/LaneActions.js**
 
@@ -172,7 +172,7 @@ export default alt.generateActions(
 );
 ```
 
-And to finalize the implementation, let's add logic:
+E para finalizar a implementação, vamos adicionar nossa lógica:
 
 **app/stores/LaneStore.js**
 
@@ -202,9 +202,9 @@ leanpub-end-insert
 }
 ```
 
-Assuming everything went correctly, you should be able to delete entire lanes now.
+Supondo que tudo correu bem, você pode remover qualquer `Lane` agora.
 
-The current implementation contains one gotcha. Even though we are removing references to lanes, the notes they point remain. This is something that could be turned into a rubbish bin feature. Or we could perform cleanup as well. For the purposes of this application, we can leave the situation as is. It is something good to be aware of, though.
+A implementação atual contém um problema. Embora estamos removendo a referência da `Lane`, as notas guardadas nelas ainda permanecem por lá. Isso é algo que pode ser transformado em um recurso de lixeira. Ou, também podemos fazer a limpeza delas. Para essa exemplo, podemos deixar a situação como está. No entanto, é algo bom estar ciente.
 
 ## Styling Kanban Board
 
