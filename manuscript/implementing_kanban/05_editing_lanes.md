@@ -206,9 +206,9 @@ Supondo que tudo correu bem, você pode remover qualquer `Lane` agora.
 
 A implementação atual contém um problema. Embora estamos removendo a referência da `Lane`, as notas guardadas nelas ainda permanecem por lá. Isso é algo que pode ser transformado em um recurso de lixeira. Ou, também podemos fazer a limpeza delas. Para essa exemplo, podemos deixar a situação como está. No entanto, é algo bom estar ciente.
 
-## Styling Kanban Board
+## Adicionando estilos ao quadro Kanban
 
-As we added `Lanes` to the application, the styling went a bit off. Adjust as follows to make it a little nicer:
+Como adicionamos `Lanes` ao nosso aplicativo, os estilos ficaram um pouco fora de mão. Vamos deixar a aparência mais agradável com:
 
 **app/main.css**
 
@@ -295,12 +295,12 @@ leanpub-end-insert
 ...
 ```
 
-You should end up with a result like this:
+Você deve ter um resultado como este:
 
-![Styled Kanban](images/kanban_styled.png)
+![Styled Kanban](../images/kanban_styled.png)
 
-As this is a small project, we can leave the CSS in a single file like this. In case it starts growing, consider separating it to multiple files. One way to do this is to extract CSS per component and then refer to it there (e.g., `require('./lane.css')` at `Lane.jsx`). You could even consider using **CSS Modules** to make your CSS default to local scope. See the *Styling React* chapter for further ideas.
+Como esse é um pequeno projeto, podemos deixar o CSS em um único arquivo. Caso comece a crescer, considere separá-lo em vários arquivos. Uma maneira de fazer isso é extrair um CSS por componente e, em seguida, fazer o `require` do arquivo (ex: `require('./lane.css')` em `Lane.jsx`). Você pode até mesmo considerar usar **CSS Modules** para deixar seu CSS com escopo local como padrão. Veja o capítulo *Estilos em React* para mais ideias.
 
-## Conclusion
+## Conclucsão
 
-Even though our application is starting to look good and has basic functionality in it, it's still missing perhaps the most vital feature. We still cannot move notes between lanes. This is something we will resolve in the next chapter as we implement drag and drop.
+Mesmo que o nosso aplicativo esteja começando a ficar com funcionalidades básicas, ainda falta o recurso mais importante. Ainda não podemos mover as notas entre as pistas. Isso é algo que resolveremos no próximo capítulo à medida que implementamos o arrastar e soltar.
