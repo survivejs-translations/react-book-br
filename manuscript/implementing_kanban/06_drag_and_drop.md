@@ -1,8 +1,8 @@
-# Implementing Drag and Drop
+# Implementando arrastar e soltar
 
-Our Kanban application is almost usable now. It looks alright and there's basic functionality in place. In this chapter, we will integrate drag and drop functionality to it as we set up [React DnD](https://gaearon.github.io/react-dnd/).
+Nosso aplicativo Kanban está quase utilizável. Tem um bom estilo e há funcionalidades básicas instaladas. Neste capítulo, integraremos a funcionalidade de arrastar e soltar utilizando [React DnD](https://gaearon.github.io/react-dnd/).
 
-After this chapter, you should be able to sort notes within a lane and drag them from one lane to another. Although this sounds simple, there is quite a bit of work to do as we need to annotate our components the right way and develop the logic needed.
+No final deste capítulo, você pode organizar as notas dentro de uma `Lane` e arrastá-las de uma `Lane` para outra. Embora isso pareça simples, teremos um pouco de trabalho, pois precisamos anotar nossos componentes do jeito certo e desenvolver a lógica necessária.
 
 ## Setting Up React DnD
 
