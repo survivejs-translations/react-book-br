@@ -4,11 +4,11 @@ Nosso aplicativo Kanban está quase utilizável. Tem um bom estilo e há funcion
 
 No final deste capítulo, você pode organizar as notas dentro de uma `Lane` e arrastá-las de uma `Lane` para outra. Embora isso pareça simples, teremos um pouco de trabalho, pois precisamos anotar nossos componentes do jeito certo e desenvolver a lógica necessária.
 
-## Setting Up React DnD
+## Configurando o React DnD
 
-As the first step, we need to connect React DnD with our project. We are going to use the HTML5 Drag and Drop based back-end. There are specific back-ends for testing and [touch](https://github.com/yahoo/react-dnd-touch-backend).
+Nosso primeiro passo será conectar o `React DnD` com nosso projeto. Iremos utilizar o back-end `HTML5 Drag and Drop`. Existem back-ends específicos para testes e [touch](https://github.com/yahoo/react-dnd-touch-backend).
 
-In order to set it up, we need to use the `DragDropContext` decorator and provide the HTML5 back-end to it. To avoid unnecessary wrapping, I'll use Redux `compose` to keep the code neater and more readable:
+Para configurá-lo, precisamos usar o decorador `DragDropContext` e fornecer o back-end HTML5 para ele. Para evitar verbosidade, usarei o Redux `compose` para manter o código mais limpo e mais legível:
 
 **app/components/App.jsx**
 
@@ -58,7 +58,7 @@ export default compose(
 leanpub-end-insert
 ```
 
-After this change, the application should look exactly the same as before. We are ready to add some sweet functionality to it now.
+Após essas alterações, nosso aplicativo deve ser exatamente o mesmo que antes. Estamos prontos para adicionar algumas funcionalidades agora.
 
 ## Allowing Notes to Be Dragged
 
