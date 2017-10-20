@@ -60,9 +60,9 @@ leanpub-end-insert
 
 Após essas alterações, nosso aplicativo deve ser exatamente o mesmo que antes. Estamos prontos para adicionar algumas funcionalidades agora.
 
-## Allowing Notes to Be Dragged
+## Permitindo que `Notes` sejam arrastadas
 
-Allowing notes to be dragged is a good first step. Before that, we need to set up a constant so that React DnD can tell different kind of draggables apart. Set up a file for tracking `Note` as follows:
+Permitir que as notas sejam arrastadas é um bom primeiro passo. Antes disso, precisamos configurar uma constante para que o React DnD possa diferenciar diferentes tipos de arrastadores. Configure um arquivo para rastreamento das notas:
 
 **app/constants/itemTypes.js**
 
@@ -72,9 +72,9 @@ export default {
 };
 ```
 
-This definition can be expanded later as we add new types, such as `LANE`, to the system.
+Esta definição pode ser expandida futuramente, à medida que adicionamos novos tipos, como `Lane`, ao nosso sistema.
 
-Next, we need to tell our `Note` that it's possible to drag it. This can be achieved using the `DragSource` annotation. Replace `Note` with the following implementation:
+Em seguida, precisamos dizer a nossa `Note` que é possível arrastá-la. Podemos resolver isso utilizando a anotação `DragSource`. Vamos alterar nosso componente `Note` com a seguinte implementação:
 
 **app/components/Note.jsx**
 
@@ -106,17 +106,17 @@ export default DragSource(ItemTypes.NOTE, noteSource, connect => ({
 }))(Note)
 ```
 
-If you try to drag a `Note` now, you should see something like this at the browser console:
+Agora, se você tentar arrastar uma `Note`, você deve ver algo assim no console do navegador:
 
 ```bash
 begin dragging note Object {className: "note", children: Array[2]}
 ```
 
-Just being able to drag notes isn't enough. We need to annotate them so that they can accept dropping. Eventually this will allow us to swap them as we can trigger logic when we are trying to drop a note on top of another.
+Poder apenas arrastar notas não é suficiente. Precisamos anotá-las para que elas possam receber o evento de soltar. Isso nos permitirá alterar suas posições, pois podemos ter uma lógica para quando estamos tentando soltar uma nota em cima de outra.
 
-T> In case we wanted to implement dragging based on a handle, we could apply `connectDragSource` only to a specific part of a `Note`.
+T> No caso, querermos implementar o arrastar com base em um elemento específico, também podemos aplicar `connectDragSource` em apenas uma parte de uma `Note`.
 
-W> Note that React DnD doesn't support hot loading perfectly. You may need to refresh the browser to see the log messages you expect!
+W> Vale lembrar que o React DnD não suporta o *hot loading* perfeitamente. Talvez seja necessário atualizar o navegador para ver as mensagens de log que você espera!
 
 ## Allowing Notes to Detect Hovered Notes
 
