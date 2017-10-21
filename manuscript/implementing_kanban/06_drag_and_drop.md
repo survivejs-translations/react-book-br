@@ -118,9 +118,9 @@ T> No caso, querermos implementar o arrastar com base em um elemento específico
 
 W> Vale lembrar que o React DnD não suporta o *hot loading* perfeitamente. Talvez seja necessário atualizar o navegador para ver as mensagens de log que você espera!
 
-## Allowing Notes to Detect Hovered Notes
+## Detectando quando uma Nota é arrastada sobre outra
 
-Annotating notes so that they can notice that another note is being hovered on top of them is a similar process. In this case we'll have to use a `DropTarget` annotation:
+Vamos anotar nossas Notas para que elas possam reagir quando uma outra nota esteja sendo suspensa em cima delas. Neste caso, teremos que usar a anotação `DropTarget`:
 
 **app/components/Note.jsx**
 
@@ -191,13 +191,13 @@ export default compose(
 leanpub-end-insert
 ```
 
-If you try hovering a dragged note on top of another now, you should see messages like this at the console:
+Se você tentar arrastar uma nota por cima da outra agora, você deve ver mensagens como esta no console:
 
 ```bash
 dragging note Object {} Object {className: "note", children: Array[2]}
 ```
 
-Both decorators give us access to the `Note` props. In this case, we are using `monitor.getItem()` to access them at `noteTarget`. This is the key to making this to work properly.
+Ambos os decoradores nos dão acesso as `props` das `Note`. Neste caso, estamos usando `monitor.getItem()` para acessá-los em `noteTarget`. Este é o segredo para que isso tudi funcione corretamente.
 
 ## Developing `onMove` API for `Notes`
 
