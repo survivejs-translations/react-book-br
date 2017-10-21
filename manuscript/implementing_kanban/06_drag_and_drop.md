@@ -199,15 +199,15 @@ dragging note Object {} Object {className: "note", children: Array[2]}
 
 Ambos os decoradores nos dão acesso as `props` das `Note`. Neste caso, estamos usando `monitor.getItem()` para acessá-los em `noteTarget`. Este é o segredo para que isso tudi funcione corretamente.
 
-## Developing `onMove` API for `Notes`
+## Desenvolvendo a API `onMove` para `Notes`
 
-Now, that we can move notes around, we can start to define logic. The following steps are needed:
+Agora que podemos mover nossas notas, vamos começar a definir a lógica necessária com as seguintes etapas:
 
-1. Capture `Note` id on `beginDrag`.
-2. Capture target `Note` id on `hover`.
-3. Trigger `onMove` callback on `hover` so that we can deal with the logic elsewhere. `LaneStore` would be the ideal place for that.
+1. Capturar o id da `Note` que está em `beginDrag`.
+2. Capturar o id do alvo `Note` em `hover`.
+3. Executar o método' `onMove` em `hover` para que possamos executar a lógica em outros lugares. `LaneStore` seria o lugar ideal para isso.
 
-Based on the idea above we can see we should pass id to a `Note` through a prop. We also need to set up a `onMove` callback, define `LaneActions.move`, and `LaneStore.move` stub.
+Com base na idéia acima, podemos ver que devemos passar o id com a `Note` através das `props`. Também precisamos criar um método `onMove`, definindo `LaneActions.move`, e o `stub` para `LaneStore.move`.
 
 ### Accepting `id` and `onMove` at `Note`
 
