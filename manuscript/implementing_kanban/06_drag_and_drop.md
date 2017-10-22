@@ -283,7 +283,7 @@ Agora, precisamos atualizar `Notes` para passar as verdadeiras `props` para `Not
 
 ### Passando `id` e `onMove` de `Notes`
 
-Passando o `id` de uma nota e `onMove` é bem simples:
+Passando o `id` de uma nota e `onMove`, é bem simples:
 
 **app/components/Notes.jsx**
 
@@ -321,7 +321,7 @@ leanpub-end-insert
 )
 ```
 
-If you hover a note on top of another, you should see console messages like this:
+Se você arrastar uma nota em cima da outra, você deve ver as mensagens no console:
 
 ```bash
 moving from 3310916b-5b59-40e6-8a98-370f9c194e16 to 939fb627-1d56-4b57-89ea-04207dbfb405
