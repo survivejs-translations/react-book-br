@@ -412,11 +412,12 @@ Você deve ver as mesmas mensagens de log anteriormente discutidas.
 
 Em seguida, precisamos adicionar alguma lógica para que isso funcione. Podemos usar a lógica descrita no início desse tópico. Temos dois casos para se preocupar: mover dentro de uma própria coluna e passando de uma coluna para outra.
 
-## Implementing Note Drag and Drop Logic
+## Implementando lógica das notas ao arrastar e soltar
 
-Moving within a lane itself is complicated. When you are operating based on ids and perform operations one at a time, you'll need to take possible index alterations into account. As a result, I'm using `update` [immutability helper](https://facebook.github.io/react/docs/update.html) from React as that solves the problem in one pass.
+Mover uma nota dentro de uma `Lane`, já é complicado. Quando estamos operando com base em ids e uma operação de cada vez, você precisa levar em conta alterações de índices. Como resultado, estou usando `update` [utilitário para estruturas de dados imutáveis](https://facebook.github.io/react/docs/update.html) do React como para resolver o problema em uma única chamada.
 
-It is possible to solve the lane to lane case using [splice](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Array/splice). First, we `splice` out the source note, and then we `splice` it to the target lane. Again, `update` could work here, but I didn't see much point in that given `splice` is nice and simple. The code below illustrates a mutation based solution:
+It is possible to solve the lane to lane case using
+Também é possível resolver esse problema usando [splice](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Array/splice). Primeiro, nós usamos `splice` na nota e novamnete, fazemos `splice` da `Lane` que será alvo. E por último, um `update` funcionaria aqui, mas não faz muito sentido, já que `slice` é mais simples e elegante. O código abaixo mostra uma solução baseda em mutação:
 
 **app/stores/LaneStore.js**
 
@@ -464,9 +465,9 @@ leanpub-end-insert
 }
 ```
 
-If you try out the application now, you can actually drag notes around and it should behave as you expect. Dragging to empty lanes doesn't work, though, and the presentation could be better.
+Se você recarregar o aplicativo, você pode realmente arrastar as notas e deve funcionar do jeito que você espera. Arrastar notas para esvaziar uma `Lane` não funciona e a apresentação poderia ser melhor.
 
-It would be nicer if we indicated the dragged note's location more clearly. We can do this by hiding the dragged note from the list. React DnD provides us the hooks we need for this purpose.
+Seria melhor se indicássemos a localização da nota arrastada com mais clareza. Podemos fazer isso escondendo a nota arrastada da lista. Reagir DnD nos fornece os ganchos que precisamos para este propósito.
 
 ### Indicating Where to Move
 
