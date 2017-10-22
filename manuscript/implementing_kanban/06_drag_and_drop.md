@@ -209,9 +209,9 @@ Agora que podemos mover nossas notas, vamos começar a definir a lógica necess�
 
 Com base na idéia acima, podemos ver que devemos passar o id com a `Note` através das `props`. Também precisamos criar um método `onMove`, definindo `LaneActions.move`, e o `stub` para `LaneStore.move`.
 
-### Accepting `id` and `onMove` at `Note`
+### Recebendo `id` e `onMove` em `Note`
 
-We can accept `id` and `onMove` props at `Note` like below. There is an extra check at `noteTarget` as we don't need trigger `hover` in case we are hovering on top of the `Note` itself:
+Nos podemos passar `id` e `onMove` como `props` para `Note`. Há uma verificação extra em `noteTarget` que precisamos fazer, pois não precisamos executar `hover` quando estivermos arrastando a nota em cima de si mesma:
 
 **app/components/Note.jsx**
 
@@ -279,11 +279,11 @@ leanpub-end-insert
 ...
 ```
 
-Having these props isn't useful if we don't pass anything to them at `Notes`. That's our next step.
+Agora, precisamos atualizar `Notes` para passar as verdadeiras `props` para `Note`. Iremos fazer no próximo tópico.
 
-### Passing `id` and `onMove` from `Notes`
+### Passando `id` e `onMove` de `Notes`
 
-Passing a note `id` and `onMove` is simple enough:
+Passando o `id` de uma nota e `onMove` é bem simples:
 
 **app/components/Notes.jsx**
 
