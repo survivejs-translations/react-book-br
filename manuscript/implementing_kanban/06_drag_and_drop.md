@@ -327,11 +327,11 @@ Se você arrastar uma nota em cima da outra, você deve ver as mensagens no cons
 moving from 3310916b-5b59-40e6-8a98-370f9c194e16 to 939fb627-1d56-4b57-89ea-04207dbfb405
 ```
 
-## Adding Action and Store Method for Moving
+## Adicionando novas ações e métodos ao arrastar
 
-The logic of drag and drop goes as follows. Suppose we have a lane containing notes A, B, C. In case we move A below C we should end up with B, C, A. In case we have another list, say D, E, F, and move A to the beginning of it, we should end up with B, C and A, D, E, F.
+A lógica do arrastar e soltar é a seguinte, suponha que temos uma coluna contendo notas A, B, C. No caso de nos arrastarmos A em cima de C devemos terminar com B, C, A. Caso arrastarmos ela para outra lista, vamos dizer D, E, F, e arrastarmos A para o começo dela, nós teremos B, C e A, D, E, F.
 
-In our case, we'll get some extra complexity due to lane to lane dragging. When we move a `Note`, we know its original position and the intended target position. `Lane` knows what `Notes` belong to it by id. We are going to need some way to tell `LaneStore` that it should perform the logic over the given notes. A good starting point is to define `LaneActions.move`:
+No nosso caso, teremos alguma complexidade extra para arrastar de uma `Lane` para outra. Quando movemos uma `Note`, Nós conhecemos sua posição original e a posição alvo. `Lane` sabe qual `Notes` o id pertence. De alguma maneira, precisamos dizer a `LaneStore` para executar uma lógica na nota fornecida ao arrastar. Um bom ponto de partida é definir `LaneActions.move`:
 
 **app/actions/LaneActions.js**
 
@@ -345,7 +345,7 @@ export default alt.generateActions(
 );
 ```
 
-We should connect this action with the `onMove` hook we just defined:
+Devemos conectar esta ação com o `onMove`:
 
 **app/components/Notes.jsx**
 
@@ -386,9 +386,9 @@ leanpub-end-insert
 )
 ```
 
-T> It could be a good idea to refactor `onMove` as a prop to make the system more flexible. In our implementation the `Notes` component is coupled with `LaneActions`. This isn't particularly nice if you want to use it in some other context.
+T> Poderia ser uma boa idéia refatorar `onMove` como uma `props`, para tornar o sistema mais flexível. Em nossa implementação, o componente `Notes` é acoplado com `LaneActions`. Impossibilitando você, de utilizar essa lógica em outro lugar.
 
-We should also define a stub at `LaneStore` to see that we wired it up correctly:
+Também devemos definir um `stub` em `LaneStore` para ver que nós o conectamos corretamente:
 
 **app/stores/LaneStore.js**
 
@@ -408,9 +408,9 @@ leanpub-end-insert
 }
 ```
 
-You should see the same log messages as earlier.
+Você deve ver as mesmas mensagens de log anteriormente discutidas.
 
-Next, we'll need to add some logic to make this work. We can use the logic outlined above here. We have two cases to worry about: moving within a lane itself and moving from lane to another.
+Em seguida, precisamos adicionar alguma lógica para que isso funcione. Podemos usar a lógica descrita no início desse tópico. Temos dois casos para se preocupar: mover dentro de uma própria coluna e passando de uma coluna para outra.
 
 ## Implementing Note Drag and Drop Logic
 
