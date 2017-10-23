@@ -469,9 +469,9 @@ Se você recarregar o aplicativo, você pode realmente arrastar as notas e deve 
 
 Seria melhor se indicássemos a localização da nota arrastada com mais clareza. Podemos fazer isso escondendo a nota arrastada da lista. Reagir DnD nos fornece os ganchos que precisamos para este propósito.
 
-### Indicating Where to Move
+## Indicando aonde mover
 
-React DnD provides a feature known as state monitors. Through it we can use `monitor.isDragging()` and `monitor.isOver()` to detect which `Note` we are currently dragging. It can be set up as follows:
+Reagir DnD fornece um recurso conhecido como monitores de estado. Através dele, podemos usar `monitor.isDragging ()` e `monitor.isOver ()` para detectar qual nota estamos atualmente arrastando. Pode ser configurado da seguinte forma:
 
 **app/components/Note.jsx**
 
@@ -529,9 +529,9 @@ leanpub-end-insert
 )(Note)
 ```
 
-If you drag a note within a lane, the dragged note should be shown as blank.
+Se você arrastar uma nota dentro de uma `Lane`, a nota arrastada deve ser mostrada em branco.
 
-There is one little problem in our system. We cannot drag notes to an empty lane yet.
+Há um pequeno problema no nosso sistema. Não podemos arrastar as notas para uma `Lane` vazia.
 
 ## Dragging Notes to Empty Lanes
 
