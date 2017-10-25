@@ -533,9 +533,9 @@ Se você arrastar uma nota dentro de uma `Lane`, a nota arrastada deve ser mostr
 
 Há um pequeno problema no nosso sistema. Não podemos arrastar as notas para uma `Lane` vazia.
 
-## Dragging Notes to Empty Lanes
+## Arrastando Notas para `Lanes` vazias
 
-To drag notes to empty lanes, we should allow them to receive notes. Just as above, we can set up `DropTarget` based logic for this. First, we need to capture the drag on `Lane`:
+Para arrastar notas para uma `Lane` vazia, precisamos permitir que elas recebam notas. Assim como acima, podemos configurar `DropTarget` com uma lógica para isso. Primeiro, precisamos capturar o evento de arrastar em `Lane`:
 
 **app/components/Lane.jsx**
 
