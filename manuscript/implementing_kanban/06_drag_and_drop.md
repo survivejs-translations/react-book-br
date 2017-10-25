@@ -582,13 +582,13 @@ const noteTarget = {
     const sourceProps = monitor.getItem();
     const sourceId = sourceProps.id;
 
-    // If the target lane doesn't have notes,
-    // attach the note to it.
+    // Se a `Lane` alvo não tiver notas,
+    // vamos anexar a nota a ela.
     //
-    // `attachToLane` performs necessarly
-    // cleanup by default and it guarantees
-    // a note can belong only to a single lane
-    // at a time.
+    // `attachToLane` executa uma
+    // limpeza por padrão e garante
+    // que uma nota pode pertencer
+    // apenas a uma única `Lane` de uma vez.
     if(!targetProps.lane.notes.length) {
       LaneActions.attachToLane({
         laneId: targetProps.lane.id,
