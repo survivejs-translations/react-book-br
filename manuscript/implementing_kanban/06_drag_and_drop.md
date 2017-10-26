@@ -626,7 +626,7 @@ leanpub-end-insert
 
 Depois de adicionar essa lógica, você pode arrastar as notas para uma `Lane` vazia.
 
-Our current implementation of `attachToLane` does a lot of the hard work for us. If it didn't guarantee that a note can belong only to a single lane at a time, we would need to adjust our logic. It's good to have these sort of invariants within the state management system.
+Nossa implementação atual de `attachToLane` faz o trabalho duro para nós. Se esse método não garantir que uma nota possa pertencer há apenas uma única `Lane` de cada vez, nós iremos precisar ajustar nossa lógica. É bom ter esses tipos de invariantes dentro do sistema de gerenciamento do estado.
 
 ### Fixing Editing Behavior During Dragging
 
