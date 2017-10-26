@@ -624,7 +624,7 @@ export default compose(
 leanpub-end-insert
 ```
 
-After attaching this logic, you should be able to drag notes to empty lanes.
+Depois de adicionar essa lógica, você pode arrastar as notas para uma `Lane` vazia.
 
 Our current implementation of `attachToLane` does a lot of the hard work for us. If it didn't guarantee that a note can belong only to a single lane at a time, we would need to adjust our logic. It's good to have these sort of invariants within the state management system.
 
