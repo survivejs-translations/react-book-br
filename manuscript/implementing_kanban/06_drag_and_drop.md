@@ -628,11 +628,11 @@ Depois de adicionar essa lógica, você pode arrastar as notas para uma `Lane` v
 
 Nossa implementação atual de `attachToLane` faz o trabalho duro para nós. Se esse método não garantir que uma nota possa pertencer há apenas uma única `Lane` de cada vez, nós iremos precisar ajustar nossa lógica. É bom ter esses tipos de invariantes dentro do sistema de gerenciamento do estado.
 
-### Fixing Editing Behavior During Dragging
+### Corrigindo a edição durante o arrastar
 
-The current implementation has a small glitch. If you edit a note, you can still drag it around while it's being edited. This isn't ideal as it overrides the default behavior most people are used to. You cannot for instance double-click on an input to select all the text.
+A implementação atual tem uma pequena falha. Se você editar uma nota, você ainda pode arrastá-la enquanto ela está sendo editada. Isso não é ideal porque substitui o comportamento padrão que a maioria das pessoas está acostumada. Você não pode, por exemplo, clicar duas vezes em um campo de texto para selecionar todo o texto.
 
-Fortunately, this is simple to fix. We'll need to use the `editing` state per each `Note` to adjust its behavior. First we need to pass `editing` state to an individual `Note`:
+Felizmente, isso é simples de corrigir. Precisamos usar o estado `editing` em cada `Note` para ajustar seu comportamento. Primeiro, precisamos passar o estado `editing` para cada `Note`:
 
 **app/components/Notes.jsx**
 
