@@ -668,7 +668,7 @@ leanpub-end-insert
 )
 ```
 
-Next we need to take this into account while rendering:
+Em seguida, precisamos levar isso em consideração ao renderizar o componente:
 
 **app/components/Note.jsx**
 
