@@ -707,11 +707,11 @@ leanpub-end-insert
 ...
 ```
 
-This small change gives us the behavior we want. If you try to edit a note now, the input should work as you might expect it to behave normally.
+Esta pequena mudança nos dá o comportamento que queremos. Se você tentar editar uma nota, agora, a campo irá funcionar da maneira que você esperar.
 
-Design-wise it was a good idea to keep `editing` state outside of `Editable`. If we hadn't done that, implementing this change would have been a lot harder as we would have had to extract the state outside of the component.
+Foi uma boa idéia manter o estado `editing` fora do `Editable`. Se não tivéssemos feito isso, essa mudança teria sido muito mais difícil, pois teríamos que extrair o estado fora do componente.
 
-Now we have a Kanban table that is actually useful! We can create new lanes and notes, and edit and remove them. In addition we can move notes around. Mission accomplished!
+Agora, temos um quadro Kanban que é realmente útil! Podemos criar novas `Lanes` e `Notes`, editá-las e removê-las. Além disso, podemos mover as notas ao redor. Missão cumprida!
 
 ## Conclusion
 
