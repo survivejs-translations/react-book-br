@@ -713,9 +713,9 @@ Foi uma boa idéia manter o estado `editing` fora do `Editable`. Se não tivéss
 
 Agora, temos um quadro Kanban que é realmente útil! Podemos criar novas `Lanes` e `Notes`, editá-las e removê-las. Além disso, podemos mover as notas ao redor. Missão cumprida!
 
-## Conclusion
+## Conclusão
 
-In this chapter, you saw how to implement drag and drop for our little application. You can model sorting for lanes using the same technique. First, you mark the lanes to be draggable and droppable, then you sort out their ids, and finally, you'll add some logic to make it all work together. It should be considerably simpler than what we did with notes.
+Neste capítulo, você viu uma maneira de implementar o arrastar e soltar na nossa pequena aplicação. Você pode modelar a ordenação das `Lanes` usando a mesma técnica. Primeiro, você marca quais `Lanes` podem ter o evento de arrastar e soltar, então, você guarda seus ids e, finalmente, você adiciona alguma lógica para que tudo funcione em conjunto. É consideravelmente mais simples do que o que fizemos com as notas.
 
 I encourage you to expand the application. The current implementation should work just as a starting point for something greater. Besides extending the DnD implementation, you can try adding more data to the system. You could also do something to the visual outlook. One option would be to try out various styling approaches discussed at the *Styling React* chapter.
 
